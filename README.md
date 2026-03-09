@@ -4,5 +4,5 @@
 - [Life scroll](yuhan-life-scroll)
 - [Tutorial on the Web](tutorial)
 
-Here is an image: ![example](./shanzhai_web/images/falling-dream-cover.jpg)
+Here is an image: ![example](shanzhai_web/images/falling-dream-cover.jpg)
 
