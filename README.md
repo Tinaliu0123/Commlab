@@ -10,7 +10,7 @@ A collection of web projects developed for the **INTM-SHU 120 Communications Lab
 
 <!-- ![Preview](assets/spreadsheet.jpg) -->
 <p align="center">
-<img src="assets/spreadsheet.jpg" alt="Alt text" width="350">
+<img src="assets/spreadsheet.jpg" alt="Alt text" width="400">
 </p>
 
 ---
@@ -21,8 +21,8 @@ A collection of web projects developed for the **INTM-SHU 120 Communications Lab
 - 📂 [Code](yuhan-life-scroll)
 
 <p align="center">
-<img src="assets/lifescroll1.png" alt="Alt text" width="350">
-<img src="assets/lifescroll2.png" alt="Alt text" width="350">
+<img src="assets/lifescroll1.png" alt="Alt text" width="400">
+<img src="assets/lifescroll2.png" alt="Alt text" width="400">
 <!-- <img src="assets/lifescroll3.png" alt="Alt text" width="350"> -->
 </p>
 
@@ -35,6 +35,6 @@ A collection of web projects developed for the **INTM-SHU 120 Communications Lab
 - 📂 [Code](tutorial)
 
 <p align="center">
-<img src="assets/tree1.png" alt="Alt text" width="350">
-<img src="assets/tree2.png" alt="Alt text" width="350">
+<img src="assets/tree1.png" alt="Alt text" width="400">
+<img src="assets/tree2.png" alt="Alt text" width="400">
 </p>
