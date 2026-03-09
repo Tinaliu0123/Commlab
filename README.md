@@ -8,12 +8,9 @@ A collection of web projects developed for the **INTM-SHU 120 Communications Lab
 - **Medium:** Google Sheets
 - 🔗 [Live project](https://docs.google.com/spreadsheets/d/13V0v_KpksMYIk4VfGUJB7WRcY7odHRPk5ghLlrq07bs/edit?usp=sharing) 
 
-<!-- ![Preview](assets/spreadsheet.jpg) -->
 <p align="center">
 <img src="assets/spreadsheet.jpg" alt="Alt text" width="400">
 </p>
-
----
 
 ### 🧘 Life Scroll: Observe My Mind
 - **Medium:** Web (HTML)
@@ -25,9 +22,6 @@ A collection of web projects developed for the **INTM-SHU 120 Communications Lab
 <img src="assets/lifescroll2.png" alt="Alt text" width="400">
 <!-- <img src="assets/lifescroll3.png" alt="Alt text" width="350"> -->
 </p>
-
-
----
 
 ### 🌲 Tutorial on the Web: How to Become a Tree?
 - **Medium:** Web (HTML)
