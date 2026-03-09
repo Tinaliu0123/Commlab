@@ -18,7 +18,7 @@ A collection of web projects developed for the **INTM-SHU 120 Communications Lab
 ### 🧘 Life Scroll: Observe My Mind
 - **Medium:** Web (HTML)
 - 🔗 [Live webpage](https://tinaliu0123.github.io/Commlab/yuhan-life-scroll/)
-- 📂 [Code](yuhan-life-scroll)
+- 📂 [Code](https://github.com/Tinaliu0123/Commlab/tree/main/yuhan-life-scroll)
 
 <p align="center">
 <img src="assets/lifescroll1.png" alt="Alt text" width="400">
@@ -32,7 +32,7 @@ A collection of web projects developed for the **INTM-SHU 120 Communications Lab
 ### 🌲 Tutorial on the Web: How to Become a Tree?
 - **Medium:** Web (HTML)
 - 🔗 [Live webpage](https://tinaliu0123.github.io/Commlab/tutorial/)
-- 📂 [Code](tutorial)
+- 📂 [Code](https://github.com/Tinaliu0123/Commlab/tree/main/tutorial)
 
 <p align="center">
 <img src="assets/tree1.png" alt="Alt text" width="400">
