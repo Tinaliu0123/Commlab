@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resonance Layer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="res_style.css">
+</head>
+
+<body>
+    <div class="page-container">
+        <span id="sidebar-min" class="state-anchor"></span>
+
+        <div class="omnibox-container">
+            <button class="icon-btn search-btn" aria-label="Menu">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            
+            <input class="search-input" type="text" placeholder="Search the Resonance Layer" spellcheck="false" onkeydown="return false;" readonly>
+            
+            <button class="icon-btn search-btn" aria-label="Search">
+                <span class="material-symbols-outlined">search</span>
+            </button>
+            
+            <div class="divider"></div>
+            
+            <button class="icon-btn btn-green" aria-label="Directions">
+                <span class="material-symbols-outlined">directions</span>
+            </button>
+
+            <div class="search-suggestions">
+                <a href="#loc1" class="suggestion-item">
+                    <div class="suggestion-icon">
+                        <span class="material-symbols-outlined">schedule</span>
+                    </div>
+                    <div class="suggestion-text">
+                        <div class="suggestion-title">The Falling Dream</div>
+                        <div class="suggestion-subtitle">Subconscious, Layer 3, REM Zone</div>
+                    </div>
+                </a>
+                
+                <a href="#loc2" class="suggestion-item">
+                    <div class="suggestion-icon">
+                        <span class="material-symbols-outlined">schedule</span>
+                    </div>
+                    <div class="suggestion-text">
+                        <div class="suggestion-title">Hero's Journey</div>
+                        <div class="suggestion-subtitle">Collective Imagination, Layer 2, Narrative Zone</div>
+                    </div>
+                </a>
+
+                <a href="#loc3" class="suggestion-item">
+                    <div class="suggestion-icon">
+                        <span class="material-symbols-outlined">schedule</span>
+                    </div>
+                    <div class="suggestion-text">
+                        <div class="suggestion-title">Lullaby</div>
+                        <div class="suggestion-subtitle">Collective Memory, Layer 2, Comfort Zone</div>
+                    </div>
+                </a>
+
+                <a href="#loc4" class="suggestion-item">
+                    <div class="suggestion-icon">
+                        <span class="material-symbols-outlined">schedule</span>
+                    </div>
+                    <div class="suggestion-text">
+                        <div class="suggestion-title">Déjà Vu</div>
+                        <div class="suggestion-subtitle">Temporal Lobe, Rhinal Cortex, between Familiarity and Recall</div>
+                    </div>
+                </a>
+
+                <a href="#loc_left" class="suggestion-item">
+                    <div class="suggestion-icon">
+                        <span class="material-symbols-outlined">schedule</span>
+                    </div>
+                    <div class="suggestion-text">
+                        <div class="suggestion-title">Fear of the Dark</div>
+                        <div class="suggestion-subtitle">Amygdala, Layer 1, Pre-conscious Zone</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="category-bar">
+            <button class="pill-btn">
+                <span class="material-symbols-outlined icon-sm">partly_cloudy_night</span>
+                Dream
+            </button>
+            <button class="pill-btn">
+                <span class="material-symbols-outlined icon-sm">sprint</span>
+                Fear
+            </button>
+            <button class="pill-btn">
+                <span class="material-symbols-outlined icon-sm">favorite</span>
+                Love
+            </button>
+            <button class="pill-btn">
+                <span class="material-symbols-outlined icon-sm">cognition</span>
+                Cognition
+            </button>
+            <button class="pill-btn">
+                <span class="material-symbols-outlined icon-sm">frame_person</span>
+                Archetypes
+            </button>
+        </div>
+
+        <div class="top-right-menu">
+            <button class="icon-btn app-grid-btn" aria-label="Google apps">
+                <span class="material-symbols-outlined">apps</span>
+            </button>
+            
+            <a href="#" class="profile-avatar-btn" aria-label="Google Account">
+                <img src="https://lh3.googleusercontent.com/a/default-user=s64-c" alt="Profile Picture" class="avatar-img">
+            </a>
+        </div>
+
+        <div class="sidebar-container">
+            <div class="infobar" id="sidebar">
+
+                <div class="search-header-wrapper" id="header-loc1">
+                    <div class="search-header">
+                        <a href="#sidebar-min" class="icon-btn search-btn"><span class="material-symbols-outlined">menu</span></a>
+                        <input type="text" class="search-input" value="The Falling Dream" readonly>
+                        <button class="icon-btn search-btn"><span class="material-symbols-outlined">search</span></button>
+                        <span class="spdivider"></span>
+                        <a href="#sidebar-min" class="icon-btn close-btn">
+                            <span class="material-symbols-outlined">close</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="search-header-wrapper" id="header-loc2">
+                    <div class="search-header">
+                        <a href="#sidebar-min" class="icon-btn search-btn"><span class="material-symbols-outlined">menu</span></a>
+                        <input type="text" class="search-input" value="Hero's Journey" readonly>
+                        <button class="icon-btn search-btn"><span class="material-symbols-outlined">search</span></button>
+                        <span class="spdivider"></span>
+                        <a href="#sidebar-min" class="icon-btn close-btn">
+                            <span class="material-symbols-outlined">close</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="search-header-wrapper" id="header-loc3">
+                    <div class="search-header">
+                        <a href="#sidebar-min" class="icon-btn search-btn"><span class="material-symbols-outlined">menu</span></a>
+                        <input type="text" class="search-input" value="Lullaby" readonly>
+                        <button class="icon-btn search-btn"><span class="material-symbols-outlined">search</span></button>
+                        <span class="spdivider"></span>
+                        <a href="#sidebar-min" class="icon-btn close-btn">
+                            <span class="material-symbols-outlined">close</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="search-header-wrapper" id="header-loc4">
+                    <div class="search-header">
+                        <a href="#sidebar-min" class="icon-btn search-btn"><span class="material-symbols-outlined">menu</span></a>
+                        <input type="text" class="search-input" value="Déjà Vu" readonly>
+                        <button class="icon-btn search-btn"><span class="material-symbols-outlined">search</span></button>
+                        <span class="spdivider"></span>
+                        <a href="#sidebar-min" class="icon-btn close-btn">
+                            <span class="material-symbols-outlined">close</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="search-header-wrapper" id="header-loc_left">
+                    <div class="search-header">
+                        <a href="#sidebar-min" class="icon-btn search-btn"><span class="material-symbols-outlined">menu</span></a>
+                        <input type="text" class="search-input" value="Fear of the Dark" readonly>
+                        <button class="icon-btn search-btn"><span class="material-symbols-outlined">search</span></button>
+                        <span class="spdivider"></span>
+                        <a href="#sidebar-min" class="icon-btn close-btn">
+                            <span class="material-symbols-outlined">close</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="loc-content" id="content-loc1">
+                    <img class="infobar_topimg" src="images/falling-dream-cover.jpg" alt="">
+                    <div class="infobar_headerwrapper">
+                        <h1 class="infobar_header_h1">The Falling Dream</h1>
+                        <div class="infobar_header_ratinginfo">
+                            <span class="infobar_header_ratinginfo_star">
+                                <span class="ratingfont">2.2</span>
+                                <span class="star_list">
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star no"></span>
+                                    <span class="icon_star no"></span>
+                                    <span class="icon_star no"></span>
+                                </span>
+                                <span class="ratingfont">(4,200,000,000 reviews)</span>
+                            </span>
+                        </div>
+                        <p class="infobar_header_category">Dream</p>
+                    </div>
+                    <div class="infobar_tabs">
+                        <div class="infobar_tab infobar_tab_active">Overview</div>
+                        <div class="infobar_tab">About</div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="infobar_basicinfo">
+                        <div class="fd_info_row">
+                            <div class="fd_icon_wrapper">
+                                <span class="material-symbols-outlined">schedule</span>
+                            </div>
+                            <div class="fd_content_wrapper">
+                                <div class="fd_value_primary">Open 24/7 · Appears randomly during sleep</div>
+                            </div>
+                        </div>
+
+                        <div class="fd_info_row">
+                            <div class="fd_icon_wrapper">
+                                <span class="material-symbols-outlined">location_on</span>
+                            </div>
+                            <div class="fd_content_wrapper">
+                                <div class="fd_value_primary">Subconscious, Layer 3, REM Zone</div>
+                            </div>
+                        </div>
+
+                        <div class="fd_info_row">
+                            <div class="fd_icon_wrapper">
+                                <span class="material-symbols-outlined">call</span>
+                            </div>
+                            <div class="fd_content_wrapper">
+                                <div class="fd_value_primary">No contact number. It contacts you.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+
+                    <div class="review-summary">
+
+                        <div class="review-summary-header">
+                            <h2 class="review-summary-title">Review summary</h2>
+                        </div>
+
+                        <div class="review-summary-body">
+
+                            <div class="rating-breakdown">
+                                <div class="rating-row">
+                                    <span class="star-label">5</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:5%"></div>
+                                    </div>
+                                    <span class="percent-label">5%</span>
+                                </div>
+
+                                <div class="rating-row">
+                                    <span class="star-label">4</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:9%"></div>
+                                    </div>
+                                    <span class="percent-label">9%</span>
+                                </div>
+
+                                <div class="rating-row">
+                                    <span class="star-label">3</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:31%"></div>
+                                    </div>
+                                    <span class="percent-label">31%</span>
+                                </div>
+
+                                <div class="rating-row">
+                                    <span class="star-label">2</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:25%"></div>
+                                    </div>
+                                    <span class="percent-label">25%</span>
+                                </div>
+
+                                <div class="rating-row">
+                                    <span class="star-label">1</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:20%"></div>
+                                    </div>
+                                    <span class="percent-label">20%</span>
+                                </div>
+                            </div>
+
+                            <div class="rating-overall">
+                                <div class="rating-score">2.2</div>
+
+                                <div class="rating-stars" aria-label="2.2 stars">
+                                    <span class="star on">★</span>
+                                    <span class="star on">★</span>
+                                    <span class="star off">★</span>
+                                    <span class="star off">★</span>
+                                    <span class="star off">★</span>
+                                </div>
+
+                                <div class="rating-count">4,200,000,000 reviews</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="line"></div>
+
+                    <div class="fd_reviews">
+
+                        <div class="fd_reviews_header">
+                            <h2 class="fd_reviews_title">Reviews</h2>
+                        </div>
+                        
+                        <div class="reviews-list-wrapper">
+                            <div class="fd_review_card">
+                                <div class="fd_review_top">
+                                    <div class="fd_avatar">A</div>
+
+                                    <div class="fd_review_meta">
+                                        <div class="fd_name_row">
+                                            <span class="fd_name">Anonymous</span>
+                                            <span class="fd_time">· Shanghai · 2025</span>
+                                        </div>
+
+                                        <div class="fd_star_row" aria-label="1 star">
+                                            <span class="fd_star on">★</span><span class="fd_star off">★</span><span
+                                                class="fd_star off">★</span><span class="fd_star off">★</span><span
+                                                class="fd_star off">★</span>
+                                            <span class="fd_time2">Finals week</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="fd_review_text">
+                                    Finals week, third time this month. Every time I fall off the library rooftop, with a backpack
+                                    on,
+                                    phone in hand,
+                                    and a deadline email still glowing on the screen. Woke up at 140 bpm. Please… can we swap
+                                    dreams?
+                                </div>
+
+                                <div class="fd_review_photos">
+                                    <div class="fd_photo_box"><img src="images/falling-dream-final1.jpg" alt=""></div>
+                                    <div class="fd_photo_box"><img src="images/falling-dream-final2.jpg" alt=""></div>
+                                </div>
+                            </div>
+
+                            <div class="fd_review_card">
+                                <div class="fd_review_top">
+                                    <div class="fd_avatar">T</div>
+
+                                    <div class="fd_review_meta">
+                                        <div class="fd_name_row">
+                                            <span class="fd_name">TwistedSifter</span>
+                                            <span class="fd_time">· Reddit · 2023</span>
+                                        </div>
+
+                                        <div class="fd_star_row" aria-label="4 stars">
+                                            <span class="fd_star on">★</span><span class="fd_star on">★</span><span
+                                                class="fd_star on">★</span><span class="fd_star on">★</span><span
+                                                class="fd_star off">★</span>
+                                            <span class="fd_time2">5 hours of sleep</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="fd_review_text">
+                                    Slept for five hours and dreamed I was falling through different lives...first as a rich
+                                    person,
+                                    then a Vietnam vet which was violent, and finally a garbage man. I was happiest as the garbage
+                                    man
+                                    cuz
+                                    I kept getting high fives.
+                                </div>
+                            </div>
+
+                            <div class="fd_review_card">
+                                <div class="fd_review_top">
+                                    <div class="fd_avatar">
+                                        <img src="https://cdn.britannica.com/18/132718-050-CA529FF9/Artemidorus-portrait-mummy-case-London-British-Museum.jpg" alt="Artemidorus">
+                                    </div>
+                                    <div class="fd_review_meta">
+                                        <div class="fd_name_row">
+                                            <span class="fd_name">Artemidorus</span>
+                                            <span class="fd_time">· Ephesus · ~150 CE</span>
+                                        </div>
+
+                                        <div class="fd_star_row" aria-label="4 stars">
+                                            <span class="fd_star on">★</span><span class="fd_star on">★</span><span
+                                                class="fd_star on">★</span><span class="fd_star on">★</span><span
+                                                class="fd_star on">★</span>
+                                            <span class="fd_time2">dream archive</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="fd_review_text">
+                                    I traveled through cities and festivals of Greece, Asia, and Italy, listening for years to
+                                    people’s old dreams. The falling dream is among the most recorded. The poor fall from low walls;
+                                    the rich from high towers. Sailors drop from masts into the sea; shepherds slip from cliffs. Yet
+                                    the feeling — stomach rising, limbs weightless, waking one moment before impact — is described
+                                    the same by all.
+                                </div>
+
+                                <div class="fd_review_photos">
+                                    <div class="fd_photo_box"><img
+                                            src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Papiro_Artemidoro.jpg" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="fd_more_reviews_wrapper">
+                            <div class="fd_more_reviews_btn">
+                                More reviews (4.2B)
+                            </div>
+                        </div>
+                    
+                    </div>
+                    <div class="line"></div>
+                </div>
+
+                <div class="loc-content" id="content-loc2">
+                    <img class="infobar_topimg" src="images/hero-cover.jpg" alt="">
+                    <div class="infobar_headerwrapper">
+                        <h1 class="infobar_header_h1">Hero's Journey</h1>
+                        <div class="infobar_header_ratinginfo">
+                            <span class="infobar_header_ratinginfo_star">
+                                <span class="ratingfont">4.5</span>
+                                <span class="star_list">
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star no"></span>
+                                </span>
+                                <span class="ratingfont">(6,800,000,000 reviews)</span>
+                            </span>
+                        </div>
+                        <p class="infobar_header_category">Archetypes</p>
+                    </div>
+                    <div class="infobar_tabs">
+                        <div class="infobar_tab infobar_tab_active">Overview</div>
+                        <div class="infobar_tab">About</div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="infobar_basicinfo">
+                        <div class="fd_info_row">
+                            <div class="fd_icon_wrapper">
+                                <span class="material-symbols-outlined">schedule</span>
+                            </div>
+                            <div class="fd_content_wrapper">
+                                <div class="fd_value_primary">Open 24/7 · Active in every civilization</div>
+                            </div>
+                        </div>
+                        <div class="fd_info_row">
+                            <div class="fd_icon_wrapper">
+                                <span class="material-symbols-outlined">location_on</span>
+                            </div>
+                            <div class="fd_content_wrapper">
+                                <div class="fd_value_primary">Collective Imagination, Layer 2, Narrative Zone</div>
+                            </div>
+                        </div>
+                        <div class="fd_info_row">
+                            <div class="fd_icon_wrapper">
+                                <span class="material-symbols-outlined">call</span>
+                            </div>
+                            <div class="fd_content_wrapper">
+                                <div class="fd_value_primary">The Call comes from within.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="review-summary">
+                        <div class="review-summary-header">
+                            <h2 class="review-summary-title">Review summary</h2>
+                        </div>
+                        <div class="review-summary-body">
+                            <div class="rating-breakdown">
+                                <div class="rating-row">
+                                    <span class="star-label">5</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:63.5%"></div>
+                                    </div>
+                                    <span class="percent-label">63.5%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">4</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:25.5%"></div>
+                                    </div>
+                                    <span class="percent-label">25.5%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">3</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:9%"></div>
+                                    </div>
+                                    <span class="percent-label">9%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">2</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:1.5%"></div>
+                                    </div>
+                                    <span class="percent-label">1.5%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">1</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:0.5%"></div>
+                                    </div>
+                                    <span class="percent-label">0.5%</span>
+                                </div>
+                            </div>
+                            <div class="rating-overall">
+                                <div class="rating-score">4.5</div>
+                                <div class="rating-stars" aria-label="4.5 stars">
+                                    <span class="star on">★</span>
+                                    <span class="star on">★</span>
+                                    <span class="star on">★</span>
+                                    <span class="star on">★</span>
+                                    <span class="star off">★</span>
+                                </div>
+                                <div class="rating-count">6,800,000,000 reviews</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="fd_reviews">
+                        <div class="fd_reviews_header">
+                            <h2 class="fd_reviews_title">Reviews</h2>
+                        </div>
+                        <div class="reviews-list-wrapper">
+                            <div class="fd_review_card">
+                                <div class="fd_review_top">
+                                    <div class="fd_avatar">Z</div>
+                                    <div class="fd_review_meta">
+                                        <div class="fd_name_row">
+                                            <span class="fd_name">Zixingche</span>
+                                            <span class="fd_time">· Shanghai · 2019</span>
+                                        </div>
+                                        <div class="fd_star_row" aria-label="5 stars">
+                                            <span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star on">★</span>
+                                            <span class="fd_time2">childhood</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fd_review_text">
+                                    The scene where Nezha sacrifices himself always stayed with me as a kid. When the 2019 film came out and he said "I am the master of my own fate," it felt like the same hero speaking to a new generation. The whole theater was crying.
+                                </div>
+                                <div class="fd_review_photos">
+                                    <div class="fd_photo_box"><img src="images/hero-review1-1.jpg" alt=""></div>
+                                    <div class="fd_photo_box"><img src="images/hero-review1-2.jpg" alt=""></div>
+                                </div>
+                            </div>
+                            <div class="fd_review_card">
+                                <div class="fd_review_top">
+                                    <div class="fd_avatar">A</div>
+                                    <div class="fd_review_meta">
+                                        <div class="fd_name_row">
+                                            <span class="fd_name">Anonymous</span>
+                                            <span class="fd_time">· BuzzFeed · 2017</span>
+                                        </div>
+                                        <div class="fd_star_row" aria-label="5 stars">
+                                            <span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star on">★</span>
+                                            <span class="fd_time2">survival</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fd_review_text">
+                                    I saw my depression in the Dementors, and my flashbacks in the Boggarts. They were terrifying, but also something I could learn to face. Sometimes I wonder if I'd still be here without Harry Potter.
+                                </div>
+                            </div>
+                            <div class="fd_review_card">
+                                <div class="fd_review_top">
+                                    <div class="fd_avatar">
+                                        <img src="https://imageio.forbes.com/specials-images/imageserve/5f4d5df48198540283b331d8/0x0.jpg?format=jpg&crop=1841,1840,x358,y116,safe&height=416&width=416&fit=bounds" alt="George Lucas">
+                                    </div>
+                                    <div class="fd_review_meta">
+                                        <div class="fd_name_row">
+                                            <span class="fd_name">George Lucas</span>
+                                            <span class="fd_time">· Skywalker Ranch · 1977</span>
+                                        </div>
+                                        <div class="fd_star_row" aria-label="5 stars">
+                                            <span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star on">★</span>
+                                            <span class="fd_time2">gratitude</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fd_review_text">
+                                    I spent years hitting dead ends, writing pages of scripts that went nowhere. Then I read Joseph Campbell's The Hero with a Thousand Faces and suddenly everything made sense. I realized that myths from all over the world follow the same basic pattern: an ordinary person is called, enters the unknown, and comes back changed. That became the foundation for Star Wars. I didn't invent the story. I just recognized it.
+                                </div>
+                                <div class="fd_review_photos">
+                                    <div class="fd_photo_box fd_photo_box_wide"><img src="images/hero-review3.jpg" alt=""></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fd_more_reviews_wrapper">
+                            <div class="fd_more_reviews_btn">
+                                More reviews (6.8B)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                </div>
+
+                <div class="loc-content" id="content-loc_left">
+                    <div class="infobar_cover_wrapper infobar_cover_crop_top">
+                        <img class="infobar_topimg" src="images/dark-cover.jpg" alt="">
+                    </div>
+                    <div class="infobar_headerwrapper">
+                        <h1 class="infobar_header_h1">Fear of the Dark</h1>
+                        <div class="infobar_header_ratinginfo">
+                            <span class="infobar_header_ratinginfo_star">
+                                <span class="ratingfont">1.8</span>
+                                <span class="star_list">
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star no"></span>
+                                    <span class="icon_star no"></span>
+                                    <span class="icon_star no"></span>
+                                </span>
+                                <span class="ratingfont">(7,500,000,000 reviews)</span>
+                            </span>
+                        </div>
+                        <p class="infobar_header_category">Fear</p>
+                    </div>
+                    <div class="infobar_tabs">
+                        <div class="infobar_tab infobar_tab_active">Overview</div>
+                        <div class="infobar_tab">About</div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="infobar_basicinfo">
+                        <div class="fd_info_row">
+                            <div class="fd_icon_wrapper">
+                                <span class="material-symbols-outlined">schedule</span>
+                            </div>
+                            <div class="fd_content_wrapper">
+                                <div class="fd_value_primary">Open · Reduced service near the equator in summer.</div>
+                            </div>
+                        </div>
+                        <div class="fd_info_row">
+                            <div class="fd_icon_wrapper">
+                                <span class="material-symbols-outlined">location_on</span>
+                            </div>
+                            <div class="fd_content_wrapper">
+                                <div class="fd_value_primary">Amygdala, Layer 1, Pre-conscious Zone</div>
+                            </div>
+                        </div>
+                        <div class="fd_info_row">
+                            <div class="fd_icon_wrapper">
+                                <span class="material-symbols-outlined">call</span>
+                            </div>
+                            <div class="fd_content_wrapper">
+                                <div class="fd_value_primary">No number. It has been here since before language existed.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="review-summary">
+                        <div class="review-summary-header">
+                            <h2 class="review-summary-title">Review summary</h2>
+                        </div>
+                        <div class="review-summary-body">
+                            <div class="rating-breakdown">
+                                <div class="rating-row">
+                                    <span class="star-label">5</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:3%"></div>
+                                    </div>
+                                    <span class="percent-label">3%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">4</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:5%"></div>
+                                    </div>
+                                    <span class="percent-label">5%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">3</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:12%"></div>
+                                    </div>
+                                    <span class="percent-label">12%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">2</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:30%"></div>
+                                    </div>
+                                    <span class="percent-label">30%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">1</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:50%"></div>
+                                    </div>
+                                    <span class="percent-label">50%</span>
+                                </div>
+                            </div>
+                            <div class="rating-overall">
+                                <div class="rating-score">1.8</div>
+                                <div class="rating-stars" aria-label="1.8 stars">
+                                    <span class="star on">★</span>
+                                    <span class="star on">★</span>
+                                    <span class="star off">★</span>
+                                    <span class="star off">★</span>
+                                    <span class="star off">★</span>
+                                </div>
+                                <div class="rating-count">7,500,000,000 reviews</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="fd_reviews">
+                        <div class="fd_reviews_header">
+                            <h2 class="fd_reviews_title">Reviews</h2>
+                        </div>
+                        <div class="reviews-list-wrapper">
+                            <div class="fd_review_card">
+                                <div class="fd_review_top">
+                                    <div class="fd_avatar">A</div>
+                                    <div class="fd_review_meta">
+                                        <div class="fd_name_row">
+                                            <span class="fd_name">Anonymous</span>
+                                            <span class="fd_time">· 2024</span>
+                                        </div>
+                                        <div class="fd_star_row" aria-label="1 star">
+                                            <span class="fd_star on">★</span><span class="fd_star off">★</span><span class="fd_star off">★</span><span class="fd_star off">★</span><span class="fd_star off">★</span>
+                                            <span class="fd_time2">age 7</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fd_review_text">
+                                    The moonlight was coming through the window. I couldn't see anything in my room except the closet door. It was a little bit open and it felt like something inside was watching me...
+                                </div>
+                            </div>
+                            <div class="fd_review_card">
+                                <div class="fd_review_top">
+                                    <div class="fd_avatar">N</div>
+                                    <div class="fd_review_meta">
+                                        <div class="fd_name_row">
+                                            <span class="fd_name">NightOwl</span>
+                                            <span class="fd_time">· Reddit · 2021</span>
+                                        </div>
+                                        <div class="fd_star_row" aria-label="2 stars">
+                                            <span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star off">★</span><span class="fd_star off">★</span><span class="fd_star off">★</span>
+                                            <span class="fd_time2">insomnia</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fd_review_text">
+                                    Turned off the lights and my brain immediately started making shapes out of everything. The chair looked like a person. The coat looked like something breathing. I'm 27, I have a degree, I pay rent… and I still don't fully trust a dark room.
+                                </div>
+                                <div class="fd_review_photos">
+                                    <div class="fd_photo_box"><img src="images/dark-review2.jpg" alt=""></div>
+                                </div>
+                            </div>
+                            <div class="fd_review_card">
+                                <div class="fd_review_top">
+                                    <div class="fd_avatar">A</div>
+                                    <div class="fd_review_meta">
+                                        <div class="fd_name_row">
+                                            <span class="fd_name">Anonymous</span>
+                                            <span class="fd_time">· East Africa · ~1,000,000 years ago</span>
+                                        </div>
+                                        <div class="fd_star_row" aria-label="1 star">
+                                            <span class="fd_star on">★</span><span class="fd_star off">★</span><span class="fd_star off">★</span><span class="fd_star off">★</span><span class="fd_star off">★</span>
+                                            <span class="fd_time2">survival</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fd_review_text">
+                                    I remember the sun going down and all of us pressing closer together. Something moved in the grass, but we couldn't see it. And not seeing was the scariest part. Later we tried to keep a flame burning through the night. It is like a prayer.
+                                </div>
+                                <div class="fd_review_photos">
+                                    <div class="fd_photo_box"><img src="images/dark-review3.jpg" alt=""></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fd_more_reviews_wrapper">
+                            <div class="fd_more_reviews_btn">
+                                More reviews (7.5B)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                </div>
+
+                <div class="loc-content" id="content-loc3">
+                    <div class="infobar_cover_wrapper infobar_cover_crop_top">
+                        <img class="infobar_topimg" src="images/lullaby-cover.jpg" alt="">
+                    </div>
+                    <div class="infobar_headerwrapper">
+                        <h1 class="infobar_header_h1">Lullaby</h1>
+                        <div class="infobar_header_ratinginfo">
+                            <span class="infobar_header_ratinginfo_star">
+                                <span class="ratingfont">4.4</span>
+                                <span class="star_list">
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star no"></span>
+                                </span>
+                                <span class="ratingfont">(7,900,000,000 reviews)</span>
+                            </span>
+                        </div>
+                        <p class="infobar_header_category">Love</p>
+                    </div>
+                    <div class="infobar_tabs">
+                        <div class="infobar_tab infobar_tab_active">Overview</div>
+                        <div class="infobar_tab">About</div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="infobar_basicinfo">
+                        <div class="fd_info_row">
+                            <div class="fd_icon_wrapper">
+                                <span class="material-symbols-outlined">schedule</span>
+                            </div>
+                            <div class="fd_content_wrapper">
+                                <div class="fd_value_primary">Open every night · Has never closed.</div>
+                            </div>
+                        </div>
+                        <div class="fd_info_row">
+                            <div class="fd_icon_wrapper">
+                                <span class="material-symbols-outlined">location_on</span>
+                            </div>
+                            <div class="fd_content_wrapper">
+                                <div class="fd_value_primary">Collective Memory, Layer 2, Comfort Zone</div>
+                            </div>
+                        </div>
+                        <div class="fd_info_row">
+                            <div class="fd_icon_wrapper">
+                                <span class="material-symbols-outlined">call</span>
+                            </div>
+                            <div class="fd_content_wrapper">
+                                <div class="fd_value_primary">No number needed. The song knows the way.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="review-summary">
+                        <div class="review-summary-header">
+                            <h2 class="review-summary-title">Review summary</h2>
+                        </div>
+                        <div class="review-summary-body">
+                            <div class="rating-breakdown">
+                                <div class="rating-row">
+                                    <span class="star-label">5</span>
+                                    <div class="bar-track"><div class="bar-fill" style="width:65%"></div></div>
+                                    <span class="percent-label">65%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">4</span>
+                                    <div class="bar-track"><div class="bar-fill" style="width:20%"></div></div>
+                                    <span class="percent-label">20%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">3</span>
+                                    <div class="bar-track"><div class="bar-fill" style="width:8%"></div></div>
+                                    <span class="percent-label">8%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">2</span>
+                                    <div class="bar-track"><div class="bar-fill" style="width:4%"></div></div>
+                                    <span class="percent-label">4%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">1</span>
+                                    <div class="bar-track"><div class="bar-fill" style="width:3%"></div></div>
+                                    <span class="percent-label">3%</span>
+                                </div>
+                            </div>
+                            <div class="rating-overall">
+                                <div class="rating-score">4.4</div>
+                                <div class="rating-stars" aria-label="4.4 stars">
+                                    <span class="star on">★</span>
+                                    <span class="star on">★</span>
+                                    <span class="star on">★</span>
+                                    <span class="star on">★</span>
+                                    <span class="star off">★</span>
+                                </div>
+                                <div class="rating-count">7,900,000,000 reviews</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="fd_reviews">
+                        <div class="fd_reviews_header">
+                            <h2 class="fd_reviews_title">Reviews</h2>
+                        </div>
+                        <div class="reviews-list-wrapper">
+                            <div class="fd_review_card">
+                                <div class="fd_review_top">
+                                    <div class="fd_avatar">A</div>
+                                    <div class="fd_review_meta">
+                                        <div class="fd_name_row">
+                                            <span class="fd_name">Alyssa</span>
+                                            <span class="fd_time">· UCSD · 2021</span>
+                                        </div>
+                                        <div class="fd_star_row" aria-label="4 stars">
+                                            <span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star off">★</span>
+                                            <span class="fd_time2">loneliness</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fd_review_text">
+                                    My grandmother used to sing Spanish lullabies to me from this old, beautiful book. Now that I'm in college, when I feel really lonely, I sometimes sing the one about the little birds whose mother will come back to feed and protect them.
+                                </div>
+                            </div>
+                            <div class="fd_review_card">
+                                <div class="fd_review_top">
+                                    <div class="fd_avatar">D</div>
+                                    <div class="fd_review_meta">
+                                        <div class="fd_name_row">
+                                            <span class="fd_name">David, 75</span>
+                                            <span class="fd_time">· Music Together Class · ~2020</span>
+                                        </div>
+                                        <div class="fd_star_row" aria-label="5 stars">
+                                            <span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star on">★</span>
+                                            <span class="fd_time2">memory</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fd_review_text">
+                                    My grandmother sang me that song as we were escaping Nazi Germany when I was five years old. I hadn't remembered it was the song until I just heard you sing it now. Seventy years. The melody was locked inside me the whole time.
+                                </div>
+                            </div>
+                            <div class="fd_review_card">
+                                <div class="fd_review_top">
+                                    <div class="fd_avatar">A</div>
+                                    <div class="fd_review_meta">
+                                        <div class="fd_name_row">
+                                            <span class="fd_name">Anonymous</span>
+                                            <span class="fd_time">· Babylon · ~2000 BCE</span>
+                                        </div>
+                                        <div class="fd_star_row" aria-label="5 stars">
+                                            <span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star on">★</span>
+                                            <span class="fd_time2">mother</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fd_review_text">
+                                    My baby cried again tonight and woke the house god. They say if the crying doesn't stop, Kusarikku will come. So I sang the only words I know: little one, who dwelled in darkness, now you've come and seen the sun, why the crying? His breathing slowed. Maybe the spirits left.
+                                </div>
+                                <div class="fd_review_photos">
+                                    <div class="fd_photo_box fd_photo_box_medium"><img src="images/lullaby-review3.jpg" alt=""></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fd_more_reviews_wrapper">
+                            <div class="fd_more_reviews_btn">More reviews (7.9B)</div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                </div>
+
+                <div class="loc-content" id="content-loc4">
+                    <div class="infobar_cover_wrapper infobar_cover_crop_top">
+                        <img class="infobar_topimg" src="images/dejavu-cover.jpg" alt="">
+                    </div>
+                    <div class="infobar_headerwrapper">
+                        <h1 class="infobar_header_h1">Déjà Vu</h1>
+                        <div class="infobar_header_ratinginfo">
+                            <span class="infobar_header_ratinginfo_star">
+                                <span class="ratingfont">3.9</span>
+                                <span class="star_list">
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star no"></span>
+                                </span>
+                                <span class="ratingfont">(5,600,000,000 reviews)</span>
+                            </span>
+                        </div>
+                        <p class="infobar_header_category">Cognition</p>
+                    </div>
+                    <div class="infobar_tabs">
+                        <div class="infobar_tab infobar_tab_active">Overview</div>
+                        <div class="infobar_tab">About</div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="infobar_basicinfo">
+                        <div class="fd_info_row">
+                            <div class="fd_icon_wrapper">
+                                <span class="material-symbols-outlined">schedule</span>
+                            </div>
+                            <div class="fd_content_wrapper">
+                                <div class="fd_value_primary">Open · Appears without warning. Cannot be booked in advance.</div>
+                            </div>
+                        </div>
+                        <div class="fd_info_row">
+                            <div class="fd_icon_wrapper">
+                                <span class="material-symbols-outlined">location_on</span>
+                            </div>
+                            <div class="fd_content_wrapper">
+                                <div class="fd_value_primary">Temporal Lobe, Rhinal Cortex, between Familiarity and Recall</div>
+                            </div>
+                        </div>
+                        <div class="fd_info_row">
+                            <div class="fd_icon_wrapper">
+                                <span class="material-symbols-outlined">call</span>
+                            </div>
+                            <div class="fd_content_wrapper">
+                                <div class="fd_value_primary">No number. You'll know when it's calling.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="review-summary">
+                        <div class="review-summary-header">
+                            <h2 class="review-summary-title">Review summary</h2>
+                        </div>
+                        <div class="review-summary-body">
+                            <div class="rating-breakdown">
+                                <div class="rating-row">
+                                    <span class="star-label">5</span>
+                                    <div class="bar-track"><div class="bar-fill" style="width:25%"></div></div>
+                                    <span class="percent-label">25%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">4</span>
+                                    <div class="bar-track"><div class="bar-fill" style="width:46%"></div></div>
+                                    <span class="percent-label">46%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">3</span>
+                                    <div class="bar-track"><div class="bar-fill" style="width:25%"></div></div>
+                                    <span class="percent-label">25%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">2</span>
+                                    <div class="bar-track"><div class="bar-fill" style="width:2%"></div></div>
+                                    <span class="percent-label">2%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">1</span>
+                                    <div class="bar-track"><div class="bar-fill" style="width:2%"></div></div>
+                                    <span class="percent-label">2%</span>
+                                </div>
+                            </div>
+                            <div class="rating-overall">
+                                <div class="rating-score">3.9</div>
+                                <div class="rating-stars" aria-label="3.9 stars">
+                                    <span class="star on">★</span>
+                                    <span class="star on">★</span>
+                                    <span class="star on">★</span>
+                                    <span class="star on">★</span>
+                                    <span class="star off">★</span>
+                                </div>
+                                <div class="rating-count">5,600,000,000 reviews</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="fd_reviews">
+                        <div class="fd_reviews_header">
+                            <h2 class="fd_reviews_title">Reviews</h2>
+                        </div>
+                        <div class="reviews-list-wrapper">
+                            <div class="fd_review_card">
+                                <div class="fd_review_top">
+                                    <div class="fd_avatar">A</div>
+                                    <div class="fd_review_meta">
+                                        <div class="fd_name_row">
+                                            <span class="fd_name">Anonymous</span>
+                                            <span class="fd_time">· Reddit · 2023</span>
+                                        </div>
+                                        <div class="fd_star_row" aria-label="4 stars">
+                                            <span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star off">★</span>
+                                            <span class="fd_time2">conversation</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fd_review_text">
+                                    I was on the phone with my brother when suddenly I knew exactly what he was about to say—word for word. Even his friend talking in the background sounded familiar. He said we'd never had that conversation before. I know we hadn't, but for a moment it felt like my brain had already lived it.
+                                </div>
+                            </div>
+                            <div class="fd_review_card">
+                                <div class="fd_review_top">
+                                    <div class="fd_avatar">A</div>
+                                    <div class="fd_review_meta">
+                                        <div class="fd_name_row">
+                                            <span class="fd_name">Anonymous</span>
+                                            <span class="fd_time">· Kyoto · 2015</span>
+                                        </div>
+                                        <div class="fd_star_row" aria-label="4 stars">
+                                            <span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star off">★</span>
+                                            <span class="fd_time2">travel</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fd_review_text">
+                                    I walked down a small street I had never visited before and suddenly felt as if I knew every corner of it. The buildings, the sound of bicycles passing, even the smell of the air felt familiar.
+                                </div>
+                                <div class="fd_review_photos">
+                                    <div class="fd_photo_box"><img src="images/dejavu-review2-1.jpg" alt=""></div>
+                                    <div class="fd_photo_box"><img src="images/dejavu-review2-2.jpg" alt=""></div>
+                                </div>
+                            </div>
+                            <div class="fd_review_card">
+                                <div class="fd_review_top">
+                                    <div class="fd_avatar">A</div>
+                                    <div class="fd_review_meta">
+                                        <div class="fd_name_row">
+                                            <span class="fd_name">Anonymous Patient</span>
+                                            <span class="fd_time">· Vienna · ~1901</span>
+                                        </div>
+                                        <div class="fd_star_row" aria-label="3 stars">
+                                            <span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star on">★</span><span class="fd_star off">★</span><span class="fd_star off">★</span>
+                                            <span class="fd_time2">every room</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fd_review_text">
+                                    I entered my friend's house for the first time. Yet I had the feeling I had visited before. I knew each successive room before I walked through it. The hallway, the parlor, the dining room — all of it, already seen. My doctor says it is a repressed fantasy surfacing. I think it is something older than that.
+                                </div>
+                                <div class="fd_review_photos">
+                                    <div class="fd_photo_box fd_photo_box_medium"><img src="images/dejavu-review3.jpg" alt=""></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fd_more_reviews_wrapper">
+                            <div class="fd_more_reviews_btn">More reviews (5.6B)</div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                </div>
+            </div>
+
+            <a href="#sidebar-min" class="panel-toggle toggle-close">◀</a>
+        </div>
+
+        <div class="map-area" id="mapArea">
+            <div class="map-viewport" draggable="true">
+                <div class="map-canvas">
+                    <span id="start" class="pin pin-topright-quarter"></span>
+                    <img class="map-img" src="images/heatmap32.png" alt="">
+                    <span id="loc1" class="state-anchor state-anchor-in-canvas" style="left: 1290px; top: 950px;"></span>
+                    <span id="loc2" class="state-anchor state-anchor-in-canvas" style="left: 2400px; top: 600px;"></span>
+                    <span id="loc_left" class="state-anchor state-anchor-in-canvas" style="left: 340px; top: 230px;"></span>
+                    <span id="loc3" class="state-anchor state-anchor-in-canvas" style="left: 740px; top: 1680px;"></span>
+                    <span id="loc4" class="state-anchor state-anchor-in-canvas" style="left: 2000px; top: 1900px;"></span>
+                    <a href="#sidebar-min" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 2;" draggable="false" aria-label="Close sidebar"></a>
+                </div>
+
+                <div class="map-marker-container" style="left: 1290px; top: 950px;">
+                    <a href="#loc1" class="map-marker pin-center"></a>
+                    <a href="#loc1" class="marker-label">
+                        <span class="marker-label-title">The Falling Dream</span>
+                        <span class="marker-label-category">Dream</span>
+                    </a>
+                    <a href="#loc1" class="hover-info-card">
+                        <div class="card-image">
+                            <img src="images/falling-dream-cover.jpg" alt="Dream">
+                        </div>
+                        <div class="card-content">
+                            <div class="card-info">
+                                <h3>The Falling Dream</h3>
+                                <div class="rating">
+                                    2.2 <span class="stars">★★☆☆☆</span> (4.2B reviews)
+                                </div>
+                                <div class="category">Dream</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="map-marker-container" style="left: 2400px; top: 600px;">
+                    <a href="#loc2" class="map-marker pin-center"></a>
+                    <a href="#loc2" class="marker-label">
+                        <span class="marker-label-title">Hero's Journey</span>
+                        <span class="marker-label-category">Archetypes</span>
+                    </a>
+                    <a href="#loc2" class="hover-info-card">
+                        <div class="card-image">
+                            <img src="images/hero-cover.jpg" alt="Hero's Journey">
+                        </div>
+                        <div class="card-content">
+                            <div class="card-info">
+                                <h3>Hero's Journey</h3>
+                                <div class="rating">
+                                    4.5 <span class="stars">★★★★☆</span> (6.8B reviews)
+                                </div>
+                                <div class="category">Archetypes</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="map-marker-container" style="left: 340px; top: 230px;">
+                    <a href="#loc_left" class="map-marker pin-center"></a>
+                    <a href="#loc_left" class="marker-label">
+                        <span class="marker-label-title">Fear of the Dark</span>
+                        <span class="marker-label-category">Fear</span>
+                    </a>
+                    <a href="#loc_left" class="hover-info-card">
+                        <div class="card-image">
+                            <img src="images/dark-cover.jpg" alt="Fear of the Dark">
+                        </div>
+                        <div class="card-content">
+                            <div class="card-info">
+                                <h3>Fear of the Dark</h3>
+                                <div class="rating">
+                                    1.8 <span class="stars">★★☆☆☆</span> (7.5B reviews)
+                                </div>
+                                <div class="category">Fear</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="map-marker-container" style="left: 740px; top: 1680px;">
+                    <a href="#loc3" class="map-marker pin-center"></a>
+                    <a href="#loc3" class="marker-label">
+                        <span class="marker-label-title">Lullaby</span>
+                        <span class="marker-label-category">Love</span>
+                    </a>
+                    <a href="#loc3" class="hover-info-card">
+                        <div class="card-image">
+                            <img src="images/lullaby-cover.jpg" alt="Lullaby">
+                        </div>
+                        <div class="card-content">
+                            <div class="card-info">
+                                <h3>Lullaby</h3>
+                                <div class="rating">
+                                    4.4 <span class="stars">★★★★☆</span> (7.9B reviews)
+                                </div>
+                                <div class="category">Love</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="map-marker-container" style="left: 2000px; top: 1900px;">
+                    <a href="#loc4" class="map-marker pin-center"></a>
+                    <a href="#loc4" class="marker-label">
+                        <span class="marker-label-title">Déjà Vu</span>
+                        <span class="marker-label-category">Cognition</span>
+                    </a>
+                    <a href="#loc4" class="hover-info-card">
+                        <div class="card-image">
+                            <img src="images/dejavu-cover.jpg" alt="Déjà Vu">
+                        </div>
+                        <div class="card-content">
+                            <div class="card-info">
+                                <h3>Déjà Vu</h3>
+                                <div class="rating">
+                                    3.9 <span class="stars">★★★★☆</span> (5.6B reviews)
+                                </div>
+                                <div class="category">Cognition</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="notification">
+                <div>
+                    <p>Please scroll to navigate map</p>
+                </div>
+            </div>
+            <a href="index.html" class="layers-control">
+                <div class="layers-thumbnail">
+                    <img src="images/google_map_preview.png" alt="Default Layer">
+                </div>
+                <div class="layers-label">
+                    <span class="text-default">Layers</span>
+                    <span class="text-hover">Default</span>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+    <script>
+        const notification = document.querySelector('.notification');
+        document.body.addEventListener("dragstart", function () {
+            notification.style.visibility = "visible";
+        });
+        document.body.addEventListener("dragend", function () {
+            notification.style.visibility = "hidden";
+        });
+
+    </script>
+</body>
+
+</html>

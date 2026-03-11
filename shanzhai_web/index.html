@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google map</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="page-container">
+        <span id="sidebar-min" class="state-anchor"></span>
+
+        <div class="omnibox-container">
+            <button class="icon-btn search-btn" aria-label="Menu">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+
+            <input class="search-input" type="text" placeholder="Search Google Maps" spellcheck="false"
+                onkeydown="return false;" readonly>
+
+            <button class="icon-btn search-btn" aria-label="Search">
+                <span class="material-symbols-outlined">search</span>
+            </button>
+
+            <div class="divider"></div>
+
+            <button class="icon-btn btn-green" aria-label="Directions">
+                <span class="material-symbols-outlined">directions</span>
+            </button>
+
+            <div class="search-suggestions">
+                <a href="#loc1" class="suggestion-item">
+                    <div class="suggestion-icon">
+                        <span class="material-symbols-outlined">schedule</span>
+                    </div>
+                    <div class="suggestion-text">
+                        <div class="suggestion-title">Quanjude</div>
+                        <div class="suggestion-subtitle">778 Dongfang Rd, Yaohan, Pudong, Shanghai, China, 200085</div>
+                    </div>
+                </a>
+
+                <a href="#loc2" class="suggestion-item">
+                    <div class="suggestion-icon">
+                        <span class="material-symbols-outlined">schedule</span>
+                    </div>
+                    <div class="suggestion-text">
+                        <div class="suggestion-title">New York University Shanghai</div>
+                        <div class="suggestion-subtitle">567 West Yangsi Rd, Pu Dong Xin Qu, China, 200124</div>
+                    </div>
+                </a>
+
+                <a href="#loc3" class="suggestion-item">
+                    <div class="suggestion-icon">
+                        <span class="material-symbols-outlined">schedule</span>
+                    </div>
+                    <div class="suggestion-text">
+                        <div class="suggestion-title">Jinqiao Park</div>
+                        <div class="suggestion-subtitle">Pudong, China, 201206</div>
+                    </div>
+                </a>
+
+                <a href="#loc4" class="suggestion-item">
+                    <div class="suggestion-icon">
+                        <span class="material-symbols-outlined">schedule</span>
+                    </div>
+                    <div class="suggestion-text">
+                        <div class="suggestion-title">Shanghai Synchrotron Radiation Facility</div>
+                        <div class="suggestion-subtitle">239 Zhangheng Rd, Pudong, China, 201203</div>
+                    </div>
+                </a>
+
+                <a href="#loc_left" class="suggestion-item">
+                    <div class="suggestion-icon">
+                        <span class="material-symbols-outlined">schedule</span>
+                    </div>
+                    <div class="suggestion-text">
+                        <div class="suggestion-title">1933 Old Millfun</div>
+                        <div class="suggestion-subtitle">10 Shajing Rd, Hongkou District, Shanghai, China, 200086</div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+
+        <div class="category-bar">
+            <button class="pill-btn">
+                <span class="material-symbols-outlined icon-sm">restaurant</span>
+                Restaurants
+            </button>
+            <button class="pill-btn">
+                <span class="material-symbols-outlined icon-sm">hotel</span>
+                Hotels
+            </button>
+            <button class="pill-btn">
+                <span class="material-symbols-outlined icon-sm">museum</span>
+                Museums
+            </button>
+            <button class="pill-btn">
+                <span class="material-symbols-outlined icon-sm">train</span>
+                Transit
+            </button>
+            <button class="pill-btn">
+                <span class="material-symbols-outlined icon-sm">local_pharmacy</span>
+                Pharmacies
+            </button>
+        </div>
+
+        <div class="top-right-menu">
+            <button class="icon-btn app-grid-btn" aria-label="Google apps">
+                <span class="material-symbols-outlined">apps</span>
+            </button>
+
+            <a href="#" class="profile-avatar-btn" aria-label="Google Account">
+                <img src="https://lh3.googleusercontent.com/a/default-user=s64-c" alt="Profile Picture"
+                    class="avatar-img">
+            </a>
+        </div>
+
+
+        <div class="sidebar-container">
+            <div class="infobar" id="sidebar">
+                <div class="search-header-wrapper" id="header-loc1">
+                    <div class="search-header">
+                        <a href="#sidebar-min" class="icon-btn search-btn"><span
+                                class="material-symbols-outlined">menu</span></a>
+                        <input type="text" class="search-input" value="Quanjude" readonly>
+                        <button class="icon-btn search-btn"><span
+                                class="material-symbols-outlined">search</span></button>
+                        <span class="spdivider"></span>
+                        <a href="#sidebar-min" class="icon-btn close-btn">
+                            <span class="material-symbols-outlined">close</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="search-header-wrapper" id="header-loc2">
+                    <div class="search-header">
+                        <a href="#sidebar-min" class="icon-btn search-btn"><span
+                                class="material-symbols-outlined">menu</span></a>
+                        <input type="text" class="search-input" value="New York University Shanghai" readonly>
+                        <button class="icon-btn search-btn"><span
+                                class="material-symbols-outlined">search</span></button>
+                        <span class="spdivider"></span>
+                        <a href="#sidebar-min" class="icon-btn close-btn">
+                            <span class="material-symbols-outlined">close</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="search-header-wrapper" id="header-loc3">
+                    <div class="search-header">
+                        <a href="#sidebar-min" class="icon-btn search-btn"><span
+                                class="material-symbols-outlined">menu</span></a>
+                        <input type="text" class="search-input" value="Jinqiao Park" readonly>
+                        <button class="icon-btn search-btn"><span
+                                class="material-symbols-outlined">search</span></button>
+                        <span class="spdivider"></span>
+                        <a href="#sidebar-min" class="icon-btn close-btn">
+                            <span class="material-symbols-outlined">close</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="search-header-wrapper" id="header-loc4">
+                    <div class="search-header">
+                        <a href="#sidebar-min" class="icon-btn search-btn"><span
+                                class="material-symbols-outlined">menu</span></a>
+                        <input type="text" class="search-input" value="Shanghai Synchrotron Radiation Facility"
+                            readonly>
+                        <button class="icon-btn search-btn"><span
+                                class="material-symbols-outlined">search</span></button>
+                        <span class="spdivider"></span>
+                        <a href="#sidebar-min" class="icon-btn close-btn">
+                            <span class="material-symbols-outlined">close</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="search-header-wrapper" id="header-loc_left">
+                    <div class="search-header">
+                        <a href="#sidebar-min" class="icon-btn search-btn"><span
+                                class="material-symbols-outlined">menu</span></a>
+                        <input type="text" class="search-input" value="1933 Old Millfun" readonly>
+                        <button class="icon-btn search-btn"><span
+                                class="material-symbols-outlined">search</span></button>
+                        <span class="spdivider"></span>
+                        <a href="#sidebar-min" class="icon-btn close-btn">
+                            <span class="material-symbols-outlined">close</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="loc-content" id="content-loc1">
+                    <div class="infobar_cover_wrapper infobar_cover_crop_top">
+                        <img class="infobar_topimg"
+                            src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/04/69/e6/e8/quanjude-sanyuanqiao.jpg?w=900&h=500&s=1"
+                            alt="">
+                    </div>
+                    <div class="infobar_headerwrapper">
+                        <h1 class="infobar_header_h1">Quanjude</h1>
+                        <h2 class="infobar_header_h2"><span style="font-size: 14px;">全聚德</span></h2>
+                        <div class="infobar_header_ratinginfo">
+                            <span class="infobar_header_ratinginfo_star">
+                                <span class="ratingfont">4.1</span>
+                                <span class="star_list">
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star no"></span>
+                                </span>
+                                <span class="ratingfont">(71)</span>
+                                <span class="ratingfont"> · $$$</span>
+                            </span>
+                        </div>
+                        <p class="infobar_header_category">Chinese restaurant</p>
+                    </div>
+                    <div class="infobar_tabs">
+                        <div class="infobar_tab infobar_tab_active">Overview</div>
+                        <div class="infobar_tab">About</div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="infobar_basicinfo">
+                        <div class="fd_info_row">
+                            <div class="fd_icon_wrapper">
+                                <span class="material-symbols-outlined">schedule</span>
+                            </div>
+                            <div class="fd_content_wrapper">
+                                <div class="fd_value_primary">Opens 11 AM</div>
+                            </div>
+                        </div>
+                        <div class="fd_info_row">
+                            <div class="fd_icon_wrapper">
+                                <span class="material-symbols-outlined">location_on</span>
+                            </div>
+                            <div class="fd_content_wrapper">
+                                <div class="fd_value_primary">778 Dongfang Rd, Yaohan, Pudong, Shanghai, China, 200085
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fd_info_row">
+                            <div class="fd_icon_wrapper">
+                                <span class="material-symbols-outlined">call</span>
+                            </div>
+                            <div class="fd_content_wrapper">
+                                <div class="fd_value_primary">02168868807</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="review-summary">
+                        <div class="review-summary-header">
+                            <h2 class="review-summary-title">Review summary</h2>
+                        </div>
+                        <div class="review-summary-body">
+                            <div class="rating-breakdown">
+                                <div class="rating-row">
+                                    <span class="star-label">5</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:55%"></div>
+                                    </div>
+                                    <span class="percent-label">55%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">4</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:25%"></div>
+                                    </div>
+                                    <span class="percent-label">25%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">3</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:12%"></div>
+                                    </div>
+                                    <span class="percent-label">12%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">2</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:4%"></div>
+                                    </div>
+                                    <span class="percent-label">4%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">1</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:4%"></div>
+                                    </div>
+                                    <span class="percent-label">4%</span>
+                                </div>
+                            </div>
+                            <div class="rating-overall">
+                                <div class="rating-score">4.1</div>
+                                <div class="rating-stars" aria-label="4.1 stars">
+                                    <span class="star on">★</span><span class="star on">★</span><span
+                                        class="star on">★</span><span class="star on">★</span><span
+                                        class="star off">★</span>
+                                </div>
+                                <div class="rating-count">71 reviews</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="fd_reviews">
+                        <div class="fd_reviews_header">
+                            <h2 class="fd_reviews_title">Reviews</h2>
+                        </div>
+                        <div class="reviews-list-wrapper">
+                            <div class="fd_review_card">
+                                <div class="fd_review_top">
+                                    <div class="fd_avatar">T</div>
+                                    <div class="fd_review_meta">
+                                        <div class="fd_name_row">
+                                            <span class="fd_name">Toh Hun Khim</span>
+                                            <span class="fd_time">· 6 years ago</span>
+                                        </div>
+                                        <div class="fd_star_row" aria-label="5 stars">
+                                            <span class="fd_star on">★</span><span class="fd_star on">★</span><span
+                                                class="fd_star on">★</span><span class="fd_star on">★</span><span
+                                                class="fd_star on">★</span>
+                                            <span class="fd_time2">Local Guide · 137 reviews · 483 photos</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fd_review_text">
+                                    Restaurant is on 3rd level of a hotel. The Peking duck is really excellent. More
+                                    importantly pricing is reasonable and will not burn a hole in your pocket. Will come
+                                    back if in Shanghai again.
+                                </div>
+                                <div class="fd_review_photos">
+                                    <div class="fd_photo_box"><img src="images/quanjude-review.jpg" alt=""></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fd_more_reviews_wrapper">
+                            <div class="fd_more_reviews_btn">More reviews (71)</div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                </div>
+
+                <div class="loc-content" id="content-loc2">
+                    <div class="infobar_cover_wrapper infobar_cover_crop_top">
+                        <img class="infobar_topimg" src="images/nyush-cover.jpg" alt="">
+                    </div>
+                    <div class="infobar_headerwrapper">
+                        <h1 class="infobar_header_h1">New York University Shanghai</h1>
+                        <h2 class="infobar_header_h2"><span style="font-size: 14px;">上海纽约大学</span></h2>
+                        <p class="infobar_header_category">College</p>
+                    </div>
+                    <div class="infobar_tabs">
+                        <div class="infobar_tab infobar_tab_active">Overview</div>
+                        <div class="infobar_tab">About</div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="infobar_basicinfo">
+                        <div class="fd_info_row">
+                            <div class="fd_icon_wrapper">
+                                <span class="material-symbols-outlined">location_on</span>
+                            </div>
+                            <div class="fd_content_wrapper">
+                                <div class="fd_value_primary">567 West Yangsi Rd, Pu Dong Xin Qu, China, 200124</div>
+                            </div>
+                        </div>
+                        <div class="fd_info_row">
+                            <div class="fd_icon_wrapper">
+                                <span class="material-symbols-outlined">call</span>
+                            </div>
+                            <div class="fd_content_wrapper">
+                                <div class="fd_value_primary">02120595500</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="review-summary">
+                        <div class="review-summary-header">
+                            <h2 class="review-summary-title">Review summary</h2>
+                        </div>
+                        <div class="review-summary-body">
+                            <div class="rating-breakdown">
+                                <div class="rating-row">
+                                    <span class="star-label">5</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:79%"></div>
+                                    </div>
+                                    <span class="percent-label">79%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">4</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:15%"></div>
+                                    </div>
+                                    <span class="percent-label">15%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">3</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:3%"></div>
+                                    </div>
+                                    <span class="percent-label">3%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">2</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:3%"></div>
+                                    </div>
+                                    <span class="percent-label">3%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">1</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:0%"></div>
+                                    </div>
+                                    <span class="percent-label">0%</span>
+                                </div>
+                            </div>
+                            <div class="rating-overall">
+                                <div class="rating-score">4.7</div>
+                                <div class="rating-stars" aria-label="4.7 stars">
+                                    <span class="star on">★</span><span class="star on">★</span><span
+                                        class="star on">★</span><span class="star on">★</span><span
+                                        class="star off">★</span>
+                                </div>
+                                <div class="rating-count">33 reviews</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="fd_reviews">
+                        <div class="fd_reviews_header">
+                            <h2 class="fd_reviews_title">Reviews</h2>
+                        </div>
+                        <div class="reviews-list-wrapper">
+                            <div class="fd_review_card">
+                                <div class="fd_review_top">
+                                    <div class="fd_avatar">E</div>
+                                    <div class="fd_review_meta">
+                                        <div class="fd_name_row">
+                                            <span class="fd_name">Enzo Kim</span>
+                                            <span class="fd_time">· 5 years ago</span>
+                                        </div>
+                                        <div class="fd_star_row" aria-label="5 stars">
+                                            <span class="fd_star on">★</span><span class="fd_star on">★</span><span
+                                                class="fd_star on">★</span><span class="fd_star on">★</span><span
+                                                class="fd_star on">★</span>
+                                            <span class="fd_time2">1 review</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fd_review_text">
+                                    NYU Shanghai is full of brilliant minded individuals who are always eager to learn.
+                                    The best college experience I could ever hope for!
+                                </div>
+                            </div>
+                            <div class="fd_review_card">
+                                <div class="fd_review_top">
+                                    <div class="fd_avatar">T</div>
+                                    <div class="fd_review_meta">
+                                        <div class="fd_name_row">
+                                            <span class="fd_name">Trinette Wheeler</span>
+                                            <span class="fd_time">· 4 years ago</span>
+                                        </div>
+                                        <div class="fd_star_row" aria-label="1 star">
+                                            <span class="fd_star on">★</span><span class="fd_star off">★</span><span
+                                                class="fd_star off">★</span><span class="fd_star off">★</span><span
+                                                class="fd_star off">★</span>
+                                            <span class="fd_time2">1 review</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fd_review_text">
+                                    not a fan
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fd_more_reviews_wrapper">
+                            <div class="fd_more_reviews_btn">More reviews (33)</div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                </div>
+
+                <div class="loc-content" id="content-loc_left">
+                    <div class="infobar_cover_wrapper infobar_cover_crop_top">
+                        <img class="infobar_topimg" src="images/1933-cover.jpg" alt="">
+                    </div>
+                    <div class="infobar_headerwrapper">
+                        <h1 class="infobar_header_h1">1933 Old Millfun</h1>
+                        <h2 class="infobar_header_h2"><span style="font-size: 14px;">1933老场坊</span></h2>
+                        <div class="infobar_header_ratinginfo">
+                            <span class="infobar_header_ratinginfo_star">
+                                <span class="ratingfont">4.3</span>
+                                <span class="star_list">
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star no"></span>
+                                </span>
+                                <span class="ratingfont">(265)</span>
+                            </span>
+                        </div>
+                        <p class="infobar_header_category">Tourist attraction</p>
+                    </div>
+                    <div class="infobar_tabs">
+                        <div class="infobar_tab infobar_tab_active">Overview</div>
+                        <div class="infobar_tab">About</div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="infobar_basicinfo">
+                        <div class="fd_info_row">
+                            <div class="fd_icon_wrapper">
+                                <span class="material-symbols-outlined">location_on</span>
+                            </div>
+                            <div class="fd_content_wrapper">
+                                <div class="fd_value_primary">10 Shajing Rd, Hongkou District, Shanghai, China, 200086
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fd_info_row">
+                            <div class="fd_icon_wrapper">
+                                <span class="material-symbols-outlined">call</span>
+                            </div>
+                            <div class="fd_content_wrapper">
+                                <div class="fd_value_primary">02168881933</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="review-summary">
+                        <div class="review-summary-header">
+                            <h2 class="review-summary-title">Review summary</h2>
+                        </div>
+                        <div class="review-summary-body">
+                            <div class="rating-breakdown">
+                                <div class="rating-row">
+                                    <span class="star-label">5</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:58%"></div>
+                                    </div>
+                                    <span class="percent-label">58%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">4</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:25%"></div>
+                                    </div>
+                                    <span class="percent-label">25%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">3</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:10%"></div>
+                                    </div>
+                                    <span class="percent-label">10%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">2</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:4%"></div>
+                                    </div>
+                                    <span class="percent-label">4%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">1</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:3%"></div>
+                                    </div>
+                                    <span class="percent-label">3%</span>
+                                </div>
+                            </div>
+                            <div class="rating-overall">
+                                <div class="rating-score">4.3</div>
+                                <div class="rating-stars" aria-label="4.3 stars">
+                                    <span class="star on">★</span><span class="star on">★</span><span
+                                        class="star on">★</span><span class="star on">★</span><span
+                                        class="star off">★</span>
+                                </div>
+                                <div class="rating-count">265 reviews</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="fd_reviews">
+                        <div class="fd_reviews_header">
+                            <h2 class="fd_reviews_title">Reviews</h2>
+                        </div>
+                        <div class="reviews-list-wrapper">
+                            <div class="fd_review_card">
+                                <div class="fd_review_top">
+                                    <div class="fd_avatar">N</div>
+                                    <div class="fd_review_meta">
+                                        <div class="fd_name_row">
+                                            <span class="fd_name">Nad Ramesh</span>
+                                            <span class="fd_time">· 2 months ago</span>
+                                        </div>
+                                        <div class="fd_star_row" aria-label="5 stars">
+                                            <span class="fd_star on">★</span><span class="fd_star on">★</span><span
+                                                class="fd_star on">★</span><span class="fd_star on">★</span><span
+                                                class="fd_star on">★</span>
+                                            <span class="fd_time2">Local Guide · 24 reviews · 149 photos</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fd_review_text">
+                                    This building is a maze, and it's absolutely amazing! The architecture is so unique
+                                    and fascinating. I love getting lost in its corridors and discovering new things.
+                                </div>
+                                <div class="fd_review_photos">
+                                    <div class="fd_photo_box"><img src="images/1933-review.jpg" alt=""></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fd_more_reviews_wrapper">
+                            <div class="fd_more_reviews_btn">More reviews (265)</div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                </div>
+
+                <div class="loc-content" id="content-loc4">
+                    <div class="infobar_cover_wrapper infobar_cover_crop_top">
+                        <img class="infobar_topimg" src="images/radiation-cover.jpg" alt="">
+                    </div>
+                    <div class="infobar_headerwrapper">
+                        <h1 class="infobar_header_h1">Shanghai Synchrotron Radiation Facility</h1>
+                        <h2 class="infobar_header_h2"><span style="font-size: 14px;">上海光源</span></h2>
+                        <p class="infobar_header_category">Corporate office</p>
+                    </div>
+                    <div class="infobar_tabs">
+                        <div class="infobar_tab infobar_tab_active">Overview</div>
+                        <div class="infobar_tab">About</div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="infobar_basicinfo">
+                        <div class="fd_info_row">
+                            <div class="fd_icon_wrapper">
+                                <span class="material-symbols-outlined">location_on</span>
+                            </div>
+                            <div class="fd_content_wrapper">
+                                <div class="fd_value_primary">239 Zhangheng Rd, Pudong, China, 201203</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="review-summary">
+                        <div class="review-summary-header">
+                            <h2 class="review-summary-title">Review summary</h2>
+                        </div>
+                        <div class="review-summary-body">
+                            <div class="rating-breakdown">
+                                <div class="rating-row">
+                                    <span class="star-label">5</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:31%"></div>
+                                    </div>
+                                    <span class="percent-label">31%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">4</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:25%"></div>
+                                    </div>
+                                    <span class="percent-label">25%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">3</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:19%"></div>
+                                    </div>
+                                    <span class="percent-label">19%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">2</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:12%"></div>
+                                    </div>
+                                    <span class="percent-label">12%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">1</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:13%"></div>
+                                    </div>
+                                    <span class="percent-label">13%</span>
+                                </div>
+                            </div>
+                            <div class="rating-overall">
+                                <div class="rating-score">3.5</div>
+                                <div class="rating-stars" aria-label="3.5 stars">
+                                    <span class="star on">★</span><span class="star on">★</span><span
+                                        class="star on">★</span><span class="star off">★</span><span
+                                        class="star off">★</span>
+                                </div>
+                                <div class="rating-count">16 reviews</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="fd_reviews">
+                        <div class="fd_reviews_header">
+                            <h2 class="fd_reviews_title">Reviews</h2>
+                        </div>
+                        <div class="reviews-list-wrapper">
+                            <div class="fd_review_card">
+                                <div class="fd_review_top">
+                                    <div class="fd_avatar">W</div>
+                                    <div class="fd_review_meta">
+                                        <div class="fd_name_row">
+                                            <span class="fd_name">Wenbin FAN</span>
+                                            <span class="fd_time">· 4 years ago</span>
+                                        </div>
+                                        <div class="fd_star_row" aria-label="5 stars">
+                                            <span class="fd_star on">★</span><span class="fd_star on">★</span><span
+                                                class="fd_star on">★</span><span class="fd_star on">★</span><span
+                                                class="fd_star on">★</span>
+                                            <span class="fd_time2">1 review</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fd_review_text">
+                                    There's a high-quality synchrotron radiation source here that has produced many
+                                    strong academic results. The building is enormous—you can only take in the full view
+                                    from satellite photos.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fd_more_reviews_wrapper">
+                            <div class="fd_more_reviews_btn">More reviews (16)</div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                </div>
+
+                <div class="loc-content" id="content-loc3">
+                    <div class="infobar_cover_wrapper infobar_cover_crop_top">
+                        <img class="infobar_topimg" src="images/jinqiao-cover.jpg" alt="">
+                    </div>
+                    <div class="infobar_headerwrapper">
+                        <h1 class="infobar_header_h1">Jinqiao Park</h1>
+                        <h2 class="infobar_header_h2"><span style="font-size: 14px;">金桥公园</span></h2>
+                        <p class="infobar_header_category">Park</p>
+                    </div>
+                    <div class="infobar_tabs">
+                        <div class="infobar_tab infobar_tab_active">Overview</div>
+                        <div class="infobar_tab">About</div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="infobar_basicinfo">
+                        <div class="fd_info_row">
+                            <div class="fd_icon_wrapper">
+                                <span class="material-symbols-outlined">location_on</span>
+                            </div>
+                            <div class="fd_content_wrapper">
+                                <div class="fd_value_primary">Pudong, China, 201206</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="review-summary">
+                        <div class="review-summary-header">
+                            <h2 class="review-summary-title">Review summary</h2>
+                        </div>
+                        <div class="review-summary-body">
+                            <div class="rating-breakdown">
+                                <div class="rating-row">
+                                    <span class="star-label">5</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:52%"></div>
+                                    </div>
+                                    <span class="percent-label">52%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">4</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:28%"></div>
+                                    </div>
+                                    <span class="percent-label">28%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">3</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:12%"></div>
+                                    </div>
+                                    <span class="percent-label">12%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">2</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:5%"></div>
+                                    </div>
+                                    <span class="percent-label">5%</span>
+                                </div>
+                                <div class="rating-row">
+                                    <span class="star-label">1</span>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" style="width:3%"></div>
+                                    </div>
+                                    <span class="percent-label">3%</span>
+                                </div>
+                            </div>
+                            <div class="rating-overall">
+                                <div class="rating-score">4.2</div>
+                                <div class="rating-stars" aria-label="4.2 stars">
+                                    <span class="star on">★</span><span class="star on">★</span><span
+                                        class="star on">★</span><span class="star on">★</span><span
+                                        class="star off">★</span>
+                                </div>
+                                <div class="rating-count">128 reviews</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="fd_reviews">
+                        <div class="fd_reviews_header">
+                            <h2 class="fd_reviews_title">Reviews</h2>
+                        </div>
+                        <div class="reviews-list-wrapper">
+                            <div class="fd_review_card">
+                                <div class="fd_review_top">
+                                    <div class="fd_avatar">M</div>
+                                    <div class="fd_review_meta">
+                                        <div class="fd_name_row">
+                                            <span class="fd_name">Marcus L.</span>
+                                            <span class="fd_time">· 3 weeks ago</span>
+                                        </div>
+                                        <div class="fd_star_row" aria-label="5 stars">
+                                            <span class="fd_star on">★</span><span class="fd_star on">★</span><span
+                                                class="fd_star on">★</span><span class="fd_star on">★</span><span
+                                                class="fd_star on">★</span>
+                                            <span class="fd_time2">Local Guide · 42 reviews · 89 photos</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fd_review_text">
+                                    For a community park, Jinqiao Park is quite spacious. It's about 400m from Line 9
+                                    Taierzhuang Road station—the walk felt a bit long to me. That said, the greenery is
+                                    well laid out, there are plenty of flower beds, and the park offers lots of
+                                    amenities. Good number of benches and rest areas throughout.
+                                </div>
+                                <div class="fd_review_photos">
+                                    <div class="fd_photo_box"><img src="images/jinqiao-review.jpg" alt=""></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fd_more_reviews_wrapper">
+                            <div class="fd_more_reviews_btn">More reviews (128)</div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                </div>
+            </div>
+
+            <a href="#sidebar-min" class="panel-toggle toggle-close">◀</a>
+            <a href="#loc1" class="panel-toggle toggle-open">▶</a>
+
+        </div>
+
+        <div class="map-area" id="mapArea">
+            <div class="map-viewport" draggable="true">
+                <div class="map-canvas">
+                    <span id="start" class="pin pin-topright-quarter"></span>
+                    <img id="mapImg" class="map-img" src="images/google_map_regular.png" alt="">
+                    <span id="loc1" class="state-anchor state-anchor-in-canvas" style="left: 930px; top: 960px;"></span>
+                    <span id="loc2" class="state-anchor state-anchor-in-canvas"
+                        style="left: 1170px; top: 1030px;"></span>
+                    <span id="loc_left" class="state-anchor state-anchor-in-canvas"
+                        style="left: 200px; top: 235px;"></span>
+                    <span id="loc3" class="state-anchor state-anchor-in-canvas"
+                        style="left: 2500px; top: 162px;"></span>
+                    <span id="loc4" class="state-anchor state-anchor-in-canvas"
+                        style="left: 2400px; top: 2010px;"></span>
+                    <a href="#sidebar-min"
+                        style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 2;"
+                        draggable="false" aria-label="Close sidebar"></a>
+
+                    <div class="map-marker-container" style="left: 930px; top: 960px;">
+                        <a href="#loc1" class="map-marker map-marker-restaurant pin-center"></a>
+                        <a href="#loc1" class="marker-label marker-label-restaurant">
+                            <span class="marker-label-title">Quanjude</span>
+                            <span class="marker-label-category">Chinese restaurant</span>
+                        </a>
+                        <a href="#loc1" class="hover-info-card">
+                            <div class="card-image">
+                                <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/04/69/e6/e8/quanjude-sanyuanqiao.jpg?w=900&h=500&s=1"
+                                    alt="Quanjude">
+                            </div>
+                            <div class="card-content">
+                                <div class="card-info">
+                                    <h3>Quanjude</h3>
+                                    <div class="rating">4.1 <span class="stars">★★★★☆</span> (71)</div>
+                                    <div class="category">Chinese restaurant</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="map-marker-container" style="left: 1170px; top: 1030px;">
+                        <a href="#loc2" class="map-marker map-marker-college pin-center"></a>
+                        <a href="#loc2" class="marker-label marker-label-college">
+                            <span class="marker-label-title">New York University Shanghai</span>
+                            <span class="marker-label-category">College</span>
+                        </a>
+                        <a href="#loc2" class="hover-info-card">
+                            <div class="card-image">
+                                <img src="images/nyush-cover.jpg" alt="NYU Shanghai">
+                            </div>
+                            <div class="card-content">
+                                <div class="card-info">
+                                    <h3>New York University Shanghai</h3>
+                                    <div class="rating">4.7 <span class="stars">★★★★☆</span> (33)</div>
+                                    <div class="category">College</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="map-marker-container" style="left: 200px; top: 235px;">
+                        <a href="#loc_left" class="map-marker map-marker-attraction pin-center"></a>
+                        <a href="#loc_left" class="marker-label marker-label-attraction">
+                            <span class="marker-label-title">1933 Old Millfun</span>
+                            <span class="marker-label-category">Tourist attraction</span>
+                        </a>
+                        <a href="#loc_left" class="hover-info-card">
+                            <div class="card-image">
+                                <img src="images/1933-cover.jpg" alt="1933 Old Millfun">
+                            </div>
+                            <div class="card-content">
+                                <div class="card-info">
+                                    <h3>1933 Old Millfun</h3>
+                                    <div class="rating">4.3 <span class="stars">★★★★☆</span> (265)</div>
+                                    <div class="category">Tourist attraction</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="map-marker-container" style="left: 2500px; top: 162px;">
+                        <a href="#loc3" class="map-marker map-marker-park pin-center"></a>
+                        <a href="#loc3" class="marker-label marker-label-park">
+                            <span class="marker-label-title">Jinqiao Park</span>
+                            <span class="marker-label-category">Park</span>
+                        </a>
+                        <a href="#loc3" class="hover-info-card">
+                            <div class="card-image">
+                                <img src="images/jinqiao-cover.jpg" alt="Jinqiao Park">
+                            </div>
+                            <div class="card-content">
+                                <div class="card-info">
+                                    <h3>Jinqiao Park</h3>
+                                    <div class="rating">4.2 <span class="stars">★★★★☆</span> (128)</div>
+                                    <div class="category">Park</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="map-marker-container" style="left: 2400px; top: 2010px;">
+                        <a href="#loc4" class="map-marker map-marker-office pin-center"></a>
+                        <a href="#loc4" class="marker-label marker-label-office">
+                            <span class="marker-label-title">Shanghai Synchrotron Radiation Facility</span>
+                            <span class="marker-label-category">Corporate office</span>
+                        </a>
+                        <a href="#loc4" class="hover-info-card">
+                            <div class="card-image">
+                                <img src="images/radiation-cover.jpg" alt="Shanghai Synchrotron">
+                            </div>
+                            <div class="card-content">
+                                <div class="card-info">
+                                    <h3>Shanghai Synchrotron Radiation Facility</h3>
+                                    <div class="rating">3.5 <span class="stars">★★★☆</span> (16)</div>
+                                    <div class="category">Corporate office</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="notification">
+                <div>
+                    <p>Please scroll to navigate map</p>
+                </div>
+            </div>
+            <a href="resonance.html" class="layers-control">
+                <div class="layers-thumbnail">
+                    <img src="images/heatmap-thumbnail.jpg" alt="Resonance Layer">
+                </div>
+                <div class="layers-label">
+                    <span class="text-default">Layers</span>
+                    <span class="text-hover">Resonance</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const notification = document.querySelector('.notification');
+        document.body.addEventListener("dragstart", function () {
+            notification.style.visibility = "visible";
+        });
+        document.body.addEventListener("dragend", function () {
+            notification.style.visibility = "hidden";
+        });
+
+        // When clicking card/marker/label for loc1,2,3,4: open sidebar but don't scroll map. Only loc_left scrolls.
+        const mapViewport = document.querySelector('.map-viewport');
+        const noScrollLocs = ['loc1', 'loc2', 'loc3', 'loc4'];
+        document.querySelectorAll('.map-marker-container a[href^="#loc"]').forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                const hash = this.getAttribute('href').slice(1);
+                if (noScrollLocs.includes(hash)) {
+                    e.preventDefault();
+                    const sx = mapViewport.scrollLeft, sy = mapViewport.scrollTop;
+                    location.hash = hash;
+                    function restore() {
+                        mapViewport.scrollLeft = sx;
+                        mapViewport.scrollTop = sy;
+                    }
+                    requestAnimationFrame(function () { requestAnimationFrame(restore); });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
