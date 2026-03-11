@@ -972,7 +972,7 @@ a.hover-info-card {
     position: absolute;
     bottom: 24px;
     left: 24px;
-    z-index: 100;
+    z-index: 150;
     width: 90px;
     height: 90px;
     border-radius: 12px;
