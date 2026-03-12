@@ -216,16 +216,6 @@ body {
     visibility: hidden;
 }
 
-/* --- Scroll-to-loc 原理 (无 JS) ---
- * 1) 点击 suggestion 后地址变为 #loc2，浏览器对 id="loc2" 的元素做一次「滚动到可见」。
- * 2) 锚点放在 .map-canvas 里、与 marker 同坐标 (如 loc2 在 left:2400px; top:600px)，
- *    这样锚点与 3500px 宽的地图同属一个滚动流，浏览器会同时算横向、纵向滚动。
- * 3) 最近的可滚动祖先是 .map-viewport (overflow:scroll)，所以被滚动的是地图视口。
- * 4) scroll-margin:120px 在锚点四周留白。
- * 5) 目标位置约定：出现在 map area 右半边中间 → scroll-padding: 25% 12.5% 25% 62.5%。
- * 6) 从右边切到中间/左边时，浏览器常不向左滚。对需左滚的 loc 加大 scroll-margin-left，
- *    使「要显示的框」向左延伸，促使浏览器执行左滚（这是方向上的辅助，不改变目标出现位置）。
- */
 .map-canvas .state-anchor.state-anchor-in-canvas {
     position: absolute;
     width: 1px;

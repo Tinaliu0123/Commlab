@@ -214,11 +214,6 @@ body {
     left: -500px;
 }
 
-#sidebar-min:target~.sidebar-container .toggle-open {
-    opacity: 1;
-    pointer-events: auto;
-}
-
 
 .state-anchor {
     position: absolute;
