@@ -16,11 +16,11 @@ Instead of geographic landmarks, the map visualizes universal experiences such a
 
 ## ✨ Preview
 
-![Map to Resonance Layer](assets/map-to-resonance.gif)
+<img src="assets/map-to-resonance.gif" width="700">
 
 *Transition from the Google Maps interface into the hidden Resonance Layer.*
 
-![Hover interaction](assets/hover-sidebar.gif)
+<img src="assets/hover-sidebar.gif" width="700">
 
 *Hover over and click a location to reveal information and reviews of these shared experiences.*
 
