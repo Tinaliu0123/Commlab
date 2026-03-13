@@ -16,7 +16,7 @@ Instead of geographic landmarks, the map visualizes universal experiences such a
 
 ## ✨ Preview
 
-<img src="assets/map-to-resonance.gif" width="100%">
+<img src="assets/map-to-resonance-lessclear.gif" width="100%">
 
 *Transition from the Google Maps interface into the hidden Resonance Layer.*
 
