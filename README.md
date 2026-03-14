@@ -37,8 +37,6 @@ A collection of web projects developed for the **INTM-SHU 120 Communications Lab
 - **Medium:** Web (HTML, CSS)
 - 🔗 [Live webpage](https://tinaliu0123.github.io/Commlab/shanzhai_web/)
 - 📂 [Code](https://github.com/Tinaliu0123/Commlab/tree/main/shanzhai_web)
-<!-- 
 <p align="center">
-<img src="assets/tree1.png" alt="Alt text" width="400">
-<img src="assets/tree2.png" alt="Alt text" width="400">
-</p> -->
+<img src="assets/shanzhai1.jpg" alt="Alt text" width="500">
+</p>
