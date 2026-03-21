@@ -40,3 +40,11 @@ A collection of web projects developed for the **INTM-SHU 120 Communications Lab
 <p align="center">
 <img src="assets/shanzhai1.jpg" alt="Alt text" width="500">
 </p>
+
+### 🌀 Lorem Animatum: Field
+- **Medium:** Web (HTML, CSS)
+- 🔗 [Live webpage](https://tinaliu0123.github.io/Commlab/field/)
+- 📂 [Code](https://github.com/Tinaliu0123/Commlab/tree/main/field)
+<p align="center">
+<img src="assets/field.gif" width="500">
+</p>
