@@ -130,7 +130,6 @@ body {
     z-index: 1;
 }
 
-/* Same transform stack for both mantle rings; only width/height differ below */
 .mantle .mantle-1,
 .mantle .mantle-2 {
     border-radius: 50%;
