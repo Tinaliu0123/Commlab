@@ -49,3 +49,11 @@ A collection of web projects developed for the **INTM-SHU 120 Communications Lab
 <p align="center">
 <img src="assets/field.gif" width="500">
 </p>
+
+### 🌌 DOM Entropy: Nebula
+- **Medium:** Web (HTML, CSS, JavaScript)
+- 🔗 [Live webpage](https://tinaliu0123.github.io/Commlab/nebula/)
+- 📂 [Code](https://github.com/Tinaliu0123/Commlab/tree/main/nebula)
+<p align="center">
+<img src="assets/nebula.gif" width="500">
+</p>
