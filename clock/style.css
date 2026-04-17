@@ -1,0 +1,60 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #060610;
+    overflow: hidden;
+}
+
+#clock {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+.star {
+    position: absolute;
+    border-radius: 50%;
+    background-color: white;
+    animation: twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+/* Each orbit’s ring outline */
+.orbit-track {
+    position: absolute;
+    border-radius: 50%;
+    border-style: solid;
+}
+
+/* Dots used for the ember arc along the orbit */
+.ember {
+    position: absolute;
+    border-radius: 50%;
+}
+
+/* Tick marks on each ring */
+.tick {
+    position: absolute;
+    border-radius: 50%;
+}
+
+.center-body {
+    position: absolute;
+    border-radius: 50%;
+}
+
+/* Tail particles behind each orbiting dot */
+.tail {
+    position: absolute;
+    border-radius: 50%;
+}
+
+/* The three main moving dots (hour / minute / second) */
+.dot {
+    position: absolute;
+    border-radius: 50%;
+}
