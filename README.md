@@ -57,3 +57,12 @@ A collection of web projects developed for the **INTM-SHU 120 Communications Lab
 <p align="center">
 <img src="assets/nebula.gif" width="500">
 </p>
+
+### 🪐 The Clock in Space
+- **Medium:** Web (HTML, CSS, JavaScript)
+- 🔗 [Live webpage](https://tinaliu0123.github.io/Commlab/clock/)
+- 📂 [Code](https://github.com/Tinaliu0123/Commlab/tree/main/clock)
+
+<p align="center">
+<img src="assets/clock.gif" width="500">
+</p>
