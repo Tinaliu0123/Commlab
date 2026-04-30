@@ -1,0 +1,218 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0a0908;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 20vh;
+    overflow-x: hidden;
+    transition: background-color 2s ease, padding-top 2s ease;
+}
+
+/* --- Bird view: light, open, airy --- */
+body.bird-view {
+    background-color: #f0e8d8;
+    padding-top: 0;
+}
+
+.letter-container {
+    max-width: 580px;
+    width: 90%;
+    padding-bottom: 40vh;
+    position: relative;
+    transition: opacity 1.5s ease;
+}
+
+body.bird-view .letter-container {
+    padding-top: 10vh;
+}
+
+.paragraph {
+    font-family: "Courier New", Courier, monospace;
+    color: #c8b89a;
+    font-size: 16px;
+    line-height: 1.9;
+    margin-bottom: 2em;
+    white-space: pre-wrap;
+    transition: opacity 1.5s ease;
+}
+
+#opening {
+    font-size: 18px;
+    margin-bottom: 3em;
+}
+
+.hidden {
+    display: none;
+}
+
+.cursor {
+    display: inline;
+    animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.keyword {
+    color: #c8b89a;
+    cursor: default;
+    transition: color 0.6s ease, text-shadow 0.6s ease;
+}
+
+.keyword.active {
+    color: #e6c97a;
+    cursor: pointer;
+    text-shadow: 0 0 8px #e6c97a40;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.keyword.completed {
+    color: #e6c97a;
+    text-shadow: 0 0 4px #e6c97a30;
+    cursor: default;
+    animation: none;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* --- Signature/落款 --- */
+.signature {
+    font-family: "Courier New", Courier, monospace;
+    color: #c8b89a;
+    font-size: 14px;
+    line-height: 1.8;
+    text-align: right;
+    margin-top: 3em;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+.signature.visible {
+    opacity: 1;
+}
+
+/* --- Background rock texture (faint characters) --- */
+.bg-char {
+    position: fixed;
+    font-family: "Courier New", Courier, monospace;
+    color: #c8b89a;
+    opacity: 0.15;
+    font-size: 32px;
+    pointer-events: none;
+    transition: opacity 1.5s ease;
+}
+
+body.bird-view .bg-char {
+    opacity: 0;
+}
+
+body.bird-view .particle {
+    animation: none;
+    opacity: 0;
+}
+
+/* --- Floating particles --- */
+.particle {
+    position: fixed;
+    width: 3px;
+    height: 3px;
+    background-color: #c8b89a;
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    animation: floatUp 12s ease-in-out infinite;
+}
+
+.particle:nth-child(2) {
+    animation-delay: 2s;
+    animation-duration: 14s;
+}
+
+.particle:nth-child(3) {
+    animation-delay: 4s;
+    animation-duration: 10s;
+}
+
+.particle:nth-child(4) {
+    animation-delay: 6s;
+    animation-duration: 16s;
+}
+
+.particle:nth-child(5) {
+    animation-delay: 8s;
+    animation-duration: 11s;
+}
+
+.particle:nth-child(6) {
+    animation-delay: 3s;
+    animation-duration: 13s;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0px);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(-200px);
+        opacity: 0;
+    }
+}
+
+/* --- Bird view: paragraph text fades, keywords stay bright --- */
+body.bird-view #opening {
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+body.bird-view .signature {
+    opacity: 0;
+}
+
+body.bird-view .paragraph {
+    color: #e0d8c8;
+    transition: color 0.6s ease;
+}
+
+body.bird-view .paragraph span {
+    color: #e0d8c8;
+    transition: color 0.6s ease;
+}
+
+body.bird-view .paragraph:hover {
+    color: #5a4a3a;
+}
+
+body.bird-view .paragraph:hover span {
+    color: #5a4a3a;
+}
+
+body.bird-view .paragraph .keyword.completed,
+body.bird-view .paragraph .keyword.completed span {
+    color: #c45a20;
+    text-shadow: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    transition: color 0.4s ease;
+}
+
+body.bird-view .keyword.completed:hover,
+body.bird-view .keyword.completed:hover span {
+    color: #e06820;
+}
+

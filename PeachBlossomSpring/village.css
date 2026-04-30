@@ -1,0 +1,260 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: #ede8df;
+    overflow-x: hidden;
+    height: 6000px;
+    width: 100vw;
+    cursor: default;
+}
+
+body.village-active {
+    height: 100vh;
+    overflow: hidden;
+    cursor: crosshair;
+}
+
+#village { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; }
+
+/* --- Intro paragraph --- */
+#intro-text {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 520px;
+    width: 85%;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 16px;
+    line-height: 1.9;
+    color: #6a5d50;
+    white-space: pre-wrap;
+    z-index: 20;
+    will-change: transform, opacity;
+}
+
+#intro-keyword {
+    color: #4a3d30;
+    font-weight: bold;
+}
+
+.signature {
+    display: block;
+    text-align: right;
+    font-style: italic;
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+/* --- Overlay hides village --- */
+#intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #ede8df;
+    z-index: 15;
+    will-change: opacity;
+}
+
+/* --- Scroll hint during intro --- */
+#scroll-hint {
+    position: fixed;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Courier New", Courier, monospace;
+    font-size: 16px;
+    letter-spacing: 4px;
+    color: #8a7a6a;
+    z-index: 25;
+    pointer-events: none;
+    transition: opacity 1.2s;
+}
+
+#scroll-hint .arrow {
+    display: block;
+    text-align: center;
+    margin-bottom: 6px;
+    animation: bob 2.2s ease-in-out infinite;
+}
+
+@keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+}
+
+/* --- Base word --- */
+.w {
+    position: absolute;
+    font-family: "Courier New", Courier, monospace;
+    white-space: nowrap;
+    pointer-events: none;
+    will-change: transform;
+    transition: transform 0.5s ease;
+    line-height: 1;
+}
+
+/* --- House words --- */
+.w.house {
+    color: #4a3d30;
+    font-size: 11px;
+    font-weight: 400;
+}
+.w.house.revealed {
+    color: #2a1f14;
+}
+
+/* --- Field words --- */
+.w.field {
+    color: #6b7a52;
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+/* --- Water words --- */
+.w.water {
+    color: #1a6b8a;
+    font-size: 11px;
+    font-weight: 400;
+    font-style: italic;
+}
+.w.water.reflected {
+    color: #8ab5c8;
+    font-style: normal;
+    transition: color 0.3s;
+}
+
+/* --- Path words --- */
+.w.path {
+    color: #c0b5a5;
+    font-size: 9px;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+/* --- Tree words (per species) --- */
+.w.tree { font-size: 10px; font-weight: 400; }
+.w.tree.bamboo   { color: #3a8a48; }
+.w.tree.mulberry { color: #6b5a3a; }
+.w.tree.willow   { color: #5a8a4a; }
+.w.tree.pine     { color: #2a5040; }
+
+/* --- Flower words --- */
+.w.flower {
+    font-family: "Courier New", Courier, monospace;
+    font-weight: 400;
+}
+
+/* --- People words --- */
+.w.person {
+    font-family: "Courier New", Courier, monospace;
+    color: #7a3e22;
+    font-size: 13px;
+    font-weight: 400;
+    z-index: 10;
+}
+.w.person::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(190, 140, 90, 0.10) 0%, rgba(190, 140, 90, 0.04) 50%, transparent 70%);
+    animation: presence 3s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: -1;
+}
+@keyframes presence {
+    0%   { transform: translate(-50%, -50%) scale(0.9); opacity: 0.7; }
+    100% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+}
+.w.person.revealed {
+    color: #5a2a12;
+    font-style: italic;
+}
+
+/* --- Bird dot --- */
+#bird {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #4a3d30;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 100;
+    box-shadow: 0 0 6px rgba(74, 61, 48, 0.2);
+}
+#bird-shadow {
+    position: absolute;
+    width: 4px;
+    height: 2px;
+    background: rgba(74, 61, 48, 0.10);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* --- Vignette --- */
+#vignette {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at 50% 48%,
+        transparent 40%,
+        rgba(200, 190, 175, 0.05) 65%,
+        rgba(180, 170, 155, 0.10) 100%
+    );
+    pointer-events: none;
+    z-index: 50;
+}
+
+/* --- Hint (hidden until village is active) --- */
+#hint {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Courier New", Courier, monospace;
+    font-style: italic;
+    font-size: 13px;
+    color: #b8a898;
+    pointer-events: none;
+    z-index: 60;
+    letter-spacing: 2px;
+    transition: opacity 2s;
+    opacity: 0;
+}
+
+body.village-active #hint {
+    opacity: 1;
+}
+
+/* --- Back button (hidden until village is active) --- */
+.back-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 14px;
+    color: #8a7a6a;
+    text-decoration: none;
+    z-index: 60;
+    transition: color 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+body.village-active .back-btn {
+    opacity: 1;
+    pointer-events: auto;
+}
+.back-btn:hover {
+    color: #4a3d30;
+}

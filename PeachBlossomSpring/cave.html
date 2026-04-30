@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peach Blossom Spring · Cave</title>
+    <link rel="stylesheet" href="cave.css">
+    <script src="cave.js" defer></script>
+</head>
+<body>
+
+<!-- Intro: paragraph from the diary -->
+<div id="intro-text">"Three years ago a fisherman told me, half-drunk, about a place hidden in the mountains. A village no dynasty has ever touched. I have refused to serve corrupt courts my whole life. When he spoke, I knew this place was meant for me to find.<br><br>He said the entrance came by accident: at the base of the mountain, a <span id="intro-keyword">cave</span> — barely wide enough for one body. He squeezed through sideways, stone pressing against his chest and back, in darkness for what felt like an eternity. Then the stone gave way to light."<br><br><span class="signature">— Liu Ziji's diary</span></div>
+
+<!-- Dark overlay: covers cave, fades as intro scrolls away -->
+<div id="intro-overlay"></div>
+
+<!-- Fixed title after intro scrolls away -->
+<div id="cave-title">cave</div>
+
+<!-- Tunnel layers -->
+<div id="bg-warm"></div>
+<div id="glow-inner"></div>
+<!-- rings injected here by JS -->
+<div id="vignette"></div>
+
+<!-- Bird's voice (primary) -->
+<div class="narrative bird" id="narrative-0">A familiar crack in the stone, light spilling through</div>
+<div class="narrative bird" id="narrative-1">The walls press close — but not for wings</div>
+<div class="narrative bird" id="narrative-2">A breath of warm air rising from below</div>
+<div class="narrative bird" id="narrative-3">Home</div>
+
+<!-- Human echo (secondary, beneath) -->
+<div class="narrative human" id="echo-0">A small opening in the hillside, with a glimmer of light beyond</div>
+<div class="narrative human" id="echo-1">The passage narrowed, barely wide enough for one</div>
+<div class="narrative human" id="echo-2">He walked on for dozens of steps</div>
+<div class="narrative human" id="echo-3">And suddenly, everything opened up</div>
+
+<div id="hint"><span class="arrow">&#8595;</span>scroll down to view</div>
+<a href="bird.html" class="back-btn" id="back-link">back</a>
+<script>
+(function () {
+    let hash = window.location.hash.replace("#", "");
+    if (hash) {
+        document.getElementById("back-link").href = "bird.html#" + hash;
+    }
+})();
+</script>
+
+</body>
+</html>

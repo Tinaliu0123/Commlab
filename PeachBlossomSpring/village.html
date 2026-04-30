@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peach Blossom Spring · Village</title>
+    <link rel="stylesheet" href="village.css">
+    <script src="village.js" defer></script>
+</head>
+<body>
+
+<!-- Intro paragraph -->
+<div id="intro-text">"What lay beyond is open fields, neat houses, mulberry and bamboo along the edges. Chickens calling between yards. Old men in shade. Children laughing at nothing. A <span id="intro-keyword">village</span> where nothing needed fixing."<br><br><span class="signature">— Liu Ziji's diary</span></div>
+
+<!-- Overlay hides village until intro scrolls away -->
+<div id="intro-overlay"></div>
+
+<!-- Scroll hint during intro -->
+<div id="scroll-hint"><span class="arrow">&#8595;</span>scroll down to view</div>
+
+<div id="village"></div>
+<div id="vignette"></div>
+<div id="hint">click to send the bird</div>
+<a href="bird.html" class="back-btn" id="back-link">back</a>
+<script>
+(function () {
+    let hash = window.location.hash.replace("#", "");
+    if (hash) {
+        document.getElementById("back-link").href = "bird.html#" + hash;
+    }
+})();
+</script>
+
+</body>
+</html>

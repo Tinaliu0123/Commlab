@@ -1,0 +1,229 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: rgb(6, 7, 10);
+    height: 18000px;
+    overflow-x: hidden;
+}
+
+/* --- Intro paragraph (diary excerpt) --- */
+#intro-text {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 520px;
+    width: 85%;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 16px;
+    line-height: 1.9;
+    color: #c8b89a;
+    white-space: pre-wrap;
+    z-index: 20;
+    will-change: transform, opacity;
+}
+
+#intro-keyword {
+    color: #e6c97a;
+    font-weight: bold;
+}
+
+.signature {
+    display: block;
+    text-align: right;
+    font-style: italic;
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+/* --- Dark overlay: hides cave until intro scrolls away --- */
+#intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgb(6, 7, 10);
+    z-index: 15;
+    will-change: opacity;
+}
+
+/* --- Fixed cave title (stays at top after intro scrolls away) --- */
+#cave-title {
+    position: fixed;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Courier New", Courier, monospace;
+    font-size: 14px;
+    letter-spacing: 6px;
+    color: #e6c97a;
+    opacity: 0;
+    z-index: 20;
+    pointer-events: none;
+    will-change: opacity;
+}
+
+/* --- Background warm layer: fades in via opacity only --- */
+#bg-warm {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgb(51, 47, 35);
+    opacity: 0;
+    will-change: opacity;
+    z-index: 0;
+}
+
+/* --- Central glow: fixed gradient, animated via opacity + scale --- */
+#glow-inner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 200vmax;
+    height: 200vmax;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        rgba(230, 210, 160, 1) 0%,
+        rgba(230, 210, 160, 0.4) 15%,
+        transparent 70%
+    );
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+    will-change: transform, opacity;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* --- Cave rings: fixed base size, positioned via transform only --- */
+.cave-ring {
+    position: fixed;
+    width: 400px;
+    height: 288px;
+    border: 1px solid rgb(130, 120, 100);
+    background: transparent;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform-origin: center center;
+    will-change: transform, opacity;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* --- Vignette: fixed gradient, animated via opacity --- */
+#vignette {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center,
+        transparent 4vw,
+        rgba(6, 7, 10, 0.3) 28vw,
+        rgba(6, 7, 10, 1) 52vw
+    );
+    opacity: 0.7;
+    will-change: opacity;
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* --- Narrative text --- */
+.narrative {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-family: "Courier New", Courier, monospace;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 20px;
+    letter-spacing: 2px;
+    line-height: 2.2;
+    color: rgba(210, 195, 165, 0.85);
+    opacity: 0;
+    z-index: 5;
+    pointer-events: none;
+    text-align: center;
+    white-space: nowrap;
+    will-change: transform, opacity;
+}
+
+/* Bird's voice: primary, brighter, slightly above center */
+.narrative.bird {
+    top: 46%;
+    font-size: 22px;
+    color: rgba(230, 215, 175, 0.95);
+    letter-spacing: 3px;
+}
+
+/* Human echo: secondary, smaller, dimmer, below bird text */
+.narrative.human {
+    top: 56%;
+    font-size: 14px;
+    font-style: normal;
+    color: rgba(180, 165, 135, 0.5);
+    letter-spacing: 1px;
+}
+
+/* Final bird narrative: above everything including glow */
+#narrative-3 {
+    z-index: 12;
+    color: rgba(35, 30, 20, 0.9);
+    font-size: 26px;
+    font-weight: 400;
+}
+
+/* Final human echo adjusts too */
+#echo-3 {
+    z-index: 12;
+    top: 58%;
+    color: rgba(80, 70, 55, 0.4);
+}
+
+/* --- Scroll hint --- */
+#hint {
+    position: fixed;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Courier New", Courier, monospace;
+    font-size: 16px;
+    letter-spacing: 4px;
+    color: #e6c97a;
+    z-index: 25;
+    pointer-events: none;
+    transition: opacity 1.2s;
+}
+
+#hint .arrow {
+    display: block;
+    text-align: center;
+    margin-bottom: 6px;
+    animation: bob 2.2s ease-in-out infinite;
+}
+
+@keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+}
+
+/* --- Back button --- */
+.back-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 14px;
+    color: #8a7a6a;
+    text-decoration: none;
+    z-index: 25;
+    transition: color 0.3s ease;
+}
+
+.back-btn:hover {
+    color: #c8b89a;
+}
