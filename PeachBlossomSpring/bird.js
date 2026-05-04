@@ -2,6 +2,13 @@ let W = window.innerWidth;
 let H = window.innerHeight;
 
 // ═══════════════════════════════
+//  ENTRANCE ANIMATION STATE
+// ═══════════════════════════════
+
+let hasHash = window.location.hash.replace("#", "").length > 0;
+let entranceDone = hasHash;
+
+// ═══════════════════════════════
 //  BIRD-VIEW PARAGRAPH SWAP
 // ═══════════════════════════════
 
@@ -81,11 +88,13 @@ for (let ri = 0; ri < nestRings.length; ri++) {
         t.style.left = x + "px";
         t.style.top = y + "px";
         let deg = (angle * 180 / Math.PI) + 90 + (srand() - 0.5) * 40;
-        t.style.setProperty("--base-rot", "rotate(" + deg.toFixed(0) + "deg)");
-        t.style.transform = "rotate(" + deg.toFixed(0) + "deg)";
-        t.style.setProperty("--sx", ((srand() - 0.5) * 2.5).toFixed(2));
-        t.style.setProperty("--sy", ((srand() - 0.5) * 1.5).toFixed(2));
-        t.style.animation = "nestSway " + (3 + srand() * 2).toFixed(1) + "s ease-in-out " + (srand() * 2).toFixed(1) + "s infinite";
+        t.style.setProperty("--base-rot", "rotate(" + Math.round(deg) + "deg)");
+        t.style.transform = "rotate(" + Math.round(deg) + "deg)";
+        t.style.setProperty("--sx", "" + ((srand() - 0.5) * 2.5));
+        t.style.setProperty("--sy", "" + ((srand() - 0.5) * 1.5));
+        let swayDur = 3 + srand() * 2;
+        let swayDelay = srand() * 2;
+        t.style.animation = "nestSway " + swayDur + "s ease-in-out " + swayDelay + "s infinite";
         nestEl.appendChild(t);
     }
 }
@@ -136,10 +145,24 @@ birdShadow.innerHTML =
     '<div class="shadow-wing right"></div>';
 document.body.appendChild(birdShadow);
 
-let birdX = nestX;
-let birdY = nestY;
-let birdAngle = -90;
-let birdState = "resting";
+let birdX, birdY, birdAngle, birdState;
+
+if (entranceDone) {
+    // Returning from keyword page — skip entrance, show everything
+    birdX = nestX;
+    birdY = nestY;
+    birdAngle = -90;
+    birdState = "resting";
+    nestEl.classList.add("visible");
+    document.querySelector(".letter-container").classList.add("visible");
+    document.getElementById("hint").classList.add("visible");
+} else {
+    // First visit — bird starts off-screen left
+    birdX = -60;
+    birdY = H * 0.4;
+    birdAngle = 0;
+    birdState = "entrance";
+}
 
 // Flight bezier
 let fStart = { x: 0, y: 0 };
@@ -162,7 +185,7 @@ for (let ki = 0; ki < keywordEls.length; ki++) {
     (function (el) {
         el.addEventListener("click", function (e) {
             e.stopPropagation();
-            if (transitioning) return;
+            if (transitioning || !entranceDone) return;
             let rect = el.getBoundingClientRect();
             let tx = rect.left + rect.width / 2;
             let ty = rect.top + rect.height / 2;
@@ -326,6 +349,125 @@ function startTransition(el, rect) {
 
 
 // ═══════════════════════════════
+//  ENTRANCE FLIGHT (sine-wave path)
+// ═══════════════════════════════
+
+let entranceT = 0;
+let entranceDur = 8.0;
+let entranceSettleT = 0;
+let entranceSettleDur = 0.6;
+let entrancePhase = "fly"; // fly | settle | done
+
+// Waypoints: bird enters left, explores sky, then descends to nest
+let waypoints = [
+    { x: -60, y: H * 0.35 },
+    { x: W * 0.25, y: H * 0.2 },
+    { x: W * 0.5, y: H * 0.3 },
+    { x: W * 0.65, y: H * 0.15 },
+    { x: W * 0.8, y: H * 0.35 },
+    { x: nestX, y: nestY }
+];
+
+function getEntrancePos(t) {
+    // Walk through waypoints with smooth interpolation
+    let segCount = waypoints.length - 1;
+    let seg = Math.floor(t * segCount);
+    if (seg >= segCount) seg = segCount - 1;
+    let segT = (t * segCount) - seg;
+    // Smooth the segment t
+    let smooth = segT * segT * (3 - 2 * segT);
+    let from = waypoints[seg];
+    let to = waypoints[seg + 1];
+    // Add a gentle sine wobble for natural flight
+    let wobble = Math.sin(t * Math.PI * 3) * 10 * (1 - t);
+    return {
+        x: lerp(from.x, to.x, smooth),
+        y: lerp(from.y, to.y, smooth) + wobble
+    };
+}
+
+function entranceUpdate(dt) {
+    if (entrancePhase === "fly") {
+        entranceT += dt / entranceDur;
+        if (entranceT >= 1) {
+            entranceT = 1;
+            entrancePhase = "settle";
+            entranceSettleT = 0;
+            birdGroup.className = "bird-resting";
+            nestEl.classList.add("visible");
+        }
+
+        // Smooth ease: slow start, gentle cruise, slow landing
+        let eased = entranceT * entranceT * (3 - 2 * entranceT);
+
+        let pos = getEntrancePos(eased);
+        birdX = pos.x;
+        birdY = pos.y;
+
+        // Angle follows movement direction
+        let nextPos = getEntrancePos(Math.min(1, eased + 0.01));
+        birdAngle = Math.atan2(nextPos.y - birdY, nextPos.x - birdX) * 180 / Math.PI + 90;
+
+        // Switch to gliding near end
+        if (entranceT > 0.85 && birdGroup.className !== "bird-gliding") {
+            birdGroup.className = "bird-gliding";
+        }
+
+        // Trail dots during flight
+        trailTimer += dt;
+        if (trailTimer > 0.1) {
+            trailTimer = 0;
+            spawnDot(birdX, birdY);
+        }
+
+    } else if (entrancePhase === "settle") {
+        entranceSettleT += dt / entranceSettleDur;
+        birdX = nestX;
+        birdY = nestY;
+        birdAngle = -90;
+
+        // Small shuffle in nest
+        let shake = Math.sin(entranceSettleT * Math.PI * 4) * 2 * (1 - entranceSettleT);
+        birdX = nestX + shake;
+
+        if (entranceSettleT >= 1) {
+            entrancePhase = "done";
+            entranceDone = true;
+            birdX = nestX;
+            birdY = nestY;
+            birdState = "resting";
+
+            // Reveal paragraphs and hint
+            document.querySelector(".letter-container").classList.add("visible");
+            setTimeout(function () {
+                document.getElementById("hint").classList.add("visible");
+            }, 800);
+        }
+    }
+}
+
+// Start entrance with flying pose; click anywhere to skip
+if (!entranceDone) {
+    birdGroup.className = "bird-flying";
+    trailTimer = 0;
+    document.addEventListener("click", function skipEntrance() {
+        if (entranceDone) return;
+        entrancePhase = "done";
+        entranceDone = true;
+        birdX = nestX;
+        birdY = nestY;
+        birdAngle = -90;
+        birdState = "resting";
+        birdGroup.className = "bird-resting";
+        nestEl.classList.add("visible");
+        document.querySelector(".letter-container").classList.add("visible");
+        document.getElementById("hint").classList.add("visible");
+        document.removeEventListener("click", skipEntrance);
+    });
+}
+
+
+// ═══════════════════════════════
 //  ANIMATION LOOP
 // ═══════════════════════════════
 
@@ -335,6 +477,17 @@ function animate(now) {
     requestAnimationFrame(animate);
     let dt = (now - lastTime) / 1000;
     lastTime = now;
+
+    // Entrance animation takes priority
+    if (!entranceDone) {
+        entranceUpdate(dt);
+        birdGroup.style.transform = "translate(" + Math.round(birdX) + "px," + Math.round(birdY) + "px) rotate(" + Math.round(birdAngle) + "deg)";
+        let sOff = entrancePhase === "fly" ? 14 : 8;
+        let sScl = entrancePhase === "fly" ? 0.7 : 0.9;
+        birdShadow.style.transform = "translate(" + Math.round(birdX) + "px," + Math.round(birdY + sOff) + "px) rotate(" + Math.round(birdAngle) + "deg) scale(" + sScl + ")";
+        birdShadow.style.opacity = entrancePhase === "fly" ? "0.5" : "0.8";
+        return;
+    }
 
     if (birdState === "flying") {
         fT += dt / fDur;
@@ -370,11 +523,11 @@ function animate(now) {
         }
     }
 
-    birdGroup.style.transform = "translate(" + birdX.toFixed(1) + "px," + birdY.toFixed(1) + "px) rotate(" + birdAngle.toFixed(1) + "deg)";
+    birdGroup.style.transform = "translate(" + Math.round(birdX) + "px," + Math.round(birdY) + "px) rotate(" + Math.round(birdAngle) + "deg)";
 
     let sOff = birdState === "flying" ? 14 : 8;
     let sScl = birdState === "flying" ? 0.7 : 0.9;
-    birdShadow.style.transform = "translate(" + birdX.toFixed(1) + "px," + (birdY + sOff).toFixed(1) + "px) rotate(" + birdAngle.toFixed(1) + "deg) scale(" + sScl + ")";
+    birdShadow.style.transform = "translate(" + Math.round(birdX) + "px," + Math.round(birdY + sOff) + "px) rotate(" + Math.round(birdAngle) + "deg) scale(" + sScl + ")";
     birdShadow.style.opacity = birdState === "flying" ? "0.5" : "0.8";
 }
 

@@ -1,0 +1,369 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: #ede8df;
+    height: 300vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-family: "Courier New", Courier, monospace;
+    transition: background 2s ease;
+}
+
+/* === INTRO === */
+#intro-text {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 520px;
+    width: 85%;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 16px;
+    line-height: 1.9;
+    color: #5a4a3a;
+    text-align: center;
+    z-index: 50;
+    will-change: transform, opacity;
+}
+
+#intro-keyword {
+    color: #c45a20;
+    font-weight: bold;
+}
+
+.signature {
+    display: block;
+    text-align: right;
+    font-style: italic;
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+#intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #ede8df;
+    z-index: 15;
+    will-change: opacity;
+}
+
+#scroll-hint {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Courier New", Courier, monospace;
+    font-size: 18px;
+    color: #b8a898;
+    z-index: 55;
+    animation: bobDown 2s ease-in-out infinite;
+}
+
+@keyframes bobDown {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+}
+
+/* === BIRD PERCH === */
+#bird-perch {
+    position: fixed;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+#bird-perch.visible {
+    opacity: 1;
+}
+
+#bird-group {
+    position: relative;
+    width: 0;
+    height: 0;
+    transition: transform 0.5s ease;
+}
+
+/* Bird listening - leans forward */
+#bird-group.listening {
+    transform: rotate(-10deg) translateY(-3px);
+}
+
+.bird-body {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #3a2e22;
+    border-radius: 50%;
+    left: -4px;
+    top: -4px;
+}
+
+.bird-head {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #3a2e22;
+    border-radius: 50%;
+    left: -2.5px;
+    top: -12px;
+    transition: top 0.4s ease, left 0.4s ease;
+}
+
+#bird-group.listening .bird-head {
+    top: -14px;
+    left: -5px;
+}
+
+.bird-tail {
+    position: absolute;
+    width: 3px;
+    height: 10px;
+    background: #4a3d30;
+    left: -1.5px;
+    top: 6px;
+    border-radius: 0 0 2px 2px;
+    opacity: 0.7;
+}
+
+.wing {
+    position: absolute;
+    top: -3px;
+    width: 20px;
+    height: 3px;
+    background: #3a2e22;
+    border-radius: 2px;
+}
+
+.wing.left {
+    right: 4px;
+    transform-origin: 100% 50%;
+    transform: rotate(25deg) scaleX(0.6);
+}
+
+.wing.right {
+    left: 4px;
+    transform-origin: 0% 50%;
+    transform: rotate(-25deg) scaleX(0.6);
+}
+
+#rafter {
+    position: absolute;
+    top: 10px;
+    left: -60px;
+    width: 120px;
+    height: 3px;
+    background: #c8b8a8;
+    border-radius: 1px;
+}
+
+
+/* === NATURAL LAYER (bird's own space) === */
+#natural-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 12;
+    opacity: 1;
+    transition: opacity 0.8s ease;
+}
+
+#natural-layer.dimmed {
+    opacity: 0;
+}
+
+.dust {
+    position: absolute;
+    background: #a08060;
+    border-radius: 50%;
+    animation: dustFloat 10s ease-in-out infinite;
+}
+
+@keyframes dustFloat {
+    0%, 100% { transform: translate(0, 0); opacity: 0.5; }
+    25% { transform: translate(12px, -8px); opacity: 0.6; }
+    50% { transform: translate(-6px, -16px); opacity: 0.4; }
+    75% { transform: translate(8px, -6px); opacity: 0.55; }
+}
+
+.feather {
+    position: absolute;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 16px;
+    color: #8a7060;
+    pointer-events: none;
+    animation: featherDrift 12s ease-in-out infinite;
+}
+
+@keyframes featherDrift {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.4; }
+    25% { transform: translate(18px, -10px) rotate(10deg); opacity: 0.5; }
+    50% { transform: translate(-10px, -20px) rotate(-8deg); opacity: 0.35; }
+    75% { transform: translate(14px, -5px) rotate(6deg); opacity: 0.45; }
+}
+
+/* After conversation ends - slower and dimmer */
+#natural-layer.after-conversation .dust {
+    animation-duration: 30s;
+    opacity: 0.2;
+}
+
+#natural-layer.after-conversation .feather {
+    animation-duration: 36s;
+    opacity: 0.15;
+}
+
+/* === HUMAN LAYER (conversation space) === */
+#human-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+#human-layer.active {
+    opacity: 1;
+}
+
+.hearth-glow {
+    position: absolute;
+    bottom: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 40%;
+    background: radial-gradient(ellipse at center, #d4a05015 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+/* === DIALOGUE === */
+#dialogue-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    pointer-events: none;
+}
+
+#dialogue-container.visible {
+    opacity: 0.3;
+}
+
+#dialogue-container.focused {
+    opacity: 1;
+}
+
+.exchange {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 480px;
+    width: 80%;
+    text-align: center;
+    opacity: 0;
+    transition: transform 1.2s ease, opacity 1.2s ease, filter 1.2s ease;
+}
+
+.exchange.revealed {
+    opacity: 1;
+}
+
+.exchange.pushed {
+    opacity: 0.3;
+    filter: blur(0.5px);
+}
+
+.question {
+    color: #b86520;
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 0.6em;
+    transition: font-size 1.5s ease, color 1.5s ease;
+}
+
+.answer {
+    color: #4a6a7a;
+    font-size: 14px;
+    line-height: 1.7;
+    font-style: italic;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.answer.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Silence */
+.exchange.silence {
+    height: 2em;
+}
+
+/* Temperature on questions - warmth fades */
+.exchange.temp-warm .question { color: #b86520; font-size: 16px; }
+.exchange.temp-cooling .question { color: #a07040; font-size: 15px; }
+.exchange.temp-cold .question { color: #887060; font-size: 14px; }
+.exchange.temp-frozen .question { color: #7a7068; font-size: 13px; }
+
+/* === HINT === */
+#hint {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Courier New", Courier, monospace;
+    font-style: italic;
+    font-size: 13px;
+    color: #b8a898;
+    letter-spacing: 0.08em;
+    pointer-events: none;
+    z-index: 60;
+    opacity: 0;
+    transition: opacity 2s ease;
+}
+
+#hint.visible {
+    opacity: 1;
+}
+
+/* === BACK BUTTON === */
+.back-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 13px;
+    color: #b8a898;
+    text-decoration: none;
+    z-index: 60;
+    opacity: 0;
+    transition: opacity 1s ease, color 0.3s ease;
+}
+
+.back-btn.visible {
+    opacity: 1;
+}
+
+.back-btn:hover {
+    color: #5a4a3a;
+}

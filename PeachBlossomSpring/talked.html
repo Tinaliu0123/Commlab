@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peach Blossom Spring · Talked</title>
+    <link rel="stylesheet" href="talked.css">
+    <script src="talked.js" defer></script>
+</head>
+<body>
+
+<div id="intro-text">"They welcomed him. Killed a chicken, poured ale. They <span id="intro-keyword">talked</span> a lot and asked him what dynasty it was now. When he told them what the world had become, they went quiet."<br><br><span class="signature">— Liu Ziji's diary</span></div>
+
+<div id="intro-overlay"></div>
+<div id="scroll-hint"><span class="arrow">&#8595;</span></div>
+
+<div id="bird-perch">
+    <div id="bird-group">
+        <div class="bird-head"></div>
+        <div class="bird-body"></div>
+        <div class="wing left"></div>
+        <div class="wing right"></div>
+        <div class="bird-tail"></div>
+    </div>
+    <div id="rafter"></div>
+</div>
+
+<div id="natural-layer"></div>
+
+<div id="human-layer">
+    <div class="hearth-glow"></div>
+</div>
+
+<div id="dialogue-container"></div>
+
+<div id="hint">hold spacebar to listen</div>
+
+<a href="bird.html" class="back-btn" id="back-link">back</a>
+
+<script>
+    let hash = window.location.hash.replace("#", "");
+    if (hash) {
+        document.getElementById("back-link").href = "bird.html#" + hash;
+    }
+</script>
+
+</body>
+</html>

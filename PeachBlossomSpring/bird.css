@@ -18,6 +18,12 @@ body {
     padding-top: 10vh;
     padding-bottom: 20vh;
     z-index: 8;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+}
+
+.letter-container.visible {
+    opacity: 1;
 }
 
 .paragraph {
@@ -83,6 +89,12 @@ body {
     width: 0;
     height: 0;
     z-index: 5;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+#nest.visible {
+    opacity: 1;
 }
 
 .twig {
@@ -156,8 +168,8 @@ body {
 .bird-resting .bird-head  { top: -12px; }
 
 /* Flying pose */
-.bird-flying .wing.left  { animation: flapL 0.3s ease-in-out infinite; }
-.bird-flying .wing.right { animation: flapR 0.3s ease-in-out infinite; }
+.bird-flying .wing.left  { animation: flapL 0.5s ease-in-out infinite; }
+.bird-flying .wing.right { animation: flapR 0.5s ease-in-out infinite; }
 
 @keyframes flapL {
     0%, 100% { transform: rotate(15deg); }
@@ -252,5 +264,11 @@ body {
     pointer-events: none;
     z-index: 60;
     letter-spacing: 0.1em;
+    opacity: 0;
     transition: opacity 2s;
 }
+
+#hint.visible {
+    opacity: 1;
+}
+
