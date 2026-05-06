@@ -274,7 +274,7 @@ function openGroup(index) {
 
     activeTitle.textContent = groups[index].title;
     activeDialogue.innerHTML = "";
-    activeHint.textContent = "hold to listen";
+    activeHint.textContent = "hold down spacebar to listen";
     activeHint.style.opacity = "1";
     activeSlip.classList.add("visible");
 
