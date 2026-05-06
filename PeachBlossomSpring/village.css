@@ -219,42 +219,57 @@ body.village-active {
 /* --- Hint (hidden until village is active) --- */
 #hint {
     position: fixed;
-    bottom: 20px;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     font-family: "Courier New", Courier, monospace;
     font-style: italic;
-    font-size: 13px;
-    color: #b8a898;
+    font-size: 15px;
+    color: #3a2a1a;
     pointer-events: none;
     z-index: 60;
     letter-spacing: 2px;
-    transition: opacity 2s;
+    transition: opacity 0.8s;
     opacity: 0;
+    background: rgba(250, 247, 240, 0.92);
+    padding: 12px 24px;
+    border-radius: 4px;
+    border: 1px solid rgba(200, 188, 164, 0.4);
 }
 
 body.village-active #hint {
     opacity: 1;
 }
 
-/* --- Back button (hidden until village is active) --- */
-.back-btn {
+/* --- Nest --- */
+#nest-link {
     position: fixed;
-    bottom: 30px;
-    left: 30px;
-    font-family: "Courier New", Courier, monospace;
-    font-size: 14px;
-    color: #8a7a6a;
-    text-decoration: none;
+    bottom: 50px;
+    right: 50px;
+    width: 180px;
+    height: 130px;
     z-index: 60;
-    transition: color 0.3s ease;
+    cursor: pointer;
     opacity: 0;
     pointer-events: none;
+    transition: opacity 1s ease;
 }
-body.village-active .back-btn {
+
+body.village-active #nest-link {
     opacity: 1;
     pointer-events: auto;
+    filter: drop-shadow(0 0 14px rgba(200, 100, 30, 0.6)) drop-shadow(0 0 30px rgba(200, 100, 30, 0.3));
 }
-.back-btn:hover {
-    color: #4a3d30;
+
+.twig {
+    position: absolute;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: 400;
+    line-height: 1;
+    pointer-events: none;
+}
+
+@keyframes nestSway {
+    0%, 100% { transform: var(--base-rot) translate(0, 0); }
+    50%      { transform: var(--base-rot) translate(calc(var(--sx) * 1px), calc(var(--sy) * 1px)); }
 }

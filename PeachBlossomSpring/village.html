@@ -20,16 +20,8 @@
 
 <div id="village"></div>
 <div id="vignette"></div>
-<div id="hint">click to send the bird</div>
-<a href="bird.html" class="back-btn" id="back-link">back</a>
-<script>
-(function () {
-    let hash = window.location.hash.replace("#", "");
-    if (hash) {
-        document.getElementById("back-link").href = "bird.html#" + hash;
-    }
-})();
-</script>
+<div id="hint">click anywhere to send the bird</div>
+<div id="nest-link"></div>
 
 </body>
 </html>

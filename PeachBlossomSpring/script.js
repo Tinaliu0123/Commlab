@@ -1,7 +1,4 @@
 // --- Text content ---
-// Each paragraph is an array of segments
-// Each segment is either {text: "..."} or {keyword: "...", id: "kw-cave"}
-
 let openingText = "I have searched again, and again I have failed.";
 
 let paragraphs = [
@@ -47,7 +44,6 @@ let paragraphs = [
     }
 ];
 
-// Map keyword IDs to their world pages
 let worldPages = {
     "kw-cave": "cave.html",
     "kw-village": "village.html",
@@ -60,14 +56,12 @@ let currentParagraph = 0;
 let isTyping = false;
 let inBirdView = false;
 
-// --- Typewriter for plain text into an element ---
+// --- Typewriter effect ---
 function typeText(container, text, done) {
     isTyping = true;
     let charIndex = 0;
-
     let textSpan = document.createElement("span");
     container.append(textSpan);
-
     let cursor = document.createElement("span");
     cursor.classList.add("cursor");
     cursor.innerText = "|";
@@ -78,40 +72,32 @@ function typeText(container, text, done) {
             let char = text[charIndex];
             textSpan.innerText = textSpan.innerText + char;
             charIndex++;
-
-            // let delay = 45;
             let delay = 1; // for temporary test!
             if (char === "\n") {
                 delay = 300;
             } else if (char === "." || char === ",") {
                 delay = 120;
             }
-
             setTimeout(typeNext, delay);
         } else {
             cursor.remove();
             isTyping = false;
-            if (done) {
-                done();
-            }
+            if (done) done();
         }
     }
-
     typeNext();
 }
 
-// --- Type a full paragraph with segments ---
+// --- Type a paragraph with keyword segments ---
 function typeParagraph(paraData, done) {
     let container = document.querySelector("#" + paraData.id);
     container.classList.remove("hidden");
-
     let segmentIndex = 0;
 
     function typeNextSegment() {
         if (segmentIndex < paraData.segments.length) {
             let segment = paraData.segments[segmentIndex];
             segmentIndex++;
-
             if (segment.text) {
                 typeText(container, segment.text, typeNextSegment);
             } else if (segment.keyword) {
@@ -119,37 +105,29 @@ function typeParagraph(paraData, done) {
                 kwSpan.className = "keyword";
                 kwSpan.id = segment.id;
                 container.append(kwSpan);
-
                 typeText(kwSpan, segment.keyword, typeNextSegment);
             }
         } else {
-            if (done) {
-                done();
-            }
+            if (done) done();
         }
     }
-
     typeNextSegment();
 }
 
-// --- Show the signature ---
 function showSignature() {
     let sig = document.querySelector("#signature");
     sig.classList.add("visible");
 }
 
-// --- Activate a keyword (during diary phase) ---
 function activateKeyword(keywordId) {
     let kw = document.querySelector("#" + keywordId);
     if (kw) {
         kw.classList.add("active");
         kw.addEventListener("click", function() {
-            if (isTyping) {
-                return;
-            }
+            if (isTyping) return;
+            if (!kw.classList.contains("active")) return;
             kw.classList.remove("active");
             kw.classList.add("completed");
-
             if (keywordId === "kw-bird") {
                 window.location.href = worldPages[keywordId];
             } else {
@@ -159,25 +137,19 @@ function activateKeyword(keywordId) {
     }
 }
 
-// --- Show next paragraph ---
 function showNextParagraph() {
     if (currentParagraph < paragraphs.length) {
         let para = paragraphs[currentParagraph];
         currentParagraph++;
-
         typeParagraph(para, function() {
             activateKeyword(para.segments[1].id);
-            if (para.id === "para5") {
-                showSignature();
-            }
+            if (para.id === "para5") showSignature();
         });
     }
 }
 
-// --- Start the sequence ---
 function startLetter() {
     let opening = document.querySelector("#opening");
-
     typeText(opening, openingText, function() {
         setTimeout(showNextParagraph, 1500);
     });

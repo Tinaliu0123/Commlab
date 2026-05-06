@@ -1,150 +1,161 @@
-// ===============================
-//  DIALOGUE DATA
-// ===============================
-
-let dialogues = [
+// --- Dialogue data ---
+let groups = [
     {
-        question: "You \u2014 where did you come from! We haven\u2019t seen a new face in... longer than I can say. Sit, sit! Have you eaten?",
-        answer: "I came from downstream. Got lost following the river."
+        title: "A Full Table",
+        pairs: [
+            { q: "You \u2014 sit, sit! When did you last eat? You look thin.", a: "This morning. But nothing like this." },
+            { q: "Bring the chicken \u2014 the whole thing! And the good ale, not the watery one!", a: "You don\u2019t have to\u2014" },
+            { q: "Nonsense. We kill a chicken for every guest. ...We just haven\u2019t had a guest in a very long time.", a: null },
+            { q: "The children keep peeking from behind the door. Forgive them. They\u2019ve never seen a stranger before.", a: "...Never?" }
+        ]
     },
     {
-        question: "Here, here \u2014 chicken, and the ale is fresh. My wife brewed it yesterday. Eat as much as you want, we have plenty!",
-        answer: "Thank you. It\u2019s been a while since I sat at a table like this."
+        title: "Names They Never Heard",
+        pairs: [
+            { q: "Tell us \u2014 what dynasty is it out there now?", a: "Jin." },
+            { q: "...Jin? We don\u2019t know that name.", a: null },
+            { q: "Our ancestors left during Qin. How long has it been?", a: "There was Han for four hundred years. Then it broke apart. Then Wei. Now Jin." },
+            { q: "Old Liu doesn\u2019t believe you. He says no empire lasts four hundred years.", a: "I\u2019m not making it up." }
+        ]
     },
     {
-        question: "Our grandparents\u2019 grandparents came here during the Qin wars \u2014 we have been here ever since! Tell us, what dynasty is it now?",
-        answer: "Jin. There have been three since Qin."
+        title: "The World You Came From",
+        pairs: [
+            { q: "Do people still plant in spring and harvest in autumn?", a: "Those who can. Most of the harvest goes to taxes." },
+            { q: "Our grandfather talked about the big markets \u2014 hundreds of stalls! Are they still there?", a: "Smaller now. People sell what they must." },
+            { q: "Here we eat at a different house every night, just to talk. Do neighbors still do that?", a: "People keep their doors closed. It\u2019s safer." },
+            { q: "Safer from what?", a: "From whoever comes knocking." }
+        ]
     },
     {
-        question: "Three! How does that happen?",
-        answer: "Wars, mostly. The new one wins, changes the name, taxes the same people."
-    },
-    {
-        question: "Do people still grow rice outside? Mulberry? We\u2019ve always had enough here...",
-        answer: "They grow what they\u2019re allowed to keep. A lot goes to the army."
-    },
-    {
-        question: "And the markets \u2014 are there still markets? Our grandfather used to talk about the big ones, hundreds of stalls!",
-        answer: "There are markets. Smaller now. People sell what they have to."
-    },
-    {
-        question: "What about festivals? We still do ours every autumn \u2014 does the outside still celebrate?",
-        answer: "When there\u2019s enough food for it."
-    },
-    {
-        question: "Do neighbors visit each other? Here we eat at a different house every night, just to talk!",
-        answer: "People mostly keep doors closed. It\u2019s safer."
-    },
-    {
-        question: "...Safer from what?",
-        answer: "Soldiers. Bandits. Tax collectors. Depends on the year."
-    },
-    {
-        question: null,
-        answer: null
-    },
-    {
-        question: "...You should stay a few more days. Rest. Eat well before you go back to all that.",
-        answer: "I\u2019d like that."
-    },
-    {
-        question: "And when you leave \u2014 there is nothing here worth mentioning to anyone out there.",
-        answer: null
+        title: "What Cannot Be Said",
+        pairs: [
+            { q: "...", a: null },
+            { q: "You should stay a few more days. Rest here. Eat.", a: "I\u2019d like that." },
+            { q: "And when you go \u2014 this place is not worth mentioning to anyone out there.", a: null }
+        ]
     }
 ];
 
-// ===============================
-//  STATE
-// ===============================
-
-let currentExchange = 0;
-let isHolding = false;
-let holdTime = 0;
-let questionRevealed = false;
-let answerRevealed = false;
+// --- State ---
 let introActive = true;
 let pageReady = false;
-let exchangeEls = [];
-let conversationDone = false;
+let activeGroup = -1;
+let currentPair = 0;
+let isHolding = false;
+let holdTime = 0;
+let groupsRead = [false, false, false, false];
 
-// Timing
-let questionDelay = 0.5;
-let answerDelay = 1.8;
-
-// Temperature (warm parchment to cool parchment)
-let warmBg = { r: 237, g: 232, b: 223 };
-let coldBg = { r: 218, g: 222, b: 228 };
-
-// Intro
+let birdFlew = false;
+let birdFlying = false;
+let flyStartX = 0, flyStartY = 0;
+let flyMidX = 0, flyMidY = 0;
+let flyEndX = 0, flyEndY = 0;
+let flyT = 0;
+let flyDuration = 2.5;
 let INTRO_FRACTION = 0.15;
+let holdDelay = 1.2;
 
-// Push positions for ripple (x%, y% offset from center)
-let pushPositions = [
-    { x: -35, y: -30 },
-    { x: 30, y: 35 },
-    { x: -40, y: 25 },
-    { x: 35, y: -35 },
-    { x: -30, y: -40 },
-    { x: 40, y: 28 },
-    { x: -38, y: 32 },
-    { x: 32, y: -28 },
-    { x: -28, y: -35 },
-    { x: 36, y: 30 },
-    { x: -32, y: 38 },
-    { x: 28, y: -32 }
-];
-
-// ===============================
-//  ELEMENTS
-// ===============================
-
+// --- Elements ---
 let introEl = document.getElementById("intro-text");
 let introOverlay = document.getElementById("intro-overlay");
 let birdPerch = document.getElementById("bird-perch");
 let birdGroup = document.getElementById("bird-group");
-let dialogueContainer = document.getElementById("dialogue-container");
+let slipContainer = document.getElementById("slip-container");
+let overlayDim = document.getElementById("overlay-dim");
+let activeSlip = document.getElementById("active-slip");
+let activeTitle = document.getElementById("active-title");
+let activeDialogue = document.getElementById("active-dialogue");
+let activeHint = document.getElementById("active-hint");
 let naturalLayer = document.getElementById("natural-layer");
-let humanLayer = document.getElementById("human-layer");
 let hintEl = document.getElementById("hint");
+let nestLink = document.getElementById("nest-link");
 
-// ===============================
-//  UTILITIES
-// ===============================
-
-function lerp(a, b, t) {
-    return a + (b - a) * t;
-}
-
+// --- Utilities ---
 function clamp(v, min, max) {
     if (v < min) return min;
     if (v > max) return max;
     return v;
 }
-
 function easeIn(t) { return t * t; }
 function easeOut(t) { return 1 - (1 - t) * (1 - t); }
 
-// ===============================
-//  INTRO (scroll-driven)
-// ===============================
+let _seed = 42;
+function srand() {
+    _seed = (_seed * 16807) % 2147483647;
+    return (_seed - 1) / 2147483646;
+}
 
+// Quadratic bezier
+function bezier(t, p0, p1, p2) {
+    let mt = 1 - t;
+    return mt * mt * p0 + 2 * mt * t * p1 + t * t * p2;
+}
+
+let flyFadeOut = true;
+
+function startBirdFlight(endX, endY, midOffsetX, midOffsetY, duration, fadeOut) {
+    let rect = birdPerch.getBoundingClientRect();
+    flyStartX = rect.left;
+    flyStartY = rect.top;
+    flyMidX = (flyStartX + endX) / 2 + midOffsetX;
+    flyMidY = (flyStartY + endY) / 2 + midOffsetY;
+    flyEndX = endX;
+    flyEndY = endY;
+    flyT = 0;
+    flyDuration = duration;
+    flyFadeOut = fadeOut !== false;
+    birdFlying = true;
+    birdPerch.classList.add("flying");
+}
+
+function updateBirdFlight(dt) {
+    if (!birdFlying) return;
+    flyT = flyT + dt / flyDuration;
+    if (flyT >= 1) {
+        flyT = 1;
+        birdFlying = false;
+        birdPerch.classList.remove("flying");
+        birdPerch.style.top = flyEndY + "px";
+        birdPerch.style.left = flyEndX + "px";
+        birdPerch.style.transform = "translate(0, 0)";
+        birdGroup.style.transform = "";
+        if (flyFadeOut) birdPerch.style.opacity = "0";
+        return;
+    }
+    let eased = flyT * flyT * (3 - 2 * flyT);
+    let x = bezier(eased, flyStartX, flyMidX, flyEndX);
+    let y = bezier(eased, flyStartY, flyMidY, flyEndY);
+    birdPerch.style.top = Math.round(y) + "px";
+    birdPerch.style.left = Math.round(x) + "px";
+    birdPerch.style.transform = "translate(0, 0)";
+
+    // Rotate bird to face flight direction
+    let nextT = Math.min(flyT + 0.01, 1);
+    let nextEased = nextT * nextT * (3 - 2 * nextT);
+    let nx = bezier(nextEased, flyStartX, flyMidX, flyEndX);
+    let ny = bezier(nextEased, flyStartY, flyMidY, flyEndY);
+    let angle = Math.atan2(ny - y, nx - x) * (180 / Math.PI) + 90;
+    birdGroup.style.transform = "rotate(" + Math.round(angle) + "deg)";
+
+    if (flyFadeOut && flyT > 0.7) {
+        birdPerch.style.opacity = "" + Math.round((1 - (flyT - 0.7) / 0.3) * 100) / 100;
+    }
+}
+
+// --- Intro (scroll-driven) ---
 function handleScroll() {
     let scrollMax = document.body.scrollHeight - window.innerHeight;
     if (scrollMax <= 0) return;
     let scrollProgress = window.scrollY / scrollMax;
     let introProgress = clamp(scrollProgress / INTRO_FRACTION, 0, 1);
 
-    let introY = -introProgress * 120;
-    let introAlpha = 1 - easeIn(introProgress);
-    introEl.style.transform = "translate(-50%, " + (introY - 50) + "%)";
-    introEl.style.opacity = introAlpha;
-
+    introEl.style.transform = "translate(-50%, " + (-introProgress * 120 - 50) + "%)";
+    introEl.style.opacity = 1 - easeIn(introProgress);
     introOverlay.style.opacity = 1 - easeOut(introProgress);
 
     let scrollHint = document.getElementById("scroll-hint");
-    if (scrollHint) {
-        scrollHint.style.opacity = 1 - introProgress;
-    }
+    if (scrollHint) scrollHint.style.opacity = 1 - introProgress;
 
     if (introProgress >= 1 && introActive) {
         introActive = false;
@@ -153,9 +164,9 @@ function handleScroll() {
         document.body.style.height = "100vh";
         window.scrollTo(0, 0);
         birdPerch.classList.add("visible");
-        dialogueContainer.classList.add("visible");
-        hintEl.classList.add("visible");
-        document.querySelector(".back-btn").classList.add("visible");
+        slipContainer.classList.add("visible");
+        nestLink.classList.add("visible");
+        setTimeout(function () { hintEl.classList.add("visible"); }, 600);
         introEl.style.display = "none";
         introOverlay.style.display = "none";
         if (scrollHint) scrollHint.style.display = "none";
@@ -164,221 +175,286 @@ function handleScroll() {
 
 window.addEventListener("scroll", handleScroll);
 
-// ===============================
-//  NATURAL LAYER (bird's space)
-// ===============================
+// --- Nest ---
+function createNest() {
+    let twigChars = ["~", "~", "~", "\u2212", "~", "\u2212", "~", "~"];
+    let twigColors = ["#c45a20", "#b85020", "#d46a30", "#a84a18", "#c45a20", "#d06028"];
+    let nestRings = [
+        { radius: 80, count: 24, size: 16 },
+        { radius: 60, count: 18, size: 14 },
+        { radius: 36, count: 12, size: 13 }
+    ];
 
+    for (let ri = 0; ri < nestRings.length; ri++) {
+        let ring = nestRings[ri];
+        for (let i = 0; i < ring.count; i++) {
+            let angle = (i / ring.count) * Math.PI * 2 + (srand() - 0.5) * 0.4;
+            let r = ring.radius + (srand() - 0.5) * 6;
+            let x = Math.cos(angle) * r;
+            let y = Math.sin(angle) * r * 0.6;
+            let t = document.createElement("span");
+            t.className = "twig";
+            t.textContent = twigChars[Math.floor(srand() * twigChars.length)];
+            t.style.fontSize = ring.size + "px";
+            t.style.color = twigColors[Math.floor(srand() * twigColors.length)];
+            t.style.left = (90 + x) + "px";
+            t.style.top = (60 + y) + "px";
+            let deg = Math.round((angle * 180 / Math.PI) + 90 + (srand() - 0.5) * 40);
+            t.style.setProperty("--base-rot", "rotate(" + deg + "deg)");
+            t.style.transform = "rotate(" + deg + "deg)";
+            t.style.setProperty("--sx", "" + ((srand() - 0.5) * 2));
+            t.style.setProperty("--sy", "" + ((srand() - 0.5) * 1.2));
+            let swayDur = 3 + srand() * 2;
+            let swayDelay = srand() * 2;
+            t.style.animation = "nestSway " + Math.round(swayDur * 10) / 10 + "s ease-in-out " + Math.round(swayDelay * 10) / 10 + "s infinite";
+            nestLink.appendChild(t);
+        }
+    }
+
+    let strands = [
+        { a: 15, l: 40 }, { a: 70, l: 34 }, { a: 125, l: 38 },
+        { a: 165, l: 30 }, { a: 45, l: 28 }, { a: 100, l: 24 }
+    ];
+    for (let si = 0; si < strands.length; si++) {
+        let s = strands[si];
+        let rad = s.a * Math.PI / 180;
+        for (let i = -1; i <= 1; i++) {
+            let t = document.createElement("span");
+            t.className = "twig";
+            t.textContent = "\u2500";
+            t.style.fontSize = "12px";
+            t.style.color = twigColors[Math.floor(srand() * twigColors.length)];
+            t.style.left = (90 + Math.cos(rad) * s.l * 0.3 * i) + "px";
+            t.style.top = (60 + Math.sin(rad) * s.l * 0.3 * i * 0.6) + "px";
+            t.style.transform = "rotate(" + s.a + "deg)";
+            t.style.opacity = "0.45";
+            nestLink.appendChild(t);
+        }
+    }
+}
+
+// --- Natural layer (dust + feathers) ---
 function createNaturalElements() {
-    // Floating dust motes
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 10; i++) {
         let dust = document.createElement("div");
         dust.className = "dust";
-        dust.style.left = Math.round(Math.random() * 90 + 5) + "%";
-        dust.style.top = Math.round(Math.random() * 80 + 10) + "%";
-        let size = Math.round(3 + Math.random() * 4);
+        dust.style.left = Math.round(Math.random() * 80 + 10) + "%";
+        dust.style.top = Math.round(Math.random() * 70 + 15) + "%";
+        let size = Math.round(3 + Math.random() * 3);
         dust.style.width = size + "px";
         dust.style.height = size + "px";
-        dust.style.animationDelay = Math.round(Math.random() * 6 * 10) / 10 + "s";
+        dust.style.animationDelay = Math.round(Math.random() * 8 * 10) / 10 + "s";
         dust.style.animationDuration = Math.round((8 + Math.random() * 6) * 10) / 10 + "s";
         naturalLayer.appendChild(dust);
     }
 
-    // A few feather-like marks
-    let featherChars = ["~", "\u2013", "\u00b7", "~", "\u2013", "\u00b7", "~", "\u2013"];
+    let featherAngles = [15, -10, 30, -20, 5, -35, 22, -8];
     for (let i = 0; i < 8; i++) {
         let feather = document.createElement("div");
-        feather.className = "feather";
-        feather.textContent = featherChars[i];
-        feather.style.left = Math.round(15 + Math.random() * 70) + "%";
-        feather.style.top = Math.round(15 + Math.random() * 70) + "%";
-        feather.style.animationDelay = Math.round(Math.random() * 8 * 10) / 10 + "s";
+        feather.className = i % 3 === 0 ? "feather small" : "feather";
+        feather.style.left = Math.round(10 + Math.random() * 75) + "%";
+        feather.style.top = Math.round(15 + Math.random() * 65) + "%";
+        feather.style.transform = "rotate(" + featherAngles[i] + "deg)";
+        feather.style.animationDelay = Math.round(Math.random() * 10 * 10) / 10 + "s";
         feather.style.animationDuration = Math.round((10 + Math.random() * 8) * 10) / 10 + "s";
         naturalLayer.appendChild(feather);
     }
 }
 
-// Natural elements use CSS animation, JS only handles post-conversation dim
-function dimNatural() {
-    naturalLayer.classList.add("after-conversation");
-}
-
-// ===============================
-//  DIALOGUE REVEAL (ripple)
-// ===============================
-
-function getTemperatureClass(index) {
-    if (index <= 2) return "temp-warm";
-    if (index <= 5) return "temp-cooling";
-    if (index <= 8) return "temp-cold";
-    return "temp-frozen";
-}
-
-function createExchangeEl(index) {
-    let data = dialogues[index];
-    let el = document.createElement("div");
-    el.className = "exchange";
-    el.classList.add(getTemperatureClass(index));
-
-    if (data.question === null && data.answer === null) {
-        el.classList.add("silence");
-        return el;
-    }
-
-    if (data.question !== null) {
-        let qEl = document.createElement("div");
-        qEl.className = "question";
-        qEl.textContent = data.question;
-        el.appendChild(qEl);
-    }
-
-    if (data.answer !== null) {
-        let aEl = document.createElement("div");
-        aEl.className = "answer";
-        aEl.textContent = data.answer;
-        el.appendChild(aEl);
-    }
-
-    return el;
-}
-
-function pushOldExchanges() {
-    for (let i = 0; i < exchangeEls.length; i++) {
-        let el = exchangeEls[i];
-        let pos = pushPositions[i % pushPositions.length];
-        let scale = 0.6 - (exchangeEls.length - 1 - i) * 0.05;
-        if (scale < 0.3) scale = 0.3;
-        el.style.transform = "translate(calc(-50% + " + pos.x + "vw), calc(-50% + " + pos.y + "vh)) scale(" + scale + ")";
-        el.classList.add("pushed");
-    }
-}
-
-function revealQuestion() {
-    if (currentExchange >= dialogues.length) return;
-
-    // Push all existing exchanges outward
-    pushOldExchanges();
-
-    let el = createExchangeEl(currentExchange);
-    dialogueContainer.appendChild(el);
-    exchangeEls.push(el);
-
-    // New exchange appears at center
-    setTimeout(function () {
-        el.classList.add("revealed");
-    }, 100);
-
-    questionRevealed = true;
-}
-
-function revealAnswer() {
-    if (currentExchange >= dialogues.length) return;
-
-    let data = dialogues[currentExchange];
-    if (data.answer === null) {
-        answerRevealed = true;
-        return;
-    }
-
-    let lastExchange = exchangeEls[exchangeEls.length - 1];
-    if (!lastExchange) return;
-
-    let answerEl = lastExchange.querySelector(".answer");
-    if (answerEl) {
-        answerEl.classList.add("revealed");
-    }
-
-    answerRevealed = true;
-    updateTemperature();
-}
-
-function advanceExchange() {
-    currentExchange = currentExchange + 1;
-    questionRevealed = false;
-    answerRevealed = false;
+// --- Slip interaction ---
+function openGroup(index) {
+    if (activeGroup >= 0) return;
+    activeGroup = index;
+    currentPair = 0;
     holdTime = 0;
 
-    // Check if conversation is done
-    if (currentExchange >= dialogues.length && !conversationDone) {
-        conversationDone = true;
-        dimNatural();
-    }
-}
-
-// ===============================
-//  TEMPERATURE
-// ===============================
-
-function updateTemperature() {
-    let progress = currentExchange / (dialogues.length - 1);
-    let r = Math.round(lerp(warmBg.r, coldBg.r, progress));
-    let g = Math.round(lerp(warmBg.g, coldBg.g, progress));
-    let b = Math.round(lerp(warmBg.b, coldBg.b, progress));
-    document.body.style.background = "rgb(" + r + "," + g + "," + b + ")";
-}
-
-// ===============================
-//  HOLD LOGIC
-// ===============================
-
-function onHoldStart() {
-    if (!pageReady) return;
-    if (currentExchange >= dialogues.length) return;
-    isHolding = true;
-    holdTime = 0;
-    birdGroup.classList.add("listening");
+    document.getElementById("slip-" + index).classList.add("hidden");
+    overlayDim.classList.add("visible");
     naturalLayer.classList.add("dimmed");
-    humanLayer.classList.add("active");
-    dialogueContainer.classList.add("focused");
+
+    activeTitle.textContent = groups[index].title;
+    activeDialogue.innerHTML = "";
+    activeHint.textContent = "hold to listen";
+    activeHint.style.opacity = "1";
+    activeSlip.classList.add("visible");
+
+    let colors = ["#f2e2c8", "#ece4c6", "#e2e0da", "#dce0e6"];
+    activeSlip.style.background = colors[index];
+
+    birdPerch.classList.add("at-slip");
+    birdGroup.classList.add("listening");
+    hintEl.classList.remove("visible");
 }
 
-function onHoldEnd() {
-    if (!pageReady) return;
-    isHolding = false;
-    birdGroup.classList.remove("listening");
-    naturalLayer.classList.remove("dimmed");
-    humanLayer.classList.remove("active");
-    dialogueContainer.classList.remove("focused");
+function closeGroup() {
+    if (activeGroup < 0) return;
+    groupsRead[activeGroup] = true;
+    let slipEl = document.getElementById("slip-" + activeGroup);
+    slipEl.classList.remove("hidden");
+    slipEl.classList.add("read");
 
-    if (answerRevealed) {
-        advanceExchange();
+    if (!slipEl.querySelector(".slip-fold")) {
+        let fold = document.createElement("div");
+        fold.className = "slip-fold";
+        slipEl.appendChild(fold);
+    }
+
+    activeSlip.classList.remove("visible");
+    overlayDim.classList.remove("visible");
+    naturalLayer.classList.remove("dimmed");
+    birdGroup.classList.remove("listening");
+    birdGroup.classList.remove("bird-react");
+    birdPerch.classList.remove("at-slip");
+    birdPerch.classList.remove("flying");
+    birdFlying = false;
+    birdGroup.style.transform = "";
+
+    if (birdFlew) {
+        birdPerch.classList.add("returning");
+        setTimeout(function () {
+            birdPerch.classList.remove("returning");
+            birdPerch.style.top = "";
+            birdPerch.style.left = "";
+            birdPerch.style.transform = "";
+            birdPerch.style.opacity = "";
+            birdPerch.style.transition = "";
+        }, 50);
+    } else {
+        birdPerch.style.top = "";
+        birdPerch.style.left = "";
+        birdPerch.style.transform = "";
+        birdPerch.style.opacity = "";
+        birdPerch.style.transition = "";
+    }
+    birdFlew = false;
+    activeGroup = -1;
+    currentPair = 0;
+    hintEl.classList.add("visible");
+
+    // Check if all groups read
+    let allRead = true;
+    for (let i = 0; i < groupsRead.length; i++) {
+        if (!groupsRead[i]) { allRead = false; break; }
+    }
+    if (allRead) naturalLayer.classList.add("after-conversation");
+}
+
+function revealNextPair() {
+    if (activeGroup < 0) return;
+    let group = groups[activeGroup];
+    if (currentPair >= group.pairs.length) return;
+
+    let pair = group.pairs[currentPair];
+    let el = document.createElement("div");
+    el.className = "dialogue-pair";
+
+    if (pair.q === "...") {
+        let silEl = document.createElement("div");
+        silEl.className = "dialogue-silence";
+        silEl.textContent = "...";
+        el.appendChild(silEl);
+    } else {
+        let qEl = document.createElement("div");
+        qEl.className = "dialogue-q";
+        if (currentPair === 0) {
+            let labelQ = document.createElement("span");
+            labelQ.className = "speaker-label";
+            labelQ.textContent = "villager";
+            qEl.appendChild(labelQ);
+        }
+        qEl.appendChild(document.createTextNode("\u201C" + pair.q + "\u201D"));
+        el.appendChild(qEl);
+
+        if (pair.a !== null) {
+            let aEl = document.createElement("div");
+            aEl.className = "dialogue-a";
+            if (currentPair === 0) {
+                let labelA = document.createElement("span");
+                labelA.className = "speaker-label";
+                labelA.textContent = "fisherman";
+                aEl.appendChild(labelA);
+            }
+            aEl.appendChild(document.createTextNode("\u201C" + pair.a + "\u201D"));
+            el.appendChild(aEl);
+        }
+    }
+
+    activeDialogue.appendChild(el);
+    setTimeout(function () { el.classList.add("revealed"); }, 50);
+    currentPair = currentPair + 1;
+
+    // Bird reacts
+    if (!birdFlew) {
+        birdGroup.classList.add("bird-react");
+        setTimeout(function () { birdGroup.classList.remove("bird-react"); }, 400);
+    }
+
+    // Bird might fly away after halfway through (40% chance)
+    let threshold = Math.ceil(group.pairs.length / 2);
+    if (!birdFlew && currentPair >= threshold && Math.random() < 0.4) {
+        birdFlew = true;
+        birdPerch.classList.remove("at-slip");
+        birdGroup.classList.remove("listening");
+        let W = window.innerWidth;
+        let H = window.innerHeight;
+        let directions = [
+            { ex: W + 80, ey: H + 60, mx: 120, my: -80 },
+            { ex: -80, ey: H + 60, mx: -100, my: -60 },
+            { ex: -80, ey: -60, mx: -80, my: 80 },
+            { ex: W + 80, ey: -60, mx: 100, my: 60 }
+        ];
+        let dir = directions[Math.floor(Math.random() * directions.length)];
+        startBirdFlight(dir.ex, dir.ey, dir.mx, dir.my, 2.2);
+    }
+
+    activeSlip.scrollTop = activeSlip.scrollHeight;
+    activeHint.style.opacity = "0";
+
+    if (currentPair >= group.pairs.length) {
+        setTimeout(function () {
+            activeHint.textContent = "click to close";
+            activeHint.style.opacity = "1";
+        }, 800);
     }
 }
 
-// ===============================
-//  INPUT HANDLERS
-// ===============================
+// --- Input handlers ---
+let slips = document.querySelectorAll(".slip");
+for (let i = 0; i < slips.length; i++) {
+    slips[i].addEventListener("click", function () {
+        openGroup(Number(this.getAttribute("data-group")));
+    });
+}
 
 let spaceDown = false;
-
 document.addEventListener("keydown", function (e) {
     if (e.code === "Space" && !spaceDown) {
         e.preventDefault();
         spaceDown = true;
-        onHoldStart();
+        if (activeGroup >= 0) { isHolding = true; holdTime = 0; }
     }
 });
-
 document.addEventListener("keyup", function (e) {
-    if (e.code === "Space") {
-        e.preventDefault();
-        spaceDown = false;
-        onHoldEnd();
-    }
+    if (e.code === "Space") { e.preventDefault(); spaceDown = false; isHolding = false; }
+});
+
+document.addEventListener("click", function (e) {
+    if (activeGroup < 0) return;
+    if (currentPair >= groups[activeGroup].pairs.length) closeGroup();
 });
 
 document.addEventListener("mousedown", function (e) {
     if (e.target.tagName === "A") return;
-    onHoldStart();
+    if (e.target.classList.contains("slip") || e.target.classList.contains("slip-title")) return;
+    if (e.target.classList.contains("twig") || e.target.id === "nest-link") return;
+    if (activeGroup >= 0 && currentPair < groups[activeGroup].pairs.length) {
+        isHolding = true;
+        holdTime = 0;
+    }
 });
+document.addEventListener("mouseup", function () { isHolding = false; });
 
-document.addEventListener("mouseup", function () {
-    onHoldEnd();
-});
-
-// ===============================
-//  ANIMATION LOOP
-// ===============================
-
+// --- Animation loop ---
 let lastTime = 0;
 
 function update(timestamp) {
@@ -386,25 +462,21 @@ function update(timestamp) {
     let dt = (timestamp - lastTime) / 1000;
     lastTime = timestamp;
 
-    // Hold logic
-    if (isHolding && pageReady && currentExchange < dialogues.length) {
+    if (isHolding && activeGroup >= 0) {
         holdTime = holdTime + dt;
-
-        if (!questionRevealed && holdTime >= questionDelay) {
-            revealQuestion();
-        }
-
-        if (questionRevealed && !answerRevealed && holdTime >= answerDelay) {
-            revealAnswer();
+        if (holdTime >= holdDelay) {
+            if (currentPair < groups[activeGroup].pairs.length) {
+                revealNextPair();
+                holdTime = 0;
+            }
         }
     }
 
+    updateBirdFlight(dt);
     requestAnimationFrame(update);
 }
 
-// ===============================
-//  INIT
-// ===============================
-
+// --- Init ---
+createNest();
 createNaturalElements();
 requestAnimationFrame(update);

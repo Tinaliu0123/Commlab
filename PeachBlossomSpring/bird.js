@@ -1,27 +1,22 @@
 let W = window.innerWidth;
 let H = window.innerHeight;
 
-// ═══════════════════════════════
-//  ENTRANCE ANIMATION STATE
-// ═══════════════════════════════
-
+// --- Entrance state ---
 let hasHash = window.location.hash.replace("#", "").length > 0;
 let entranceDone = hasHash;
 
-// ═══════════════════════════════
-//  BIRD-VIEW PARAGRAPH SWAP
-// ═══════════════════════════════
-
+// --- Bird-view paragraph swap (replace visited paragraphs with bird's perspective) ---
 let birdThoughts = {
-    cave: "The dark does not frighten what was born in it. I fold my wings and the <span class=\"keyword\" data-href=\"cave.html\" data-ink=\"#1a1a20\">cave</span> lets me through \u2014 the same gap, every time, the same warm draft pushing upward. I do not squeeze. I fit. The mountain made this cave for something my size.",
-    village: "The mulberry branch is where I rest after rain. The pond is where I drink when the sun is low. Between the roofs I know every draft, every chimney that sends warm air rising. The old woman hangs cloth and I sit on the line. I have never had to think about where to go next. Everything I need is one wingspan away. This <span class=\"keyword\" data-href=\"village.html\" data-ink=\"#3a3020\">village</span> holds me without asking."
+    cave: "𓅂 The dark does not frighten what was born in it. I fold my wings and the <span class=\"keyword\" data-href=\"cave.html\" data-ink=\"#1a1a20\">cave</span> lets me through. The same gap, every time, the same warm draft pushing upward ∿ I do not squeeze. I fit. The mountain made this cave for something my size.",
+    village: "𓇢 The mulberry branch is where I rest after rain. The pond is where I drink when the sun is low ∿ Between the roofs I know every draft, every chimney that sends warm air rising. The old woman hangs cloth and I sit on the line. I have never had to think about where to go next. Everything I need is one wingspan away. This <span class=\"keyword\" data-href=\"village.html\" data-ink=\"#3a3020\">village</span> holds me without asking ꕤ",
+    talked: "I was on the rafter when they <span class=\"keyword\" data-href=\"talked.html\" data-ink=\"#4a4035\">talked</span>. The room was warm at first ∿ Their voices rose and mixed like heat from the hearth. Then something changed. The air went still 𓅂 I did not understand a word they said, but I felt the room grow cold around me. So I flew out through the open window ∿",
+    marks: "𓅂 I do not carve. I do not stack stones. The way back is the smell of peach bark after rain ∿ the draft that bends left where the stream narrows. I have flown this path so many times my wings remember what my eyes forget ꕤ Every tree is a <span class=\"keyword\" data-href=\"marks.html\" data-ink=\"#5a5045\">marks</span> I read without landing. I do not need to leave anything behind. The world already holds the way ✦"
 };
 
 function swapVisitedParagraphs() {
     let hash = window.location.hash.replace("#", "");
     if (!hash) return;
     let visited = hash.split(",");
-
     let paragraphs = document.querySelectorAll(".paragraph[data-keyword]");
     for (let i = 0; i < paragraphs.length; i++) {
         let p = paragraphs[i];
@@ -39,6 +34,36 @@ function swapVisitedParagraphs() {
 
 swapVisitedParagraphs();
 
+// --- Finale check (all 4 keywords visited) ---
+let allKeywords = ["cave", "village", "talked", "marks"];
+let finaleReady = false;
+
+function checkFinale() {
+    let hash = window.location.hash.replace("#", "");
+    if (!hash) return;
+    let visited = hash.split(",");
+    let allVisited = true;
+    for (let i = 0; i < allKeywords.length; i++) {
+        let found = false;
+        for (let j = 0; j < visited.length; j++) {
+            if (visited[j] === allKeywords[i]) { found = true; break; }
+        }
+        if (!found) { allVisited = false; break; }
+    }
+    if (allVisited) {
+        finaleReady = true;
+        let finalP = document.getElementById("final-paragraph");
+        finalP.innerHTML = "𓅂 They search because they believe it can be found again. But I never lost it. I never mapped it. I simply live here ∿ The way back is not a path. It is a belonging. And belonging cannot be followed, only felt ꕤ";
+        finalP.classList.add("finale-ready");
+        finalP.addEventListener("click", function () {
+            if (!finaleReady) return;
+            startFinale();
+        });
+    }
+}
+
+checkFinale();
+
 function lerp(a, b, t) { return a + (b - a) * t; }
 function dist(x1, y1, x2, y2) {
     return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
@@ -50,11 +75,7 @@ function srand() {
     return (_seed - 1) / 2147483646;
 }
 
-
-// ═══════════════════════════════
-//  NEST (doubled size)
-// ═══════════════════════════════
-
+// --- Nest ---
 let nestX = W - 140;
 let nestY = H - 120;
 
@@ -99,7 +120,6 @@ for (let ri = 0; ri < nestRings.length; ri++) {
     }
 }
 
-// Floor strands
 let strands = [
     { a: 15, l: 40 }, { a: 70, l: 34 }, { a: 125, l: 38 },
     { a: 165, l: 30 }, { a: 45, l: 28 }, { a: 100, l: 24 }
@@ -121,11 +141,7 @@ for (let si = 0; si < strands.length; si++) {
     }
 }
 
-
-// ═══════════════════════════════
-//  BIRD
-// ═══════════════════════════════
-
+// --- Bird ---
 let birdGroup = document.createElement("div");
 birdGroup.id = "bird-group";
 birdGroup.className = "bird-resting";
@@ -148,7 +164,6 @@ document.body.appendChild(birdShadow);
 let birdX, birdY, birdAngle, birdState;
 
 if (entranceDone) {
-    // Returning from keyword page — skip entrance, show everything
     birdX = nestX;
     birdY = nestY;
     birdAngle = -90;
@@ -157,14 +172,13 @@ if (entranceDone) {
     document.querySelector(".letter-container").classList.add("visible");
     document.getElementById("hint").classList.add("visible");
 } else {
-    // First visit — bird starts off-screen left
     birdX = -60;
     birdY = H * 0.4;
     birdAngle = 0;
     birdState = "entrance";
 }
 
-// Flight bezier
+// --- Flight (quadratic bezier) ---
 let fStart = { x: 0, y: 0 };
 let fEnd   = { x: 0, y: 0 };
 let fCtrl  = { x: 0, y: 0 };
@@ -174,11 +188,7 @@ let fOnLand = null;
 let trailTimer = 0;
 let transitioning = false;
 
-
-// ═══════════════════════════════
-//  KEYWORDS (from paragraph DOM)
-// ═══════════════════════════════
-
+// --- Keywords (click to fly + transition) ---
 let keywordEls = document.querySelectorAll(".keyword");
 
 for (let ki = 0; ki < keywordEls.length; ki++) {
@@ -186,6 +196,7 @@ for (let ki = 0; ki < keywordEls.length; ki++) {
         el.addEventListener("click", function (e) {
             e.stopPropagation();
             if (transitioning || !entranceDone) return;
+            document.body.style.overflow = "hidden";
             let rect = el.getBoundingClientRect();
             let tx = rect.left + rect.width / 2;
             let ty = rect.top + rect.height / 2;
@@ -197,17 +208,12 @@ for (let ki = 0; ki < keywordEls.length; ki++) {
     })(keywordEls[ki]);
 }
 
-
-// ═══════════════════════════════
-//  FLIGHT
-// ═══════════════════════════════
-
+// --- Flight mechanics ---
 function flyTo(tx, ty, onLand) {
     fStart.x = birdX;
     fStart.y = birdY;
     fEnd.x = tx;
     fEnd.y = ty;
-
     let mx = (birdX + tx) / 2;
     let my = (birdY + ty) / 2;
     let d = dist(birdX, birdY, tx, ty);
@@ -219,7 +225,6 @@ function flyTo(tx, ty, onLand) {
     if (ny > 0) { nx = -nx; ny = -ny; }
     fCtrl.x = mx + nx * arc;
     fCtrl.y = my + ny * arc;
-
     fT = 0;
     fDur = Math.max(1.0, d / 280);
     fOnLand = onLand;
@@ -248,40 +253,31 @@ function spawnDot(x, y) {
     let d = document.createElement("div");
     d.className = "trail-dot";
     d.style.left = x + "px";
-    d.style.top = y + "px";
+    d.style.top = (y + window.scrollY) + "px";
     document.body.appendChild(d);
     requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
-            d.classList.add("fading");
-        });
+        requestAnimationFrame(function () { d.classList.add("fading"); });
     });
     setTimeout(function () {
         if (d.parentNode) d.parentNode.removeChild(d);
     }, 2200);
 }
 
-
-// ═══════════════════════════════
-//  TRANSITION: ink circle + text
-// ═══════════════════════════════
-
+// --- Ink circle transition ---
 let inkEl  = document.getElementById("transition-ink");
 let textEl = document.getElementById("transition-text");
 
 function startTransition(el, rect) {
     transitioning = true;
-
     let kwText = el.textContent;
     let kwInk  = el.getAttribute("data-ink");
     let kwHref = el.getAttribute("data-href");
-
     let cx = rect.left + rect.width / 2;
     let cy = rect.top + rect.height / 2;
 
-    // Hide the keyword
     el.style.opacity = "0";
 
-    // Phase 1: keyword text lifts and grows
+    // Keyword text lifts and grows
     textEl.textContent = kwText;
     textEl.style.fontSize = "18px";
     textEl.style.color = "#ede8df";
@@ -291,28 +287,21 @@ function startTransition(el, rect) {
     textEl.style.transition = "none";
     textEl.style.transform = "translate(-50%, -50%) scale(1)";
 
-    // Phase 2: ink circle expands from keyword center
-    // The ink div is 200vmax x 200vmax. We position its top-left so
-    // that the center of the circle lands on (cx, cy).
+    // Ink circle expands from keyword center
     let inkSize = Math.max(W, H) * 2;
-    let inkLeft = cx - inkSize / 2;
-    let inkTop  = cy - inkSize / 2;
     inkEl.style.width = inkSize + "px";
     inkEl.style.height = inkSize + "px";
-    inkEl.style.left = inkLeft + "px";
-    inkEl.style.top = inkTop + "px";
+    inkEl.style.left = (cx - inkSize / 2) + "px";
+    inkEl.style.top = (cy - inkSize / 2) + "px";
     inkEl.style.background = kwInk;
     inkEl.style.transition = "none";
     inkEl.style.opacity = "1";
     inkEl.style.transform = "scale(0)";
 
-    // Force reflow then animate
-    inkEl.offsetWidth;
-
+    inkEl.offsetWidth; // force reflow
     inkEl.style.transition = "transform 1.0s cubic-bezier(0.4, 0, 0.2, 1)";
     inkEl.style.transform = "scale(1.5)";
 
-    // Text floats to center + scales up
     setTimeout(function () {
         textEl.style.transition = "transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), left 0.8s cubic-bezier(0.4, 0, 0.2, 1), top 0.8s cubic-bezier(0.4, 0, 0.2, 1)";
         textEl.style.transform = "translate(-50%, -50%) scale(2.5)";
@@ -320,21 +309,18 @@ function startTransition(el, rect) {
         textEl.style.top = (H / 2) + "px";
     }, 200);
 
-    // Hide bird
     setTimeout(function () {
         birdGroup.style.opacity = "0";
         birdShadow.style.opacity = "0";
     }, 300);
 
-    // Phase 3: text fades
     setTimeout(function () {
         textEl.style.transition = "opacity 0.6s ease";
         textEl.style.opacity = "0";
     }, 1400);
 
-    // Phase 4: navigate — pass current visited + this keyword via hash on the target
+    // Navigate with visited keywords in hash
     setTimeout(function () {
-        // Build visited list to carry forward
         let hash = window.location.hash.replace("#", "");
         let visited = hash ? hash.split(",") : [];
         let alreadyIn = false;
@@ -342,23 +328,17 @@ function startTransition(el, rect) {
             if (visited[v] === kwText) { alreadyIn = true; break; }
         }
         if (!alreadyIn) visited.push(kwText);
-        // Store in the target page's hash so back button can read it
         window.location.href = kwHref + "#" + visited.join(",");
     }, 2200);
 }
 
-
-// ═══════════════════════════════
-//  ENTRANCE FLIGHT (sine-wave path)
-// ═══════════════════════════════
-
+// --- Entrance flight (sine-wave path to nest) ---
 let entranceT = 0;
 let entranceDur = 8.0;
 let entranceSettleT = 0;
 let entranceSettleDur = 0.6;
-let entrancePhase = "fly"; // fly | settle | done
+let entrancePhase = "fly";
 
-// Waypoints: bird enters left, explores sky, then descends to nest
 let waypoints = [
     { x: -60, y: H * 0.35 },
     { x: W * 0.25, y: H * 0.2 },
@@ -369,16 +349,13 @@ let waypoints = [
 ];
 
 function getEntrancePos(t) {
-    // Walk through waypoints with smooth interpolation
     let segCount = waypoints.length - 1;
     let seg = Math.floor(t * segCount);
     if (seg >= segCount) seg = segCount - 1;
     let segT = (t * segCount) - seg;
-    // Smooth the segment t
-    let smooth = segT * segT * (3 - 2 * segT);
+    let smooth = segT * segT * (3 - 2 * segT); // smoothstep
     let from = waypoints[seg];
     let to = waypoints[seg + 1];
-    // Add a gentle sine wobble for natural flight
     let wobble = Math.sin(t * Math.PI * 3) * 10 * (1 - t);
     return {
         x: lerp(from.x, to.x, smooth),
@@ -395,38 +372,32 @@ function entranceUpdate(dt) {
             entranceSettleT = 0;
             birdGroup.className = "bird-resting";
             nestEl.classList.add("visible");
+            stopFlapLoop();
         }
 
-        // Smooth ease: slow start, gentle cruise, slow landing
         let eased = entranceT * entranceT * (3 - 2 * entranceT);
-
         let pos = getEntrancePos(eased);
         birdX = pos.x;
         birdY = pos.y;
 
-        // Angle follows movement direction
         let nextPos = getEntrancePos(Math.min(1, eased + 0.01));
         birdAngle = Math.atan2(nextPos.y - birdY, nextPos.x - birdX) * 180 / Math.PI + 90;
 
-        // Switch to gliding near end
         if (entranceT > 0.85 && birdGroup.className !== "bird-gliding") {
             birdGroup.className = "bird-gliding";
         }
 
-        // Trail dots during flight
         trailTimer += dt;
         if (trailTimer > 0.1) {
             trailTimer = 0;
             spawnDot(birdX, birdY);
         }
-
     } else if (entrancePhase === "settle") {
         entranceSettleT += dt / entranceSettleDur;
         birdX = nestX;
         birdY = nestY;
         birdAngle = -90;
 
-        // Small shuffle in nest
         let shake = Math.sin(entranceSettleT * Math.PI * 4) * 2 * (1 - entranceSettleT);
         birdX = nestX + shake;
 
@@ -436,8 +407,6 @@ function entranceUpdate(dt) {
             birdX = nestX;
             birdY = nestY;
             birdState = "resting";
-
-            // Reveal paragraphs and hint
             document.querySelector(".letter-container").classList.add("visible");
             setTimeout(function () {
                 document.getElementById("hint").classList.add("visible");
@@ -446,12 +415,34 @@ function entranceUpdate(dt) {
     }
 }
 
-// Start entrance with flying pose; click anywhere to skip
+// --- Wing flap audio ---
+let flapSound = new Audio("freesound_community-wings2-7112.mp3");
+flapSound.playbackRate = 0.75;
+let flapInterval = null;
+
+function startFlapLoop() {
+    flapSound.currentTime = 0;
+    flapSound.play();
+    flapInterval = setInterval(function () {
+        flapSound.currentTime = 0;
+        flapSound.play();
+    }, flapSound.duration ? flapSound.duration * 1000 / 0.75 + 200 : 1200);
+}
+
+function stopFlapLoop() {
+    if (flapInterval) {
+        clearInterval(flapInterval);
+        flapInterval = null;
+    }
+}
+
 if (!entranceDone) {
     birdGroup.className = "bird-flying";
+    startFlapLoop();
     trailTimer = 0;
     document.addEventListener("click", function skipEntrance() {
         if (entranceDone) return;
+        stopFlapLoop();
         entrancePhase = "done";
         entranceDone = true;
         birdX = nestX;
@@ -466,11 +457,7 @@ if (!entranceDone) {
     });
 }
 
-
-// ═══════════════════════════════
-//  ANIMATION LOOP
-// ═══════════════════════════════
-
+// --- Animation loop ---
 let lastTime = performance.now();
 
 function animate(now) {
@@ -478,7 +465,6 @@ function animate(now) {
     let dt = (now - lastTime) / 1000;
     lastTime = now;
 
-    // Entrance animation takes priority
     if (!entranceDone) {
         entranceUpdate(dt);
         birdGroup.style.transform = "translate(" + Math.round(birdX) + "px," + Math.round(birdY) + "px) rotate(" + Math.round(birdAngle) + "deg)";
@@ -489,9 +475,10 @@ function animate(now) {
         return;
     }
 
+    if (finaleActive && birdState !== "flying") return;
+
     if (birdState === "flying") {
         fT += dt / fDur;
-
         if (fT >= 1) {
             fT = 1;
             birdState = "resting";
@@ -524,7 +511,6 @@ function animate(now) {
     }
 
     birdGroup.style.transform = "translate(" + Math.round(birdX) + "px," + Math.round(birdY) + "px) rotate(" + Math.round(birdAngle) + "deg)";
-
     let sOff = birdState === "flying" ? 14 : 8;
     let sScl = birdState === "flying" ? 0.7 : 0.9;
     birdShadow.style.transform = "translate(" + Math.round(birdX) + "px," + Math.round(birdY + sOff) + "px) rotate(" + Math.round(birdAngle) + "deg) scale(" + sScl + ")";
@@ -541,3 +527,137 @@ window.addEventListener("resize", function () {
     nestEl.style.left = nestX + "px";
     nestEl.style.top = nestY + "px";
 });
+
+// --- Finale animation ---
+let finaleActive = false;
+
+function startFinale() {
+    if (finaleActive) return;
+    finaleActive = true;
+    finaleReady = false;
+
+    let paragraphs = document.querySelectorAll(".paragraph");
+    for (let i = 0; i < paragraphs.length; i++) {
+        if (paragraphs[i].id !== "final-paragraph") {
+            paragraphs[i].style.transition = "opacity 1s ease";
+            paragraphs[i].style.opacity = "0";
+        }
+    }
+
+    setTimeout(function () {
+        let finalP = document.getElementById("final-paragraph");
+        finalP.style.transition = "opacity 1s ease";
+        finalP.style.opacity = "0";
+    }, 1200);
+
+    document.getElementById("hint").style.opacity = "0";
+    nestEl.style.transition = "opacity 1s ease";
+    nestEl.style.opacity = "0";
+
+    // Bird flies to paper, then paper slides in
+    setTimeout(function () {
+        let paperTarget = { x: W * 0.35, y: H * 0.5 };
+        birdGroup.style.opacity = "1";
+        birdShadow.style.opacity = "0.5";
+        startFlapLoop();
+        flyTo(paperTarget.x, paperTarget.y, function () {
+            stopFlapLoop();
+            showPaper();
+        });
+    }, 2000);
+}
+
+function showPaper() {
+    let paper = document.getElementById("finale-paper");
+    paper.classList.add("visible");
+    setTimeout(function () { startBirdCircle(); }, 1500);
+}
+
+function startBirdCircle() {
+    let cx = W / 2;
+    let cy = H / 2;
+    let radius = 80;
+    let circleDur = 2.0;
+    let circleStart = performance.now();
+
+    birdGroup.className = "bird-flying";
+    startFlapLoop();
+
+    function circleStep(now) {
+        let circleT = (now - circleStart) / 1000 / circleDur;
+        if (circleT >= 1) {
+            stopFlapLoop();
+            birdFlyAway();
+            return;
+        }
+
+        let angle = circleT * Math.PI * 2 - Math.PI / 2;
+        birdX = cx + Math.cos(angle) * radius;
+        birdY = cy + Math.sin(angle) * radius * 0.6;
+
+        let nextAngle = (circleT + 0.02) * Math.PI * 2 - Math.PI / 2;
+        let nextX = cx + Math.cos(nextAngle) * radius;
+        let nextY = cy + Math.sin(nextAngle) * radius * 0.6;
+        birdAngle = Math.atan2(nextY - birdY, nextX - birdX) * 180 / Math.PI + 90;
+
+        birdGroup.style.transform = "translate(" + Math.round(birdX) + "px," + Math.round(birdY) + "px) rotate(" + Math.round(birdAngle) + "deg)";
+        birdShadow.style.transform = "translate(" + Math.round(birdX) + "px," + Math.round(birdY + 14) + "px) rotate(" + Math.round(birdAngle) + "deg) scale(0.7)";
+        requestAnimationFrame(circleStep);
+    }
+    requestAnimationFrame(circleStep);
+}
+
+function birdFlyAway() {
+    birdGroup.className = "bird-flying";
+    startFlapLoop();
+    fStart.x = birdX;
+    fStart.y = birdY;
+    fEnd.x = -100;
+    fEnd.y = -100;
+    fCtrl.x = (birdX - 100) / 2 - 60;
+    fCtrl.y = (birdY - 100) / 2 - 80;
+    fT = 0;
+    fDur = 1.5;
+    birdState = "flying";
+
+    let flyStart = performance.now();
+
+    function flyStep(now) {
+        let dt = (now - flyStart) / 1000;
+        flyStart = now;
+        fT += dt / fDur;
+
+        if (fT >= 1) {
+            stopFlapLoop();
+            birdGroup.style.opacity = "0";
+            birdShadow.style.opacity = "0";
+            finalizePaper();
+            return;
+        }
+
+        let eased = fT < 0.5 ? 2 * fT * fT : 1 - 2 * (1 - fT) * (1 - fT);
+        let p = bezPt(eased);
+        birdX = p.x;
+        birdY = p.y;
+        let tan = bezTan(eased);
+        birdAngle = Math.atan2(tan.y, tan.x) * 180 / Math.PI + 90;
+
+        birdGroup.style.transform = "translate(" + Math.round(birdX) + "px," + Math.round(birdY) + "px) rotate(" + Math.round(birdAngle) + "deg)";
+        birdShadow.style.transform = "translate(" + Math.round(birdX) + "px," + Math.round(birdY + 14) + "px) rotate(" + Math.round(birdAngle) + "deg) scale(0.7)";
+        birdShadow.style.opacity = (1 - fT).toFixed(2);
+        requestAnimationFrame(flyStep);
+    }
+    requestAnimationFrame(flyStep);
+}
+
+function finalizePaper() {
+    let title = document.getElementById("finale-title");
+    let credit = document.getElementById("finale-credit");
+
+    title.classList.add("clickable");
+    title.addEventListener("click", function () {
+        window.open("https://en.wikisource.org/wiki/Translation:The_Peach_Blossom_Spring", "_blank");
+    });
+
+    setTimeout(function () { credit.classList.add("visible"); }, 800);
+}

@@ -1,0 +1,485 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: #ede8df;
+    overflow: hidden;
+    font-family: "Courier New", Courier, monospace;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* === CHOICE SCREEN === */
+#choice-screen {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    background: #ede8df;
+    transition: opacity 1s ease;
+}
+
+#choice-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#choice-quote {
+    max-width: 520px;
+    width: 85%;
+    font-size: 15px;
+    line-height: 1.9;
+    color: #5a4a3a;
+    text-align: center;
+    margin-bottom: 50px;
+    font-style: italic;
+}
+
+#choice-quote .signature {
+    display: block;
+    text-align: right;
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+#choice-buttons {
+    display: flex;
+    gap: 60px;
+    margin-bottom: 30px;
+}
+
+.choice-btn {
+    font-size: 18px;
+    color: #5a4a3a;
+    cursor: pointer;
+    padding: 12px 28px;
+    border: 1px solid #b8a890;
+    border-radius: 3px;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    letter-spacing: 0.05em;
+}
+
+.choice-btn:hover {
+    background: #ddd6c8;
+    border-color: #8a7050;
+    color: #3a2a1a;
+}
+
+#choice-sub {
+    font-size: 13px;
+    color: #9a8a7a;
+    font-style: italic;
+    letter-spacing: 0.08em;
+}
+
+/* === MAP === */
+#map-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+    pointer-events: none;
+}
+
+#map-container.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#fog-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 8;
+    pointer-events: none;
+    background: #ede8df;
+}
+
+#map-layer {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 2;
+}
+
+/* Environment elements */
+.env-el {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.env-el.revealed {
+    opacity: 1;
+}
+
+.env-petal {
+    width: 4px;
+    height: 6px;
+    background: #d4849a;
+    border-radius: 50% 0 50% 0;
+    opacity: 0.7;
+}
+
+.env-stone {
+    width: 8px;
+    height: 6px;
+    background: #9a9080;
+    border-radius: 2px;
+}
+
+.env-tree {
+    width: 16px;
+    height: 16px;
+    background: #7a9a6a;
+    border-radius: 50%;
+}
+
+.env-grass {
+    width: 3px;
+    height: 10px;
+    background: #8aaa5a;
+    border-radius: 1px;
+}
+
+/* === RIVER (flowing text) === */
+#river-container {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 3;
+    overflow: hidden;
+}
+
+#river-container.fisherman-river {
+    opacity: 0.15;
+}
+
+.river-line {
+    position: absolute;
+    white-space: nowrap;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: #6a9ab0;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+}
+
+.river-line.revealed {
+    opacity: 0.55;
+}
+
+@keyframes riverFlow {
+    0% { transform: translateX(0) translateY(0); }
+    25% { transform: translateX(-12.5%) translateY(-8px); }
+    50% { transform: translateX(-25%) translateY(0); }
+    75% { transform: translateX(-37.5%) translateY(8px); }
+    100% { transform: translateX(-50%) translateY(0); }
+}
+
+/* Marks (fisherman's carvings) */
+#marks-layer {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 5;
+}
+
+.mark {
+    position: absolute;
+    font-size: 24px;
+    font-weight: bold;
+    color: #6a4020;
+    pointer-events: none;
+    opacity: 0.85;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    text-shadow: 1px 1px 0 rgba(60, 40, 20, 0.25);
+}
+
+.mark.clickable {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.mark.clickable:hover {
+    opacity: 1;
+    transform: scale(1.4);
+}
+
+.mark.visited {
+    opacity: 0.35;
+    color: #a89880;
+}
+
+/* Trail */
+#trail-layer {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.trail-dot {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    opacity: 0.4;
+}
+
+.trail-dot.fisherman {
+    background: #8a7a6a;
+}
+
+.trail-dot.bird {
+    background: #c8a050;
+}
+
+/* Entity (fisherman or bird) */
+#entity {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    z-index: 10;
+    display: none;
+}
+
+#entity.fisherman-entity {
+    background: #5a4a3a;
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(90, 74, 58, 0.3);
+}
+
+#entity.bird-entity {
+    width: 8px;
+    height: 8px;
+    background: #c48a20;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(196, 138, 32, 0.4);
+}
+
+/* Narration */
+#narration {
+    position: fixed;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 17px;
+    font-style: italic;
+    color: #5a4a3a;
+    text-align: center;
+    z-index: 20;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    pointer-events: none;
+    max-width: 500px;
+    letter-spacing: 0.03em;
+}
+
+#narration.visible {
+    opacity: 1;
+}
+
+/* Destination (Peach Blossom Spring) */
+#destination {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+#destination.revealed {
+    opacity: 1;
+    background: radial-gradient(circle, rgba(212, 114, 138, 0.5) 0%, rgba(212, 114, 138, 0.2) 40%, rgba(212, 114, 138, 0) 70%);
+    box-shadow: 0 0 60px rgba(212, 114, 138, 0.4), 0 0 120px rgba(212, 114, 138, 0.15);
+}
+
+/* Step counter */
+#step-counter {
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px;
+    color: #6a5a4a;
+    z-index: 20;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    letter-spacing: 0.05em;
+}
+
+#step-counter.visible {
+    opacity: 1;
+}
+
+/* Instruction hint */
+#map-hint {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    font-style: italic;
+    color: #9a8a7a;
+    z-index: 20;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    pointer-events: none;
+}
+
+#map-hint.visible {
+    opacity: 1;
+}
+
+/* === END SCREEN === */
+#end-screen {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 40;
+    background: #ede8df;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+}
+
+#end-screen.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#end-text {
+    font-size: 15px;
+    color: #5a4a3a;
+    font-style: italic;
+    text-align: center;
+    line-height: 1.9;
+    max-width: 400px;
+    margin-bottom: 40px;
+}
+
+#end-again {
+    font-size: 14px;
+    color: #7a6a5a;
+    cursor: pointer;
+    padding: 10px 24px;
+    border: 1px solid #b8a890;
+    border-radius: 3px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+#end-again:hover {
+    color: #3a2a1a;
+    border-color: #8a7050;
+}
+
+/* === NEST === */
+#nest-link {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    width: 180px;
+    height: 130px;
+    z-index: 45;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s ease;
+}
+
+#nest-link.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Flying bird that enters the nest */
+#flying-bird {
+    position: fixed;
+    z-index: 46;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#flying-bird.active {
+    opacity: 1;
+}
+
+.fly-body {
+    position: absolute;
+    width: 8px; height: 8px;
+    background: #3a2e22;
+    border-radius: 50%;
+    left: -4px; top: -4px;
+}
+
+.fly-head {
+    position: absolute;
+    width: 5px; height: 5px;
+    background: #3a2e22;
+    border-radius: 50%;
+    left: -2.5px; top: -12px;
+}
+
+.fly-tail {
+    position: absolute;
+    width: 3px; height: 10px;
+    background: #4a3d30;
+    left: -1.5px; top: 6px;
+    border-radius: 0 0 2px 2px;
+    opacity: 0.7;
+}
+
+.fly-wing {
+    position: absolute;
+    top: -3px;
+    width: 20px; height: 3px;
+    background: #3a2e22;
+    border-radius: 2px;
+}
+
+.fly-wing.left {
+    right: 4px;
+    transform-origin: 100% 50%;
+    animation: flyWingLeft 0.3s ease-in-out infinite;
+}
+
+.fly-wing.right {
+    left: 4px;
+    transform-origin: 0% 50%;
+    animation: flyWingRight 0.3s ease-in-out infinite;
+}
+
+@keyframes flyWingLeft {
+    0%, 100% { transform: rotate(25deg) scaleX(0.6); }
+    50% { transform: rotate(-20deg) scaleX(1); }
+}
+
+@keyframes flyWingRight {
+    0%, 100% { transform: rotate(-25deg) scaleX(0.6); }
+    50% { transform: rotate(20deg) scaleX(1); }
+}
+
+.twig {
+    position: absolute;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: 400;
+    line-height: 1;
+    pointer-events: none;
+}
+
+@keyframes nestSway {
+    0%, 100% { transform: var(--base-rot) translate(0, 0); }
+    50%      { transform: var(--base-rot) translate(calc(var(--sx) * 1px), calc(var(--sy) * 1px)); }
+}

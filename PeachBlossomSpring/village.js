@@ -1,7 +1,4 @@
-// ═══════════════════════════════════════
-//  INTRO SCROLL PHASE
-// ═══════════════════════════════════════
-
+// --- Intro scroll phase ---
 let introEl      = document.getElementById("intro-text");
 let introOverlay = document.getElementById("intro-overlay");
 let scrollHintEl = document.getElementById("scroll-hint");
@@ -15,26 +12,15 @@ function easeOutIntro(t) { return 1 - (1 - t) * (1 - t); }
 
 window.addEventListener("scroll", function () {
     if (!introActive) return;
-
     let scrollProgress = window.scrollY / maxScroll;
     let introProgress = scrollProgress / 0.15;
     if (introProgress > 1) introProgress = 1;
 
-    // Paragraph moves up and fades
-    let introY = -introProgress * 120;
-    let introAlpha = 1 - easeInIntro(introProgress);
-    introEl.style.transform = "translate(-50%, " + (introY - 50) + "%)";
-    introEl.style.opacity = introAlpha;
-
-    // Overlay fades, revealing village
+    introEl.style.transform = "translate(-50%, " + (-introProgress * 120 - 50) + "%)";
+    introEl.style.opacity = 1 - easeInIntro(introProgress);
     introOverlay.style.opacity = 1 - easeOutIntro(introProgress);
+    if (window.scrollY > 60) scrollHintEl.style.opacity = "0";
 
-    // Hide scroll hint once scrolling starts
-    if (window.scrollY > 60) {
-        scrollHintEl.style.opacity = "0";
-    }
-
-    // Transition to village mode once fully scrolled through intro
     if (introProgress >= 1) {
         introActive = false;
         introEl.style.display = "none";
@@ -58,7 +44,6 @@ function dist(x1, y1, x2, y2) {
 }
 function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
 
-// Seeded random for consistent layout
 let _seed = 42;
 function srand() {
     _seed = (_seed * 16807) % 2147483647;
@@ -68,15 +53,10 @@ function srand() {
 function px(p) { return p / 100 * W; }
 function py(p) { return p / 100 * H; }
 
-
-// ═══════════════════════════════════════
-//  VILLAGE DATA
-// ═══════════════════════════════════════
-
+// --- Village data ---
 let houses = [
     {
-        id: "h1", cx: 28, cy: 30,
-        colGap: 4.0, rowGap: 3.2,
+        id: "h1", cx: 28, cy: 30, colGap: 4.0, rowGap: 3.2,
         grid: [
             [["roof","fire"],["roof","warmth"],["roof","cooking"],["roof","laughter"]],
             [["roof","humming"],["roof","children"],["roof","old song"],["roof","stories"]],
@@ -84,16 +64,14 @@ let houses = [
         ]
     },
     {
-        id: "h2", cx: 50, cy: 54,
-        colGap: 3.8, rowGap: 3.2,
+        id: "h2", cx: 50, cy: 54, colGap: 3.8, rowGap: 3.2,
         grid: [
             [["roof","tea"],["roof","reading"],["roof","afternoon"],["roof","ink brush"],["roof","quiet"]],
             [["roof","a letter"],["wall","memory"],["door","come in"],["wall","silence"]]
         ]
     },
     {
-        id: "h3", cx: 16, cy: 62,
-        colGap: 4.0, rowGap: 3.2,
+        id: "h3", cx: 16, cy: 62, colGap: 4.0, rowGap: 3.2,
         grid: [
             [["roof","steam"],["roof","rice"],["roof","boiling"]],
             [["wall","voices"],["wall","three"],["wall","generations"]],
@@ -101,8 +79,7 @@ let houses = [
         ]
     },
     {
-        id: "h4", cx: 64, cy: 28,
-        colGap: 4.0, rowGap: 3.2,
+        id: "h4", cx: 64, cy: 28, colGap: 4.0, rowGap: 3.2,
         grid: [
             [["roof","rain"],["roof","safe"],["roof","warm"]],
             [["wall","sleeping"],["door","dreaming"],["wall","peace"]]
@@ -142,10 +119,8 @@ let trees = [
     { cx: 6,  cy: 78, rows: 2, cols: 2, word: "mulberry", colGap: 5.8, rowGap: 2.6, species: "mulberry" },
     { cx: 34, cy: 84, rows: 2, cols: 2, word: "pine",     colGap: 4.2, rowGap: 2.6, species: "pine" },
     { cx: 56, cy: 86, rows: 2, cols: 2, word: "bamboo",   colGap: 5.0, rowGap: 2.6, species: "bamboo" },
-    { cx: 92, cy: 82, rows: 2, cols: 2, word: "bamboo",   colGap: 5.0, rowGap: 2.6, species: "bamboo" },
     { cx: 5,  cy: 50, rows: 2, cols: 1, word: "bamboo",   colGap: 5.0, rowGap: 2.6, species: "bamboo" },
-    { cx: 96, cy: 48, rows: 2, cols: 1, word: "willow",   colGap: 5.0, rowGap: 2.6, species: "willow" },
-    { cx: 74, cy: 80, rows: 2, cols: 2, word: "bamboo",   colGap: 5.0, rowGap: 2.6, species: "bamboo" }
+    { cx: 96, cy: 48, rows: 2, cols: 1, word: "willow",   colGap: 5.0, rowGap: 2.6, species: "willow" }
 ];
 
 let flowerClusters = [
@@ -202,11 +177,7 @@ let people = [
     }
 ];
 
-
-// ═══════════════════════════════════════
-//  BUILD DOM
-// ═══════════════════════════════════════
-
+// --- Build DOM ---
 let allWords = [];
 let houseWords = {};
 let personEls = {};
@@ -219,13 +190,9 @@ function makeWord(text, pctX, pctY, zone, extra) {
     el.style.left = px(pctX) + "px";
     el.style.top  = py(pctY) + "px";
     if (extra && extra.style) {
-        for (let s in extra.style) {
-            el.style[s] = extra.style[s];
-        }
+        for (let s in extra.style) el.style[s] = extra.style[s];
     }
-    if (extra && extra.cls) {
-        el.classList.add(extra.cls);
-    }
+    if (extra && extra.cls) el.classList.add(extra.cls);
     village.appendChild(el);
     let entry = {
         el: el, bx: px(pctX), by: py(pctY), zone: zone,
@@ -235,9 +202,7 @@ function makeWord(text, pctX, pctY, zone, extra) {
     };
     if (extra) {
         for (let k in extra) {
-            if (k !== "style" && k !== "cls") {
-                entry[k] = extra[k];
-            }
+            if (k !== "style" && k !== "cls") entry[k] = extra[k];
         }
     }
     allWords.push(entry);
@@ -293,12 +258,8 @@ for (let pi = 0; pi < ponds.length; pi++) {
         let halfW = pond.rx * Math.sqrt(1 - ratio * ratio);
         let cols = Math.max(1, Math.floor(halfW * 2 / pond.colGap));
         for (let c = 0; c < cols; c++) {
-            let xOff = 0;
-            if (cols === 1) {
-                xOff = 0;
-            } else {
-                xOff = -halfW + pond.colGap * 0.5 + c * (halfW * 2 - pond.colGap) / (cols - 1);
-            }
+            let xOff = cols === 1 ? 0
+                : -halfW + pond.colGap * 0.5 + c * (halfW * 2 - pond.colGap) / (cols - 1);
             let entry = makeWord(pond.word,
                 pond.cx + xOff + (srand() - 0.5) * 0.15,
                 pond.cy + yOff + (srand() - 0.5) * 0.1,
@@ -347,12 +308,8 @@ for (let fi = 0; fi < flowerClusters.length; fi++) {
         let halfW = f.rx * Math.sqrt(1 - ratio * ratio);
         let cols = Math.max(1, Math.floor(halfW * 2 / f.colGap));
         for (let c = 0; c < cols; c++) {
-            let xOff = 0;
-            if (cols === 1) {
-                xOff = 0;
-            } else {
-                xOff = -halfW + f.colGap * 0.5 + c * (halfW * 2 - f.colGap) / (cols - 1);
-            }
+            let xOff = cols === 1 ? 0
+                : -halfW + f.colGap * 0.5 + c * (halfW * 2 - f.colGap) / (cols - 1);
             let ci = flowerIdx % flowerColors.length;
             let si = flowerIdx % flowerSizes.length;
             makeWord("*",
@@ -376,11 +333,7 @@ for (let pi = 0; pi < people.length; pi++) {
     personEls[p.id] = entry;
 }
 
-
-// ═══════════════════════════════════════
-//  BIRD
-// ═══════════════════════════════════════
-
+// --- Bird ---
 let birdEl = document.createElement("div");
 birdEl.id = "bird";
 village.appendChild(birdEl);
@@ -400,11 +353,7 @@ let BIRD_SPEED = 4;
 let PART_RADIUS = 50;
 let PART_STRENGTH = 20;
 
-
-// ═══════════════════════════════════════
-//  HOUSE REVEAL
-// ═══════════════════════════════════════
-
+// --- House reveal (bird lands near house) ---
 let activeHouse = null;
 let houseTimers = [];
 
@@ -417,25 +366,20 @@ function revealHouse(hid, ox, oy) {
     let sorted = words.slice().sort(function (a, b) {
         return dist(ox, oy, a.bx, a.by) - dist(ox, oy, b.bx, b.by);
     });
-    for (let i = 0; i < houseTimers.length; i++) {
-        clearTimeout(houseTimers[i]);
-    }
+    for (let i = 0; i < houseTimers.length; i++) clearTimeout(houseTimers[i]);
     houseTimers = [];
     for (let i = 0; i < sorted.length; i++) {
         (function (w, delay) {
-            let t = setTimeout(function () {
+            houseTimers.push(setTimeout(function () {
                 w.el.textContent = w.interior;
                 w.el.classList.add("revealed");
-            }, delay);
-            houseTimers.push(t);
+            }, delay));
         })(sorted[i], i * 120);
     }
 }
 
 function revertHouse(hid) {
-    for (let i = 0; i < houseTimers.length; i++) {
-        clearTimeout(houseTimers[i]);
-    }
+    for (let i = 0; i < houseTimers.length; i++) clearTimeout(houseTimers[i]);
     houseTimers = [];
     let words = houseWords[hid];
     if (!words) return;
@@ -450,11 +394,7 @@ function revertHouse(hid) {
     activeHouse = null;
 }
 
-
-// ═══════════════════════════════════════
-//  PERSON CYCLE
-// ═══════════════════════════════════════
-
+// --- Person cycle (bird lands near person) ---
 let activePersonId = null;
 let personCycleTimer = null;
 let personCycleIndex = 0;
@@ -481,13 +421,9 @@ function stopPersonCycle() {
     personCycleTimer = null;
     if (activePersonId) {
         let e = personEls[activePersonId];
-        // Find original word
         let origWord = "";
         for (let i = 0; i < people.length; i++) {
-            if (people[i].id === activePersonId) {
-                origWord = people[i].word;
-                break;
-            }
+            if (people[i].id === activePersonId) { origWord = people[i].word; break; }
         }
         if (origWord) e.el.textContent = origWord;
         e.el.classList.remove("revealed");
@@ -495,11 +431,7 @@ function stopPersonCycle() {
     activePersonId = null;
 }
 
-
-// ═══════════════════════════════════════
-//  WATER REFLECTION
-// ═══════════════════════════════════════
-
+// --- Water reflection ---
 let reflectedList = [];
 
 function isReflected(entry) {
@@ -518,26 +450,17 @@ function triggerReflection(entry) {
         entry.el.textContent = "water";
         entry.el.classList.remove("reflected");
         setTimeout(function () {
-            // Remove from list
             for (let i = 0; i < reflectedList.length; i++) {
-                if (reflectedList[i] === entry) {
-                    reflectedList.splice(i, 1);
-                    break;
-                }
+                if (reflectedList[i] === entry) { reflectedList.splice(i, 1); break; }
             }
         }, 300);
     }, 800);
 }
 
-
-// ═══════════════════════════════════════
-//  CHECK LANDING
-// ═══════════════════════════════════════
-
+// --- Check landing (what's nearby when bird stops) ---
 function checkLanding() {
     let HR = 60;
     let PR = 40;
-
     for (let hid in houseWords) {
         let words = houseWords[hid];
         for (let i = 0; i < words.length; i++) {
@@ -547,7 +470,6 @@ function checkLanding() {
             }
         }
     }
-
     for (let pid in personEls) {
         let pe = personEls[pid];
         if (dist(birdX, birdY, pe.currentX, pe.currentY) < PR) {
@@ -555,16 +477,11 @@ function checkLanding() {
             return;
         }
     }
-
     if (activeHouse) revertHouse(activeHouse);
     stopPersonCycle();
 }
 
-
-// ═══════════════════════════════════════
-//  CLICK → FLY
-// ═══════════════════════════════════════
-
+// --- Click to fly ---
 document.addEventListener("click", function (e) {
     birdTX = e.clientX;
     birdTY = e.clientY;
@@ -574,15 +491,10 @@ document.addEventListener("click", function (e) {
     stopPersonCycle();
 });
 
-
-// ═══════════════════════════════════════
-//  ANIMATION LOOP
-// ═══════════════════════════════════════
-
+// --- Animation loop ---
 function animate() {
     requestAnimationFrame(animate);
 
-    // Bird flight
     if (birdFlying) {
         let dx = birdTX - birdX;
         let dy = birdTY - birdY;
@@ -604,10 +516,31 @@ function animate() {
     birdEl.style.transform = "translate(" + birdX.toFixed(1) + "px," + birdY.toFixed(1) + "px)";
     shadowEl.style.transform = "translate(" + (birdX + 3).toFixed(1) + "px," + (birdY + 10).toFixed(1) + "px)";
 
+    // Bird eats mulberry/bean (dwell 400ms)
+    for (let i = 0; i < allWords.length; i++) {
+        let w = allWords[i];
+        if (w.eaten) continue;
+        let txt = w.el.textContent;
+        if (txt !== "mulberry" && txt !== "bean") continue;
+        let dd = dist(birdX, birdY, w.bx, w.by);
+        if (dd < 25 && !birdFlying) {
+            if (!w.eatTimer) {
+                w.eatTimer = Date.now();
+            } else if (Date.now() - w.eatTimer > 400) {
+                w.eaten = true;
+                w.el.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+                w.el.style.opacity = "0";
+                w.el.style.transform = "scale(0.3)";
+            }
+        } else {
+            w.eatTimer = null;
+        }
+    }
+
     let birdSpeed = Math.sqrt(birdVx * birdVx + birdVy * birdVy);
     let isMoving = birdSpeed > 0.3;
 
-    // People waypoint animation
+    // People waypoint movement
     for (let pid in personEls) {
         let pe = personEls[pid];
         if (!pe.waypoints || pe.waypoints.length < 2) continue;
@@ -630,17 +563,14 @@ function animate() {
     if (isMoving) {
         for (let wi = 0; wi < waterWords.length; wi++) {
             let ww = waterWords[wi];
-            if (dist(birdX, birdY, ww.bx, ww.by) < 40) {
-                triggerReflection(ww);
-            }
+            if (dist(birdX, birdY, ww.bx, ww.by) < 40) triggerReflection(ww);
         }
     }
 
-    // Parting effect (fields, flowers, trees, water — not houses, people, paths)
+    // Parting effect (push words away from bird)
     for (let i = 0; i < allWords.length; i++) {
         let w = allWords[i];
         if (w.zone === "house" || w.zone === "person" || w.zone === "path") continue;
-
         let dd = dist(birdX, birdY, w.bx, w.by);
         if (dd < PART_RADIUS && isMoving) {
             let ax = w.bx - birdX;
@@ -652,7 +582,6 @@ function animate() {
             f = f * f;
             let pushX = ax * PART_STRENGTH * f;
             let pushY = ay * PART_STRENGTH * f;
-
             if (w.zone === "field") {
                 let tilt = Math.atan2(birdVy, birdVx) * (180 / Math.PI) * f * 0.25;
                 w.el.style.transform = "translate(" + pushX.toFixed(1) + "px," + pushY.toFixed(1) + "px) rotate(" + tilt.toFixed(1) + "deg)";
@@ -672,4 +601,72 @@ animate();
 window.addEventListener("resize", function () {
     W = window.innerWidth;
     H = window.innerHeight;
+});
+
+// --- Nest ---
+let nestLink = document.getElementById("nest-link");
+
+function createNest() {
+    let twigChars = ["~", "~", "~", "\u2212", "~", "\u2212", "~", "~"];
+    let twigColors = ["#c45a20", "#b85020", "#d46a30", "#a84a18", "#c45a20", "#d06028"];
+    let nestRings = [
+        { radius: 80, count: 24, size: 16 },
+        { radius: 55, count: 18, size: 14 },
+        { radius: 30, count: 12, size: 12 }
+    ];
+
+    for (let ri = 0; ri < nestRings.length; ri++) {
+        let ring = nestRings[ri];
+        let r = ring.radius;
+        for (let i = 0; i < ring.count; i++) {
+            let angle = (i / ring.count) * Math.PI * 2 + srand() * 0.4;
+            let x = Math.cos(angle) * r;
+            let y = Math.sin(angle) * r * 0.6;
+            let t = document.createElement("span");
+            t.className = "twig";
+            t.textContent = twigChars[Math.floor(srand() * twigChars.length)];
+            t.style.fontSize = ring.size + "px";
+            t.style.color = twigColors[Math.floor(srand() * twigColors.length)];
+            t.style.left = (90 + x) + "px";
+            t.style.top = (60 + y) + "px";
+            let deg = Math.round((angle * 180 / Math.PI) + 90 + (srand() - 0.5) * 40);
+            let sx = (srand() - 0.5) * 2;
+            let sy = (srand() - 0.5) * 1.5;
+            t.style.setProperty("--base-rot", "rotate(" + deg + "deg)");
+            t.style.setProperty("--sx", sx);
+            t.style.setProperty("--sy", sy);
+            t.style.transform = "rotate(" + deg + "deg)";
+            t.style.animation = "nestSway " + (2.5 + srand() * 2) + "s ease-in-out " + (srand() * 2) + "s infinite";
+            nestLink.appendChild(t);
+        }
+    }
+
+    let strands = [
+        { a: 15, l: 40 }, { a: 70, l: 34 }, { a: 125, l: 38 },
+        { a: 165, l: 30 }, { a: 45, l: 28 }, { a: 100, l: 24 }
+    ];
+    for (let si = 0; si < strands.length; si++) {
+        let s = strands[si];
+        let rad = s.a * Math.PI / 180;
+        for (let i = -1; i <= 1; i++) {
+            let t = document.createElement("span");
+            t.className = "twig";
+            t.textContent = "\u2500";
+            t.style.fontSize = "12px";
+            t.style.color = twigColors[Math.floor(srand() * twigColors.length)];
+            t.style.left = (90 + Math.cos(rad) * s.l * 0.3 * i) + "px";
+            t.style.top = (60 + Math.sin(rad) * s.l * 0.3 * i * 0.6) + "px";
+            t.style.transform = "rotate(" + s.a + "deg)";
+            t.style.opacity = "0.45";
+            nestLink.appendChild(t);
+        }
+    }
+}
+
+createNest();
+
+let hash = window.location.hash.replace("#", "");
+let nestHref = hash ? "bird.html#" + hash : "bird.html";
+nestLink.addEventListener("click", function () {
+    window.location.href = nestHref;
 });
