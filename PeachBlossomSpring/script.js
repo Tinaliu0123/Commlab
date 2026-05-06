@@ -72,7 +72,7 @@ function typeText(container, text, done) {
             let char = text[charIndex];
             textSpan.innerText = textSpan.innerText + char;
             charIndex++;
-            let delay = 1; // for temporary test!
+            let delay = 40; // for temporary test!
             if (char === "\n") {
                 delay = 300;
             } else if (char === "." || char === ",") {
