@@ -66,3 +66,12 @@ A collection of web projects developed for the **INTM-SHU 120 Communications Lab
 <p align="center">
 <img src="assets/clock.gif" width="500">
 </p>
+
+### 🌸 Peach Blossom Spring
+- **Medium:** Web (HTML, CSS, JavaScript)
+- **📖 Documentation:** See [`PeachBlossomSpring/README.md`](PeachBlossomSpring/README.md) for project overview, abstract and interaction preview
+- 🔗 [Live webpage](https://tinaliu0123.github.io/Commlab/PeachBlossomSpring/)
+- 📂 [Code](https://github.com/Tinaliu0123/Commlab/tree/main/PeachBlossomSpring)
+<p align="center">
+<img src="assets/PeachBlossomSpring.jpg" width="500">
+</p>
