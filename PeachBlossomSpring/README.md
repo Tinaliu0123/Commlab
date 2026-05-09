@@ -1,12 +1,8 @@
 # Peach Blossom Spring 🌸
 
----
-
 > *An interactive adaptation of Peach Blossom Spring through the eyes of a bird*
 
 **Created by:** Yuhan Liu
-
----
 
 ## Overview
 
